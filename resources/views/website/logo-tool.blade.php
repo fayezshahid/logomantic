@@ -262,7 +262,7 @@
         <section class="checkout-area" id="toolBar">
             <div class="container">
                 
-                <form>
+                {{-- <form> --}}
                     <div class="row">
                         
 
@@ -365,7 +365,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                {{-- </form> --}}
             </div>
         </section>
         <!-- Start Services Details Area -->
