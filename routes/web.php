@@ -32,7 +32,7 @@ Route::get('/', function () {
     return view('website.index-5', ['industries' => LogoType::all()]);
 })->name('home');
 
-Route::get('/allLogos', [LogosController::class, 'allLogos'])->name('allLogos');
+// Route::get('/allLogos', [LogosController::class, 'allLogos'])->name('allLogos');
 Route::post('/allLogos', [LogosController::class, 'allLogos'])->name('allLogos');
 
 Route::post('/customizeLogo', [LogosController::class, 'customizeLogo'])->name('customizeLogo');

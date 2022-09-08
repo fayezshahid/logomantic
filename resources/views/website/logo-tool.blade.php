@@ -341,7 +341,12 @@
                                                 <div class="col-lg-2 col-md-6" style="width: 132px">
                                                     <div class="form-group">
                                                         <label>Replace Logo <span class="required"></span></label>
-                                                        <a href= "{{ route('allLogos') }}"><i class="bi-reply-fill" style="font-size:40px; cursor: pointer"></i></a>
+                                                        <form action="{{ route('allLogos') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="logoType" value="{{ $logo->logoType }}">
+                                                            <input type="hidden" name="bName" value="{{ $bName }}">
+                                                            <button type="submit"><i class="bi-reply-fill" style="font-size:40px; cursor: pointer"></i></button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                
