@@ -14,7 +14,7 @@
 
                 <div class="mb-4">
                     <label class="form-label" style="font-weight: normal">Logo Name</label>
-                    <input type="text" name="name" class="form-control @error('name') border-3 border-danger @enderror" value="{{ old('name') }}">
+                    <input type="text" name="name" placeholder="Enter logo name" class="form-control @error('name') border-3 border-danger @enderror" value="{{ old('name') }}">
                     @error('name')
                         <div class="text-danger">
                             {{ $message }}
@@ -24,7 +24,7 @@
 
                 <div class="mb-4">
                     <label class="form-label" style="font-weight: normal">Logo Description</label>
-                    <input type="text" name="description" class="form-control @error('description') border-3 border-danger @enderror" value="{{ old('description') }}">
+                    <input type="text" name="description" placeholder="Enter logo description" class="form-control @error('description') border-3 border-danger @enderror" value="{{ old('description') }}">
                     @error('description')
                         <div class="text-danger">
                             {{ $message }}
@@ -34,7 +34,7 @@
 
                 <div class="mb-4">
                     <label class="form-label" style="font-weight: normal">Logo Price</label>
-                    <input type="text" name="price" class="form-control @error('price]') border-3 border-danger @enderror" value="{{ old('price') }}">
+                    <input type="text" name="price" placeholder="Enter logo price" class="form-control @error('price]') border-3 border-danger @enderror" value="{{ old('price') }}">
                     @error('price')
                         <div class="text-danger">
                             {{ $message }}

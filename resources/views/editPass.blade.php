@@ -1,6 +1,12 @@
 @extends('dashboard')
 
 @section('content')
+<style>
+    #btn:hover{
+        background-color: white;
+        color: black;
+    }
+</style>
     <div class="row d-flex justify-content-center">
         <div class="col-8" style="margin-top: 30px;">
             <form action="{{ route('editPass', $username) }}" method="post">
@@ -42,10 +48,8 @@
                     <input type="password" name="password_confirmation" placeholder="Enter your new password again" class="form-control">
                 </div>
 
-                <div>
-                    <button class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full" type="submit">
-                        Submit
-                    </button>
+                <<div>
+                    <button type="submit" id="btn" class="btn btn-primary btn-block mb-4">Edit Your Credentials</button>
                 </div>
             </form>
         </div>
