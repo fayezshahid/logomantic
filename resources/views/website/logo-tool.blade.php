@@ -299,7 +299,7 @@
                                                 <div class="col-lg-2 col-md-6">
                                                     <div class="form-group">
                                                         <label>Font size <span class="required">*</span></label>
-                                                        <input id="font-size" type="text" class="form-control">
+                                                        <input id="font-size" type="number" class="form-control" value="">
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-lg-2 col-md-6">
@@ -756,6 +756,34 @@
             var currentPixels = null;
             var w,h;
 
+            function setTextBox(i){
+                $("#dragTextBox" + i).draggable();
+                w = $('#elementResizable' + i).width();
+                h = $('#elementResizable' + i).height();
+                $('#elementResizable' + i).resizable({
+                    maxWidth: 500,
+                    maxHeight: 150,
+                    handles: {
+                        'nw': '#nwgrip' + i,
+                        'ne': '#negrip' + i,
+                        'sw': '#swgrip' + i,
+                        'se': '#segrip' + i,
+                        'n': '#ngrip' + i,
+                        'e': '#egrip' + i,
+                        's': '#sgrip' + i,
+                        'w': '#wgrip' + i,
+                    },
+                    resize: function(event, ui) {
+                        var size = ui.size;
+                        
+                        ww = (size.width - w)/250;
+                        hh = (size.height - h)/70;
+
+                        $('#inputBoxResult' + i).css("transform", `scale(${1 + ww}, ${1 + hh})`); 
+                    }
+                });
+            }
+
             $(document).ready(function(){
 
                 saveMemento($('#inputBoxResult0').html());
@@ -763,29 +791,7 @@
                 w = $('#elementResizable0').width();
                 h = $('#elementResizable0').height();
 
-                $('#dragTextBox0').draggable();
-                $('#elementResizable0').resizable({
-                    maxWidth: 500,
-                    maxHeight: 150,
-                    handles: {
-                        'nw': '#nwgrip0',
-                        'ne': '#negrip0',
-                        'sw': '#swgrip0',
-                        'se': '#segrip0',
-                        'n': '#ngrip0',
-                        'e': '#egrip0',
-                        's': '#sgrip0',
-                        'w': '#wgrip0'
-                    },
-                    resize: function(event, ui) {
-                        var size = ui.size;
-                        
-                        ww = (size.width - w)/250;
-                        hh = (size.height - h)/70;
-                        
-                        $('#inputBoxResult0').css("transform", `scale(${1 + ww}, ${1 + hh})`); 
-                    }
-                });
+                setTextBox(0);
                 
                 $('#logoImage').draggable();
 
@@ -866,31 +872,7 @@
                             </div>
                         `;
                 $('#txtField').append(a);
-                $("#dragTextBox" + i).draggable();
-                w = $('#elementResizable' + i).width();
-                h = $('#elementResizable' + i).height();
-                $('#elementResizable' + i).resizable({
-                    maxWidth: 500,
-                    maxHeight: 150,
-                    handles: {
-                        'nw': '#nwgrip' + i,
-                        'ne': '#negrip' + i,
-                        'sw': '#swgrip' + i,
-                        'se': '#segrip' + i,
-                        'n': '#ngrip' + i,
-                        'e': '#egrip' + i,
-                        's': '#sgrip' + i,
-                        'w': '#wgrip' + i,
-                    },
-                    resize: function(event, ui) {
-                        var size = ui.size;
-                        
-                        ww = (size.width - w)/250;
-                        hh = (size.height - h)/70;
-
-                        $('#inputBoxResult' + i).css("transform", `scale(${1 + ww}, ${1 + hh})`); 
-                    }
-                });
+                setTextBox(i);
             });
 
             function writeAbove(i){
@@ -959,7 +941,29 @@
             $('#refresh').click(function(){
                 i = 0;
                 var src = $('#logoImage').attr('src');
-                $('#txtField').html(`<img id="logoImage" src="${src}" alt="image">`);
+                $('#txtField').html(`
+                    <img width="400px" height="400px" onclick="main()" style="cursor: move" id="logoImage" src="${src}" alt="image" >
+                    <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 359px auto auto 512.188px">
+                        <div class="d-flex justify-content-between" style="position: relative">
+                                <div id='elementResizable0' class="elementResizable">
+                                    <p class="inputBoxResult" id="inputBoxResult0" style="color: {{ $fontColor }}; font-family: {{ $fontFamily }};" onclick="preChangeFontColor(this.id)">{{ $bName }}</p>
+                                    <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip0" ></div>
+                                    <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip0" ></div>
+                                    <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip0" ></div>
+                                    <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip0" ></div>
+                                    <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip0" ></div>
+                                    <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip0" ></div>
+                                    <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip0" ></div>
+                                    <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip0" ></div>
+                                </div>
+                            <span id="remove0" class="removeInputBoxIcon" onclick="removeInputBox(0)">x</span>
+                        </div>
+                        <input class="inputBox" onkeyup="writeAbove(0)" id="inputBox0" type="text" maxlength="30" value="{{ $bName }}">
+                    </div>
+                `);
+
+                setTextBox(0);
+
             });
 
             $('#font-size').keyup(function(){
@@ -987,29 +991,9 @@
                 if(tmp.includes('dragTextBox')){
                     // console.log(tmp);
                     $('#txtField').append(tmp);
-                    $("#dragTextBox" + id).draggable();
-                    $('#elementResizable' + id).resizable({
-                        maxWidth: 500,
-                        maxHeight: 150,
-                        handles: {
-                            'nw': '#nwgrip' + id,
-                            'ne': '#negrip' + id,
-                            'sw': '#swgrip' + id,
-                            'se': '#segrip' + id,
-                            'n': '#ngrip' + id,
-                            'e': '#egrip' + id,
-                            's': '#sgrip' + id,
-                            'w': '#wgrip' + id,
-                        },
-                        resize: function(event, ui) {
-                            var size = ui.size;
+                    
+                    setTextBox(id);
 
-                            ww = (size.width - w)/250;
-                            hh = (size.height - h)/70;
-
-                            $('#inputBoxResult' + id).css("transform", `scale(${1 + ww}, ${1 + hh})`); 
-                        }
-                    });
                     $('#inputBoxResult' + id).html(pVal);
                     $('#inputBox' + id).val(inpVal);
                 }
@@ -1147,6 +1131,10 @@
             function setColor(newColor){
                 changeColor(recentColor, newColor);
             }
+
+            $('#inputBoxResult0').click(function(){
+                $('#font-size').val(30);
+            });
 
             // $('#color').change(function(){
             //     var color = $(this).val();
