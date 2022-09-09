@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between" id="imageDiv">
-                    <img id="img" src="/cms-ecommerce/public/uploads/logos/{{ $logo->image }}" width="350px" height="350px">
+                    <img id="img" src="{{ config('logo.logoUrl').$logo->image }}" width="350px" height="350px">
                     <span id="close" onclick="closeImage()" style="cursor: pointer; height: 5px;">x</span>
                 </div>
                 
