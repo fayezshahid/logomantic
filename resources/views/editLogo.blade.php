@@ -34,7 +34,7 @@
 
                 <div class="mb-4">
                     <label class="form-label" style="font-weight: normal">Logo Price</label>
-                    <input type="text" name="price" class="form-control @error('price]') border-3 border-danger @enderror" value="{{ $logo->price }}">
+                    <input type="text" name="price" class="form-control @error('price') border-3 border-danger @enderror" value="{{ $logo->price }}">
                     @error('price')
                         <div class="text-danger">
                             {{ $message }}

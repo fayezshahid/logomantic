@@ -9,12 +9,12 @@
 </style>
     <div class="row d-flex justify-content-center">
         <div class="col-8" style="margin-top: 30px;">
-            <form action="{{ route('addLogo') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('addDesign') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Name</label>
-                    <input type="text" name="name" placeholder="Enter logo name" class="form-control @error('name') border-3 border-danger @enderror" value="{{ old('name') }}">
+                    <label class="form-label" style="font-weight: normal">Design Card Name</label>
+                    <input type="text" name="name" placeholder="Enter Design Card name" class="form-control @error('name') border-3 border-danger @enderror" value="{{ old('name') }}">
                     @error('name')
                         <div class="text-danger">
                             {{ $message }}
@@ -23,8 +23,8 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Description</label>
-                    <input type="text" name="description" placeholder="Enter logo description" class="form-control @error('description') border-3 border-danger @enderror" value="{{ old('description') }}">
+                    <label class="form-label" style="font-weight: normal">Design Card Description</label>
+                    <input type="text" name="description" placeholder="Enter Design Card description" class="form-control @error('description') border-3 border-danger @enderror" value="{{ old('description') }}">
                     @error('description')
                         <div class="text-danger">
                             {{ $message }}
@@ -33,8 +33,8 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Price</label>
-                    <input type="text" name="price" placeholder="Enter logo price" class="form-control @error('price') border-3 border-danger @enderror" value="{{ old('price') }}">
+                    <label class="form-label" style="font-weight: normal">Design Card Price</label>
+                    <input type="text" name="price" placeholder="Enter Design Card price" class="form-control @error('price') border-3 border-danger @enderror" value="{{ old('price') }}">
                     @error('price')
                         <div class="text-danger">
                             {{ $message }}
@@ -43,14 +43,14 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Type</label>
-                    <select class="form-control @error('logoType') border-3 border-danger @enderror" style="width: 100%" name="logoType" value="{{ old('logoType') }}">
-                        <option selected disabled>Select a logo type</option>
-                        @foreach ($logoTypes as $logoType)
-                            <option value="{{ $logoType->name }}">{{ $logoType->name }}</option>
+                    <label class="form-label" style="font-weight: normal">Design Category</label>
+                    <select class="form-control @error('logoType') border-3 border-danger @enderror" style="width: 100%" name="designCategory" value="{{ old('designCategory') }}">
+                        <option selected disabled>Select a design category</option>
+                        @foreach ($designCategories as $designCategory)
+                            <option value="{{ $designCategory->name }}">{{ $designCategory->name }}</option>
                         @endforeach
                     </select>
-                    @error('logoType')
+                    @error('designCategory')
                         <div class="text-danger">
                             {{ $message }}
                         </div>
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="mb-4" id="chooseImg">
-                    <label class="form-label" style="font-weight: normal">Logo Image</label>
+                    <label class="form-label" style="font-weight: normal">Design Card Image</label>
                     <input type="file" id="image" class="form-control @error('image') border-3 border-danger @enderror" name="image" onchange="displayImage(this)" value="{{ old('image') }}">
                     @error('image')
                         <div class="text-danger">
@@ -73,7 +73,7 @@
                 </div>
                 
                 <div>
-                    <button type="submit" id="btn" class="btn btn-primary btn-block mb-4">Add Logo</button>
+                    <button type="submit" id="btn" class="btn btn-primary btn-block mb-4">Add Design Card</button>
                 </div>
             </form>
         </div>

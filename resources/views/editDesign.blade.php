@@ -9,12 +9,12 @@
 </style>
     <div class="row d-flex justify-content-center">
         <div class="col-8" style="margin-top: 30px;">
-            <form action="{{ route('addLogo') }}" method="post" enctype="multipart/form-data">
+            <form id="form" action="{{ route('editDesign', $design->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
-
+                @method('PUT')
                 <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Name</label>
-                    <input type="text" name="name" placeholder="Enter logo name" class="form-control @error('name') border-3 border-danger @enderror" value="{{ old('name') }}">
+                    <label class="form-label" style="font-weight: normal">Design Card Name</label>
+                    <input type="text" name="name" class="form-control @error('name') border-3 border-danger @enderror" value="{{ $design->name }}">
                     @error('name')
                         <div class="text-danger">
                             {{ $message }}
@@ -23,8 +23,8 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Description</label>
-                    <input type="text" name="description" placeholder="Enter logo description" class="form-control @error('description') border-3 border-danger @enderror" value="{{ old('description') }}">
+                    <label class="form-label" style="font-weight: normal">Design Card Description</label>
+                    <input type="text" name="description" class="form-control @error('description') border-3 border-danger @enderror" value="{{ $design->description }}">
                     @error('description')
                         <div class="text-danger">
                             {{ $message }}
@@ -33,8 +33,8 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Price</label>
-                    <input type="text" name="price" placeholder="Enter logo price" class="form-control @error('price') border-3 border-danger @enderror" value="{{ old('price') }}">
+                    <label class="form-label" style="font-weight: normal">Design Card Price</label>
+                    <input type="text" name="price" class="form-control @error('price') border-3 border-danger @enderror" value="{{ $design->price }}">
                     @error('price')
                         <div class="text-danger">
                             {{ $message }}
@@ -43,23 +43,23 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Type</label>
-                    <select class="form-control @error('logoType') border-3 border-danger @enderror" style="width: 100%" name="logoType" value="{{ old('logoType') }}">
-                        <option selected disabled>Select a logo type</option>
-                        @foreach ($logoTypes as $logoType)
-                            <option value="{{ $logoType->name }}">{{ $logoType->name }}</option>
+                    <label class="form-label" style="font-weight: normal">Design Category</label>
+                    <select class="form-control @error('designCategory') border-3 border-danger @enderror" style="width: 100%" name="designCategory" value="{{ $design->designCategory }}">
+                        <option disabled>Select a design category</option>
+                        @foreach ($designCategories as $designCategory)
+                            <option value="{{ $designCategory->name }}">{{ $designCategory->name }}</option>
                         @endforeach
                     </select>
-                    @error('logoType')
+                    @error('designCategory')
                         <div class="text-danger">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
 
-                <div class="mb-4" id="chooseImg">
-                    <label class="form-label" style="font-weight: normal">Logo Image</label>
-                    <input type="file" id="image" class="form-control @error('image') border-3 border-danger @enderror" name="image" onchange="displayImage(this)" value="{{ old('image') }}">
+                <div class="mb-4" id="chooseImg" style="display: none">
+                    <label class="form-label" style="font-weight: normal">Design Card Image</label>
+                    <input type="file" name="image" id="image" class="form-control @error('image') border-3 border-danger @enderror" onchange="displayImage(this);" value="{{ $design->image }}">
                     @error('image')
                         <div class="text-danger">
                             {{ $message }}
@@ -68,23 +68,26 @@
                 </div>
 
                 <div class="d-flex justify-content-between" id="imageDiv">
-                    <img id="img" src="" alt="">
-                    <span id="close" onclick="closeImage()" style="cursor: pointer; height: 5px; display: none;">x</span>
+                    <img id="img" src="/logomantic/public/uploads/logos/{{ $design->image }}" width="350px" height="350px">
+                    <span id="close" onclick="closeImage()" style="cursor: pointer; height: 5px;">x</span>
                 </div>
                 
                 <div>
-                    <button type="submit" id="btn" class="btn btn-primary btn-block mb-4">Add Logo</button>
+                    <button type="button" id="btn" class="btn btn-primary btn-block mb-4">Update Design Card</button>
                 </div>
             </form>
         </div>
-    </div>
+    </div>  
 
     @section('scripts')
         <script>
-            $(document).ready(function(){
-                if($('#image').val() != ''){
-                    displayImage($('#image'));
+            var flag = 0;
+
+            $('#btn').click(function(){
+                if(flag == 0){
+                    $('#chooseImg').html('<input type="hidden" name="hiddenToken" value="1">');
                 }
+                $('#form').submit();
             });
 
             function displayImage(input) {
@@ -111,6 +114,7 @@
             }
 
             function closeImage(){
+                flag = 1;
                 $('#chooseImg').show();
                 $('#image').val('');
                 $('#imageDiv').css('margin-top', '0px');

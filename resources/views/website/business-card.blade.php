@@ -314,18 +314,24 @@
         <section class="portfolio-area ">
             <div class="container">
                 <div class="row">
+                    
+                    @foreach ($designCards as $designCard)
                     <div class="col-lg-4 col-md-6">
                         <div class="single-portfolio-item">
                             <div class="portfolio-image">
                                 <a href="portfolio-details.html">
-                                    <img src="assets/new-image/business-card/image-1.jpg" alt="image">
+                                    <img src="{{ config('logo.logoUrl').$designCard->image }}" alt="image">
                                 </a>
                             </div>
 
                             <div class="portfolio-content">
                                 <h3>
-                                    <a href="portfolio-details.html">Business Card</a>
+                                    <a href="portfolio-details.html">{{ $designCard->name }}</a>
                                 </h3>
+                                <div class="d-flex justify-content-between">
+                                    <p style="color: black">{{ $designCard->description }}</p>
+                                    <p style="color: black">{{ $designCard->price }}</p>
+                                </div>
                                 <!-- <span>Web Design</span> -->
                                 <div class="pricing-btn small-padding ">
                                     <a href="#" class="default-btn new-btnn">
@@ -336,117 +342,7 @@
                             
                         </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-portfolio-item">
-                            <div class="portfolio-image">
-                                <a href="portfolio-details.html">
-                                    <img src="assets/new-image/business-card/image-1.jpg" alt="image">
-                                </a>
-                            </div>
-
-                            <div class="portfolio-content">
-                                <h3>
-                                    <a href="portfolio-details.html">Business Card</a>
-                                </h3>
-                                <!-- <span>Creative Agency</span> -->
-                                <div class="pricing-btn small-padding ">
-                                    <a href="#" class="default-btn new-btnn">
-                                        Buy Now
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-portfolio-item">
-                            <div class="portfolio-image">
-                                <a href="portfolio-details.html">
-                                    <img src="assets/new-image/business-card/image-1.jpg" alt="image">
-                                </a>
-                            </div>
-
-                            <div class="portfolio-content">
-                                <h3>
-                                    <a href="portfolio-details.html">Business Card</a>
-                                </h3>
-                                <!-- <span>IOS Android</span> -->
-                                <div class="pricing-btn small-padding ">
-                                    <a href="#" class="default-btn new-btnn">
-                                        Buy Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-portfolio-item">
-                            <div class="portfolio-image">
-                                <a href="portfolio-details.html">
-                                    <img src="assets/new-image/business-card/image-1.jpg" alt="image">
-                                </a>
-                            </div>
-
-                            <div class="portfolio-content">
-                                <h3>
-                                    <a href="portfolio-details.html">Business Card</a>
-                                </h3>
-                                <!-- <span>Web Development</span> -->
-                                <div class="pricing-btn small-padding ">
-                                    <a href="#" class="default-btn new-btnn">
-                                        Buy Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-portfolio-item">
-                            <div class="portfolio-image">
-                                <a href="portfolio-details.html">
-                                    <img src="assets/new-image/business-card/image-1.jpg" alt="image">
-                                </a>
-                            </div>
-
-                            <div class="portfolio-content">
-                                <h3>
-                                    <a href="portfolio-details.html">Business Card</a>
-                                </h3>
-                                <!-- <span>Marketing</span> -->
-                                <div class="pricing-btn small-padding ">
-                                    <a href="#" class="default-btn new-btnn">
-                                        Buy Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-portfolio-item">
-                            <div class="portfolio-image">
-                                <a href="portfolio-details.html">
-                                    <img src="assets/new-image/business-card/image-1.jpg" alt="image">
-                                </a>
-                            </div>
-
-                            <div class="portfolio-content">
-                                <h3>
-                                    <a href="portfolio-details.html">Business Card</a>
-                                </h3>
-                                <!-- <span>Business Card</span> -->
-                                <div class="pricing-btn small-padding ">
-                                    <a href="#" class="default-btn new-btnn">
-                                        Buy Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
 
                     <div class="col-lg-12 col-md-12">
                         <div class="pagination-area">

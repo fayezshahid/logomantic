@@ -758,6 +758,8 @@
 
             $(document).ready(function(){
 
+                saveMemento($('#inputBoxResult0').html());
+
                 w = $('#elementResizable0').width();
                 h = $('#elementResizable0').height();
 
@@ -904,7 +906,7 @@
                 var fz = $('#inputBoxResult' + i).css('font-size');
                 var c = $('#inputBoxResult' + i).css('color');
                 var ff = $('#inputBoxResult' + i).css('font-family');
-                console.log(ff);
+                
                 var a = `
                             <div id="dragTextBox${i}" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: ${loc}">
                                 <div class="d-flex justify-content-between" style="position: relative">
@@ -976,9 +978,12 @@
 
             function undo() {
                 var tmp = mementos.pop();
-                saveRedo(tmp);
-                // console.log(mementos[mementos.length-1]);
-                // console.log(tmp);
+                if(tmp != null)
+                {
+                    saveRedo(tmp);
+                }
+                console.log(mementos[mementos.length-1]);
+                console.log(tmp);
                 if(tmp.includes('dragTextBox')){
                     // console.log(tmp);
                     $('#txtField').append(tmp);
@@ -1010,8 +1015,8 @@
                 }
                 else{
                     var inp = mementos[mementos.length-1];
-                    $('#inputBoxResult' + id).html(inp ? inp : 'This is a text field');
-                    $('#inputBox' + id).val(inp ? inp : 'This is a text field');
+                    $('#inputBoxResult' + id).html(inp ? inp : tmp);
+                    $('#inputBox' + id).val(inp ? inp : tmp);
                 }
             }
 
@@ -1022,15 +1027,19 @@
             }
 
             function redo(){
-                var tmp = redos.pop();
+                var inp = redos.pop();
+                if(inp != null)
+                {
+                    saveMemento(inp);
+                }
                 // console.log(mementos[mementos.length-1]);
-                // console.log(tmp);
-                if(tmp.includes('dragTextBox')){
-                    console.log(id);
+                console.log(inp);
+                if(inp.includes('dragTextBox')){
+                    // console.log(id);
                     $('#dragTextBox' + id).remove();
                 }
                 else{
-                    var inp = redos[redos.length-1];
+                    // var inp = redos[redos.length-1];
                     $('#inputBoxResult' + id).html(inp ? inp : 'This is a text field');
                     $('#inputBox' + id).val(inp ? inp : 'This is a text field');
                 }

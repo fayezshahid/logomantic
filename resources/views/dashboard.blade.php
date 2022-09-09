@@ -126,12 +126,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <p>Add Logo Type</p>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="{{ route('addColor') }}" class="nav-link active">
+            </ul>
+        </li>
+
+        <li class="nav-item ">
+            <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Designs
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('designs') }}" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Add Color</p>
+                    <p>Add Design Card</p>
                     </a>
-                </li> --}}
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('addDesignCategory') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Design Category</p>
+                    </a>
+                </li>
             </ul>
         </li>
 
