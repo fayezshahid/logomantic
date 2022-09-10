@@ -47,7 +47,7 @@
                     <select class="form-control @error('designCategory') border-3 border-danger @enderror" style="width: 100%" name="designCategory" value="{{ $design->designCategory }}">
                         <option disabled>Select a design category</option>
                         @foreach ($designCategories as $designCategory)
-                            <option value="{{ $designCategory->name }}">{{ $designCategory->name }}</option>
+                            <option value="{{ $designCategory->name }}" @if($designCategory->name == $design->designCategory) selected @endif>{{ $designCategory->name }}</option>
                         @endforeach
                     </select>
                     @error('designCategory')
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between" id="imageDiv">
-                    <img id="img" src="/logomantic/public/uploads/logos/{{ $design->image }}" width="350px" height="350px">
+                    <img id="img" src="/uploads/logos/{{ $design->image }}" width="350px" height="350px">
                     <span id="close" onclick="closeImage()" style="cursor: pointer; height: 5px;">x</span>
                 </div>
                 

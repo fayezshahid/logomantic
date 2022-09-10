@@ -308,12 +308,6 @@
                                                         <input id="color" type="color" class="form-control">
                                                     </div>
                                                 </div> --}}
-                                                {{-- <div class="col-lg-1 col-md-6">
-                                                    <div class="form-group">
-                                                        <label>color <span class="required">*</span></label>
-                                                        <input type="color" class="form-control">
-                                                    </div>
-                                                </div> --}}
                                                 <div class="col-lg-1 col-md-6">
                                                     <div class="form-group">
                                                         <label>Refresh <span class="required"></span></label>
@@ -1033,6 +1027,7 @@
                 $(this).hide();
                 $('#toolBar').hide();
                 $('#unPrev').show();
+                $('#logoImage').draggable({ disabled: true });
                 // $('#modalBody').html($('#finalLogo').html());
                 for(var j=0; j<=i; j++){
                     $('#inputBox' + j).attr('type', 'hidden');
@@ -1072,6 +1067,7 @@
                 $(this).hide();
                 $('#toolBar').show();
                 $('#prevNow').show();
+                $('#logoImage').draggable({ disabled: false });
                 // $('#modalBody').html($('#finalLogo').html());
                 for(var j=0; j<=i; j++){
                     $('#inputBox' + j).attr('type', 'text');
@@ -1142,7 +1138,7 @@
             //     $('#colorPalette').html(`
             //         <input type="color" onclick="getColor(this.value)" onchange="setColor(this.value)" id="${color}" value="${color}" style="width: 3rem; height: 3rem;">
             //     `);
-            // })
+            // });
 
         </script>
 

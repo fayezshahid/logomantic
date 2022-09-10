@@ -47,7 +47,7 @@
                     <select class="form-control @error('logoType') border-3 border-danger @enderror" style="width: 100%" name="logoType" value="{{ $logo->logoType }}">
                         <option disabled>Select a logo type</option>
                         @foreach ($logoTypes as $logoType)
-                            <option value="{{ $logoType->name }}">{{ $logoType->name }}</option>
+                            <option value="{{ $logoType->name }}" @if($logoType->name == $logo->logoType) selected @endif>{{ $logoType->name }}</option>
                         @endforeach
                     </select>
                     @error('logoType')
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between" id="imageDiv">
-                    <img id="img" src="{{ config('logo.logoUrl').$logo->image }}" width="350px" height="350px">
+                    <img id="img" src="/uploads/logos/{{ $logo->image }}" width="350px" height="350px">
                     <span id="close" onclick="closeImage()" style="cursor: pointer; height: 5px;">x</span>
                 </div>
                 
