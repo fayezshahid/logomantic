@@ -15,6 +15,7 @@ class Logo extends Model
         'price',
         'logoType',
         'image',
+        'path',
     ];
 
 }

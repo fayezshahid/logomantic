@@ -14,6 +14,8 @@ class LogosController extends Controller
 {
     public function index()
     {
+        // $contents = Storage::disk('google')->listContents();
+        // $paths = array_column($contents, 'path');
         return view('logo', [
             'logos' => Logo::all(),
         ]);
@@ -37,9 +39,13 @@ class LogosController extends Controller
             'image' => 'required',
         ]);
         
-        $image = Storage::disk('logoImage')->putFile('', $request->image);
+        $image = Storage::disk('google')->putFile('', $request->image);
         $data['image'] = $image;
-        
+
+        $contents = collect(Storage::disk('google')->listContents());
+        $path = $contents->where('name', '=', $image)->first();
+        $data['path'] = $path['path'];
+
         Logo::create($data);
 
         Alert::success('Success', 'Logo added successfully');
@@ -77,8 +83,13 @@ class LogosController extends Controller
                 'image' => 'required',
             ]);
 
-            $image = Storage::disk('logoImage')->putFile('', $request->image);
+            $image = Storage::disk('google')->putFile('', $request->image);
             $data['image'] = $image;
+
+            $contents = collect(Storage::disk('google')->listContents());
+            $path = $contents->where('name', '=', $image)->first();
+            $data['path'] = $path['path'];
+
         }
         
         $logoUpdate = Logo::find($logo);
@@ -89,9 +100,12 @@ class LogosController extends Controller
         return redirect()->route('logos');
     }
 
-    public function delete($logo)
+    public function delete($logoId)
     {
-        Logo::find($logo)->delete();
+        $logo = Logo::find($logoId);
+        $logo->delete();
+
+        Storage::disk('google')->delete($logo->path);
 
         Alert::success('Success', 'Logo deleted successfully');
 

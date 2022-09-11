@@ -394,7 +394,7 @@
                                     <div class="products-image">
                                         <div id="finalLogo" style="position: relative;">
                                             <div class="txtContainer" id="txtField">
-                                                <img width="400px" height="400px" onclick="main()" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
+                                                <img width="400px" height="400px" onclick="main()" style="cursor: move" id="logoImage" src="https://drive.google.com/uc?id={{ $logo->path }}" alt="image" >
                                                 <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 359px auto auto 512.188px">
                                                     <div class="d-flex justify-content-between" style="position: relative">
                                                             <div id='elementResizable0' class="elementResizable">

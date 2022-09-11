@@ -34,8 +34,12 @@ class DesignController extends Controller
             'image' => 'required',
         ]);
         
-        $image = Storage::disk('logoImage')->putFile('', $request->image);
+        $image = Storage::disk('google')->putFile('', $request->image);
         $data['image'] = $image;
+
+        $contents = collect(Storage::disk('google')->listContents());
+        $path = $contents->where('name', '=', $image)->first();
+        $data['path'] = $path['path'];
 
         Design::create($data);
 
@@ -73,8 +77,12 @@ class DesignController extends Controller
                 'image' => 'required',
             ]);
 
-            $image = Storage::disk('logoImage')->putFile('', $request->image);
+            $image = Storage::disk('google')->putFile('', $request->image);
             $data['image'] = $image;
+
+            $contents = collect(Storage::disk('google')->listContents());
+            $path = $contents->where('name', '=', $image)->first();
+            $data['path'] = $path['path'];
         }
 
         $designUpdate = Design::find($design);
@@ -85,9 +93,12 @@ class DesignController extends Controller
         return redirect()->route('designs');
     }
 
-    public function delete($design)
+    public function delete($designId)
     {
-        Design::find($design)->delete();
+        $design = Design::find($designId);
+        $design->delete();
+
+        Storage::disk('google')->delete($design->path);
 
         Alert::success('Success', 'Design Card deleted successfully');
 

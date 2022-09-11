@@ -536,7 +536,7 @@
                                         <div class="products-image">
                                             <a href="shop-details.html">
                                                 <div class="smallLogo">
-                                                    <img id="logoImage{{ $logo->id }}" src="{{ config("logo.logoUrl").$logo->image }}" alt="image">
+                                                    <img id="logoImage{{ $logo->id }}" src="https://drive.google.com/uc?id={{ $logo->path }}" alt="image">
                                                     <p class="txt" id="txt{{ $logo->id }}"></p>
                                                 </div>
                                             </a>

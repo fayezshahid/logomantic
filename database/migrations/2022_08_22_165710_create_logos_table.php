@@ -20,6 +20,7 @@ class CreateLogosTable extends Migration
             $table->float('price');
             $table->string('logoType');
             $table->string('image');
+            $table->string('path');
             $table->timestamps();
         });
     }

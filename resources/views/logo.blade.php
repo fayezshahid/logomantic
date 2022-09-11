@@ -34,7 +34,7 @@
                     <td>{{ $logo->price }}</td>
                     <td>{{ $logo->logoType }}</td>
                     <td>
-                        <img src="{{ config("logo.logoUrl").$logo->image }}" alt="item" height="80px" width="80px" class="mx-auto">
+                        <img src="https://drive.google.com/uc?id={{ $logo->path }}" alt="item" height="80px" width="80px" class="mx-auto">
                     </td>
                     <td class="d-flex justify-content-center form-inline">
                         <a href="{{ route('editLogo', $logo->id) }}" class="btn btn-primary btn-sm">Edit</a>
