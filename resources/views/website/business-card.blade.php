@@ -320,7 +320,7 @@
                         <div class="single-portfolio-item">
                             <div class="portfolio-image">
                                 <a href="portfolio-details.html">
-                                    <img src="{{ config('logo.logoUrl').$designCard->image }}" alt="image">
+                                    <img src="https://drive.google.com/uc?id={{ $designCard->path }}" alt="image">
                                 </a>
                             </div>
 
