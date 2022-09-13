@@ -15,5 +15,6 @@ class Design extends Model
         'price',
         'designCategory',
         'image',
+        'path',
     ];
 }
