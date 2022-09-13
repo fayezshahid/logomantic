@@ -748,7 +748,6 @@
         <script>
 
             var img = document.getElementById("logoImage");
-            img.crossOrigin = "Anonymous";
             var canvas = document.createElement("canvas");
             var ctx = canvas.getContext("2d");
             var originalPixels = null;

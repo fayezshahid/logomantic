@@ -205,7 +205,6 @@ const buildPalette = (colorsList) => {
   
   const main = () => {
     const img = document.getElementById("logoImage");
-    img.crossOrigin = "Anonymous";
     const image = new Image();
     // const file = imgFile.files[0];
     // const fileReader = new FileReader();
