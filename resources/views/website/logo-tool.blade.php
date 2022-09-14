@@ -398,7 +398,7 @@
                                     <div class="products-image">
                                         <div id="finalLogo" style="position: relative;">
                                             <div class="txtContainer" id="txtField">
-                                                <img width="400px" height="400px" onclick="main()" style="cursor: move" id="logoImage" src="https://drive.google.com/uc?id={{ $logo->path }}" alt="image" >
+                                                <img width="400px" height="400px" onclick="main()" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
                                                 <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 359px auto auto 512.188px">
                                                     <div class="d-flex justify-content-between" style="position: relative">
                                                             <div id='elementResizable0' class="elementResizable">
@@ -417,7 +417,7 @@
                                                     <input class="inputBox" onkeyup="writeAbove(0)" id="inputBox0" type="text" maxlength="30" value="{{ $bName }}">
                                                 </div>
                                             </div>
-                                            <img width="1000px" height="1000px" src="assets/img/background.jpg" alt="background">
+                                            <img id="parent" width="1000px" height="1000px" src="assets/img/background.jpg" alt="background">
                                         </div>
                                         
                                     </div>
@@ -755,7 +755,9 @@
             var w,h;
 
             function setTextBox(i){
-                $("#dragTextBox" + i).draggable();
+                $("#dragTextBox" + i).draggable({
+                    containment: "#parent",
+                });
                 w = $('#elementResizable' + i).width();
                 h = $('#elementResizable' + i).height();
                 $('#elementResizable' + i).resizable({
@@ -791,7 +793,9 @@
 
                 setTextBox(0);
                 
-                $('#logoImage').draggable();
+                $('#logoImage').draggable({
+                    containment: "#parent",
+                });
 
                 canvas.width = img.width;
                 canvas.height = img.height;

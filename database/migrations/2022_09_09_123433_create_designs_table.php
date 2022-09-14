@@ -20,7 +20,7 @@ class CreateDesignsTable extends Migration
             $table->float('price');
             $table->string('designCategory');
             $table->string('image');
-            $table->string('path');
+            // $table->string('path');
             $table->timestamps();
         });
     }

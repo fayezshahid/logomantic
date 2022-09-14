@@ -34,12 +34,12 @@ class DesignController extends Controller
             'image' => 'required',
         ]);
         
-        $image = Storage::disk('google')->putFile('', $request->image);
+        $image = Storage::disk('logoImage')->putFile('', $request->image);
         $data['image'] = $image;
 
-        $contents = collect(Storage::disk('google')->listContents());
-        $path = $contents->where('name', '=', $image)->first();
-        $data['path'] = $path['path'];
+        // $contents = collect(Storage::disk('google')->listContents());
+        // $path = $contents->where('name', '=', $image)->first();
+        // $data['path'] = $path['path'];
 
         Design::create($data);
 
@@ -77,12 +77,12 @@ class DesignController extends Controller
                 'image' => 'required',
             ]);
 
-            $image = Storage::disk('google')->putFile('', $request->image);
+            $image = Storage::disk('logoImage')->putFile('', $request->image);
             $data['image'] = $image;
 
-            $contents = collect(Storage::disk('google')->listContents());
-            $path = $contents->where('name', '=', $image)->first();
-            $data['path'] = $path['path'];
+            // $contents = collect(Storage::disk('google')->listContents());
+            // $path = $contents->where('name', '=', $image)->first();
+            // $data['path'] = $path['path'];
         }
 
         $designUpdate = Design::find($design);
@@ -98,7 +98,8 @@ class DesignController extends Controller
         $design = Design::find($designId);
         $design->delete();
 
-        Storage::disk('google')->delete($design->path);
+        // Storage::disk('google')->delete($design->path);
+        Storage::disk('logoImage')->delete($design->image);
 
         Alert::success('Success', 'Design Card deleted successfully');
 

@@ -39,12 +39,12 @@ class LogosController extends Controller
             'image' => 'required',
         ]);
         
-        $image = Storage::disk('google')->putFile('', $request->image);
+        $image = Storage::disk('logoImage')->putFile('', $request->image);
         $data['image'] = $image;
 
-        $contents = collect(Storage::disk('google')->listContents());
-        $path = $contents->where('name', '=', $image)->first();
-        $data['path'] = $path['path'];
+        // $contents = collect(Storage::disk('google')->listContents());
+        // $path = $contents->where('name', '=', $image)->first();
+        // $data['path'] = $path['path'];
 
         Logo::create($data);
 
@@ -83,12 +83,12 @@ class LogosController extends Controller
                 'image' => 'required',
             ]);
 
-            $image = Storage::disk('google')->putFile('', $request->image);
+            $image = Storage::disk('logoImage')->putFile('', $request->image);
             $data['image'] = $image;
 
-            $contents = collect(Storage::disk('google')->listContents());
-            $path = $contents->where('name', '=', $image)->first();
-            $data['path'] = $path['path'];
+            // $contents = collect(Storage::disk('google')->listContents());
+            // $path = $contents->where('name', '=', $image)->first();
+            // $data['path'] = $path['path'];
 
         }
         
@@ -105,7 +105,8 @@ class LogosController extends Controller
         $logo = Logo::find($logoId);
         $logo->delete();
 
-        Storage::disk('google')->delete($logo->path);
+        // Storage::disk('google')->delete($logo->path);
+        Storage::disk('logoImage')->delete($logo->image);
 
         Alert::success('Success', 'Logo deleted successfully');
 
