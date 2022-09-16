@@ -71,6 +71,28 @@
                     <img id="img" src="{{ config('logo.logoUrl').$logo->image }}" width="350px" height="350px">
                     <span id="close" onclick="closeImage()" style="cursor: pointer; height: 5px;">x</span>
                 </div>
+
+                <div class="mb-4" id="hexcodeDiv">
+                    <label class="form-label" style="font-weight: normal">Logo Hexcodes</label>
+                    <?php $i = 0 ?>
+                    @foreach ($logo->hexcodes as $hexcode)
+                        <?php ++$i ?>
+                        <div class="d-flex justify-content-between" id="hexcode{{ $i }}">
+                            <input type="text" value="{{ $hexcode->hexcode }}" name="hexcode{{ $i }}" class="form-control w-75 mt-2">
+                            @if($i == 1)
+                            <button type="button" class="btn btn-warning" onclick="addMore()">Add More</button>
+                            @else
+                            <button style="height: 30px; margin-top: 15px; font-size: 12px;" type="button" class="btn btn-danger" onclick="deleteInput(this.parentNode.id)">Delete this field</button>
+                            @endif
+                        </div>
+                    @endforeach
+                    <input type="hidden" value="{{ $i }}" id="hexInputCount">
+                    @error('hexcode1')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 
                 <div>
                     <button type="button" id="btn" class="btn btn-primary btn-block mb-4">Update Logo</button>
@@ -82,11 +104,13 @@
     @section('scripts')
         <script>
             var flag = 0;
-
+            var hexInputCount = $('#hexInputCount').val();
             $('#btn').click(function(){
                 if(flag == 0){
                     $('#chooseImg').html('<input type="hidden" name="hiddenToken" value="1">');
                 }
+
+                $('#form').append(`<input type="hidden" name="hexInputCount" value="${hexInputCount}">`);
                 $('#form').submit();
             });
 
@@ -121,6 +145,20 @@
                 $('#imageDiv').css('margin-bottom', '0px');
                 $('#img').hide();
                 $('#close').hide();
+            }
+
+            function addMore(){
+                hexInputCount++;
+                $('#hexcodeDiv').append(`
+                <div class="d-flex justify-content-between" id="hexcode${hexInputCount}">
+                    <input type="text" name="hexcode${hexInputCount}" class="form-control w-75 mt-2">
+                    <button style="height: 30px; margin-top: 15px; font-size: 12px;" type="button" class="btn btn-danger" onclick="deleteInput(this.parentNode.id)">Delete this field</button>
+                </div>
+                `);
+            }
+
+            function deleteInput(id){
+                $('#' + id).remove();
             }
 
         </script>

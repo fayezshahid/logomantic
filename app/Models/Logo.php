@@ -18,4 +18,9 @@ class Logo extends Model
         'path',
     ];
 
+    public function hexcodes()
+    {
+        return $this->hasMany(Hexcode::class);
+    }
+
 }

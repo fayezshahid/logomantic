@@ -37,6 +37,7 @@ return array(
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Design' => $baseDir . '/app/Models/Design.php',
     'App\\Models\\DesignCategory' => $baseDir . '/app/Models/DesignCategory.php',
+    'App\\Models\\Hexcode' => $baseDir . '/app/Models/Hexcode.php',
     'App\\Models\\Logo' => $baseDir . '/app/Models/Logo.php',
     'App\\Models\\LogoType' => $baseDir . '/app/Models/LogoType.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

@@ -612,6 +612,7 @@ class ComposerStaticInit8b0ef5baeee5589aeb3e725a769f8caa
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Design' => __DIR__ . '/../..' . '/app/Models/Design.php',
         'App\\Models\\DesignCategory' => __DIR__ . '/../..' . '/app/Models/DesignCategory.php',
+        'App\\Models\\Hexcode' => __DIR__ . '/../..' . '/app/Models/Hexcode.php',
         'App\\Models\\Logo' => __DIR__ . '/../..' . '/app/Models/Logo.php',
         'App\\Models\\LogoType' => __DIR__ . '/../..' . '/app/Models/LogoType.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',

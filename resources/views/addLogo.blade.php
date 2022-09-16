@@ -9,7 +9,7 @@
 </style>
     <div class="row d-flex justify-content-center">
         <div class="col-8" style="margin-top: 30px;">
-            <form action="{{ route('addLogo') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('addLogo') }}" method="post" enctype="multipart/form-data" id="form">
                 @csrf
 
                 <div class="mb-4">
@@ -71,9 +71,22 @@
                     <img id="img" src="" alt="">
                     <span id="close" onclick="closeImage()" style="cursor: pointer; height: 5px; display: none;">x</span>
                 </div>
+
+                <div class="mb-4" id="hexcodeDiv">
+                    <label class="form-label" style="font-weight: normal">Logo Hexcodes</label>
+                    <div class="d-flex justify-content-between">
+                        <input type="text" name="hexcode1" class="form-control w-75">
+                        <button type="button" class="btn btn-warning" onclick="addMore()">Add More</button>
+                    </div>
+                    @error('hexcode1')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 
                 <div>
-                    <button type="submit" id="btn" class="btn btn-primary btn-block mb-4">Add Logo</button>
+                    <button type="button" id="btn" class="btn btn-primary btn-block mb-4">Add Logo</button>
                 </div>
             </form>
         </div>
@@ -118,6 +131,26 @@
                 $('#img').hide();
                 $('#close').hide();
             }
+
+            var hexInputCount = 1;
+            function addMore(){
+                hexInputCount++;
+                $('#hexcodeDiv').append(`
+                <div class="d-flex justify-content-between" id="hexcode${hexInputCount}">
+                    <input type="text" name="hexcode${hexInputCount}" class="form-control w-75 mt-2">
+                    <button style="height: 30px; margin-top: 15px; font-size: 12px;" type="button" class="btn btn-danger" onclick="deleteInput(this.parentNode.id)">Delete this field</button>
+                </div>
+                `);
+            }
+
+            function deleteInput(id){
+                $('#' + id).remove();
+            }
+
+            $('#btn').click(function(){
+                $('#form').append(`<input type="hidden" name="hexInputCount" value="${hexInputCount}">`);
+                $('#form').submit();
+            })
 
         </script>
     @endsection

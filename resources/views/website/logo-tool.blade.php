@@ -389,7 +389,10 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div id="colorPalette" style="padding-left: 125px;padding-bottom: 10px;">
+                        <div id="colorPalette" style="padding-left: 125px;padding-bottom: 10px; display:none">
+                            @foreach ($logo->hexcodes as $hexcode)
+                                <input type="color" onclick="getColor(this.value)" onchange="setColor(this.value)" value="#{{ $hexcode->hexcode }}" style="width: 3rem; height: 3rem;">
+                            @endforeach
                         </div>
 
                         <div class="row">
@@ -398,7 +401,7 @@
                                     <div class="products-image">
                                         <div id="finalLogo" style="position: relative;">
                                             <div class="txtContainer" id="txtField">
-                                                <img width="400px" height="400px" onclick="main()" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
+                                                <img width="400px" height="400px" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
                                                 <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 359px auto auto 512.188px">
                                                     <div class="d-flex justify-content-between" style="position: relative">
                                                             <div id='elementResizable0' class="elementResizable">
@@ -1104,13 +1107,14 @@
 
             $('#logoImage').click(function(){
                 
+                $('#colorPalette').show();
                 // colorThief = new ColorThief()
                 // img = $('#logoImage');
                 // var tmp = '';
                 // colors = colorThief.getPalette(img);
                 // for(var i=0; i<colors.length; i++){
                 //     var color = rgbToHex(colors[i][0], colors[i][1], colors[i][2]);
-                //     tmp += `<input type="color" onclick="getColor(this.id)" onchange="setColor(this.value)" id="${color}" value="${color}" style="width: 3rem; height: 3rem; display: inline-block;">`;
+                //     tmp += `<input type="color" onclick="getColor(this.value)" onchange="setColor(this.value)" value="${color}" style="width: 3rem; height: 3rem;">`;
                 // }
                 // $('#colorPalette').html(tmp);
                 

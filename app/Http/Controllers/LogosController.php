@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\LogoType;
-// use App\Models\Color;
+use App\Models\Hexcode;
 use App\Models\Logo;
 // use App\Models\Color_Logo;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -30,13 +30,14 @@ class LogosController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'price' => 'required|string',
             'logoType' => 'required',
             'image' => 'required',
+            'hexcode1' => 'required',
         ]);
         
         $image = Storage::disk('logoImage')->putFile('', $request->image);
@@ -46,7 +47,19 @@ class LogosController extends Controller
         // $path = $contents->where('name', '=', $image)->first();
         // $data['path'] = $path['path'];
 
-        Logo::create($data);
+        $logo = Logo::create($data);
+
+        for($i=1; $i<=$request->hexInputCount; $i++)
+        {
+            $tmp = 'hexcode'.$i;
+            if($request->$tmp != null)
+            {
+                $hexcode = new Hexcode;
+                $hexcode->logo_id = $logo->id;
+                $hexcode->hexcode = $request->$tmp;
+                $hexcode->save();
+            }
+        }
 
         Alert::success('Success', 'Logo added successfully');
 
@@ -95,6 +108,19 @@ class LogosController extends Controller
         $logoUpdate = Logo::find($logo);
         $logoUpdate->update($data);
 
+        $logoUpdate->hexcodes()->delete();
+        for($i=1; $i<=$request->hexInputCount; $i++)
+        {
+            $tmp = 'hexcode'.$i;
+            if($request->$tmp != null)
+            {
+                $hexcode = new Hexcode;
+                $hexcode->logo_id = $logoUpdate->id;
+                $hexcode->hexcode = $request->$tmp;
+                $hexcode->save();
+            }
+        }
+
         Alert::success('Success', 'Logo updated successfully');
 
         return redirect()->route('logos');
@@ -104,10 +130,10 @@ class LogosController extends Controller
     {
         $logo = Logo::find($logoId);
         $logo->delete();
-
+        $logo->hexcodes()->delete();
         // Storage::disk('google')->delete($logo->path);
         Storage::disk('logoImage')->delete($logo->image);
-
+        
         Alert::success('Success', 'Logo deleted successfully');
 
         return back();

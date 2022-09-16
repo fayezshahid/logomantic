@@ -543,7 +543,7 @@
                                         </div>
             
                                         <div class="products-content center">
-                                            <h3 class="fomt-size"><a href="shop-details.html">{{ $logo->name }}</a></h3>
+                                            {{-- <h3 class="fomt-size"><a href="shop-details.html">{{ $logo->name }}</a></h3> --}}
                                             <div class="price">                                                
                                                 <span class="new-price">{{ $logo->price }}</span>
                                             </div>
