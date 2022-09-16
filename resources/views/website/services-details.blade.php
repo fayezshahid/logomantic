@@ -535,8 +535,8 @@
                                     <div class="single-products-box">
                                         <div class="products-image">
                                             <a href="shop-details.html">
-                                                <div class="smallLogo">
-                                                    <img id="logoImage{{ $logo->id }}" src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
+                                                <div class="smallLogo" style="height: 290px">
+                                                    <img width="260px" height="260px" id="logoImage{{ $logo->id }}" src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
                                                     <p class="txt" id="txt{{ $logo->id }}"></p>
                                                 </div>
                                             </a>
@@ -548,7 +548,7 @@
                                                 <span class="new-price">{{ $logo->price }}</span>
                                             </div>
                                             
-                                            <a href="cart.html" class="add-to-cart">Add to Cart</a>
+                                            {{-- <a href="cart.html" class="add-to-cart">Add to Cart</a> --}}
                                         </div>
                                         <div class="features-btn">
                                             {{-- <a href="{{ route('customizeLogo', $logo->id) }}" class="default-btn new-btn">Want To Customize Free?</a> --}}

@@ -29,7 +29,7 @@ class DesignController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'price' => 'required|string',
+            'price' => 'required|integer',
             'designCategory' => 'required',
             'image' => 'required',
         ]);
@@ -63,7 +63,7 @@ class DesignController extends Controller
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'description' => 'required|string|max:255',
-                'price' => 'required|string',
+                'price' => 'required|integer',
                 'designCategory' => 'required',
             ]);
         }
@@ -72,7 +72,7 @@ class DesignController extends Controller
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'description' => 'required|string|max:255',
-                'price' => 'required|string',
+                'price' => 'required|integer',
                 'designCategory' => 'required',
                 'image' => 'required',
             ]);

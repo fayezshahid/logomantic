@@ -401,7 +401,17 @@
                                     <div class="products-image">
                                         <div id="finalLogo" style="position: relative;">
                                             <div class="txtContainer" id="txtField">
-                                                <img width="400px" height="400px" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
+                                                <div style="width: 420px; inset: -62px auto auto 380px; display: none;" id='elementResizable' class="elementResizable">
+                                                    <img width="400px" height="400px" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
+                                                    <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip" ></div>
+                                                    <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip" ></div>
+                                                    <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip" ></div>
+                                                    <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip" ></div>
+                                                    <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip" ></div>
+                                                    <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip" ></div>
+                                                    <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip" ></div>
+                                                    <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip" ></div>
+                                                </div>
                                                 <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 359px auto auto 512.188px">
                                                     <div class="d-flex justify-content-between" style="position: relative">
                                                             <div id='elementResizable0' class="elementResizable">
@@ -756,6 +766,7 @@
             var originalPixels = null;
             var currentPixels = null;
             var w,h;
+            var hexcodes;
 
             function setTextBox(i){
                 $("#dragTextBox" + i).draggable({
@@ -789,6 +800,8 @@
 
             $(document).ready(function(){
 
+                hexcodes = $('#colorPalette').html();
+
                 saveMemento($('#inputBoxResult0').html());
 
                 w = $('#elementResizable0').width();
@@ -796,9 +809,32 @@
 
                 setTextBox(0);
                 
-                $('#logoImage').draggable({
+                $('#elementResizable').draggable({
                     containment: "#parent",
                 });
+
+                $('#elementResizable').resizable({
+                    // maxWidth: 500,
+                    // maxHeight: 150,
+                    handles: {
+                        'nw': '#nwgrip',
+                        'ne': '#negrip',
+                        'sw': '#swgrip',
+                        'se': '#segrip',
+                        'n': '#ngrip',
+                        'e': '#egrip',
+                        's': '#sgrip',
+                        'w': '#wgrip',
+                    },
+                    resize: function(event, ui) {
+                        var size = ui.size;
+
+                        $('#logoImage').width(size.width - 10); 
+                        $('#logoImage').height(size.height - 10); 
+                    }
+                });
+
+                $('#elementResizable').show();
 
                 canvas.width = img.width;
                 canvas.height = img.height;
@@ -937,6 +973,7 @@
                 $('#colorPalette').html(`
                     <input type="color" onchange="changeFontColor(${txtId}, this.value)" value="${c}" style="width: 3rem; height: 3rem;">
                 `);
+                $('#colorPalette').show();
             }
 
             function changeFontColor(id, color){
@@ -1106,7 +1143,7 @@
             }).join('')
 
             $('#logoImage').click(function(){
-                
+                $('#colorPalette').html(hexcodes);
                 $('#colorPalette').show();
                 // colorThief = new ColorThief()
                 // img = $('#logoImage');

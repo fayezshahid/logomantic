@@ -34,7 +34,7 @@ class LogosController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'price' => 'required|string',
+            'price' => 'required|integer',
             'logoType' => 'required',
             'image' => 'required',
             'hexcode1' => 'required',
@@ -82,7 +82,7 @@ class LogosController extends Controller
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'description' => 'required|string|max:255',
-                'price' => 'required|string',
+                'price' => 'required|integer',
                 'logoType' => 'required',
             ]);
         }
@@ -91,7 +91,7 @@ class LogosController extends Controller
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'description' => 'required|string|max:255',
-                'price' => 'required|string',
+                'price' => 'required|integer',
                 'logoType' => 'required',
                 'image' => 'required',
             ]);
