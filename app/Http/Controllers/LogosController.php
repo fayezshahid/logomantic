@@ -56,7 +56,7 @@ class LogosController extends Controller
             {
                 $hexcode = new Hexcode;
                 $hexcode->logo_id = $logo->id;
-                $hexcode->hexcode = $request->$tmp;
+                $hexcode->hexcode = str_replace('#', '', strtoupper($request->$tmp));
                 $hexcode->save();
             }
         }
@@ -107,8 +107,8 @@ class LogosController extends Controller
         
         $logoUpdate = Logo::find($logo);
         $logoUpdate->update($data);
-
         $logoUpdate->hexcodes()->delete();
+
         for($i=1; $i<=$request->hexInputCount; $i++)
         {
             $tmp = 'hexcode'.$i;
@@ -116,7 +116,7 @@ class LogosController extends Controller
             {
                 $hexcode = new Hexcode;
                 $hexcode->logo_id = $logoUpdate->id;
-                $hexcode->hexcode = $request->$tmp;
+                $hexcode->hexcode = str_replace('#', '', strtoupper($request->$tmp));
                 $hexcode->save();
             }
         }

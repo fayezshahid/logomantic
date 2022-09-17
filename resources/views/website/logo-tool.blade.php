@@ -1174,6 +1174,7 @@
             }
 
             function setColor(newColor){
+                hexcodes = hexcodes.replace(recentColor.toUpperCase(), newColor.toUpperCase());
                 changeColor(recentColor, newColor);
             }
 
