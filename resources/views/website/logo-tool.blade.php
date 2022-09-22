@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <link href="https://fonts.googleapis.com/css2?family=Merienda&family=Playball&family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/godswearhats/jquery-ui-rotatable@1.1/jquery.ui.rotatable.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS --> 
@@ -401,8 +402,8 @@
                                     <div class="products-image">
                                         <div id="finalLogo" style="position: relative;">
                                             <div class="txtContainer" id="txtField">
-                                                <div style="width: 420px; inset: -62px auto auto 380px; display: none;" id='elementResizable' class="elementResizable">
-                                                    <img width="400px" height="400px" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
+                                                <div style="width: 250px; height: 250px; inset: -55px auto auto 510px; display: none;" id='elementResizable' class="elementResizable">
+                                                    <img width="250px" height="250px" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
                                                     <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip" ></div>
                                                     <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip" ></div>
                                                     <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip" ></div>
@@ -412,7 +413,7 @@
                                                     <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip" ></div>
                                                     <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip" ></div>
                                                 </div>
-                                                <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 359px auto auto 512.188px">
+                                                <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 200px auto auto 530px">
                                                     <div class="d-flex justify-content-between" style="position: relative">
                                                             <div id='elementResizable0' class="elementResizable">
                                                                 <p class="inputBoxResult" id="inputBoxResult0" style="color: {{ $fontColor }}; font-family: {{ $fontFamily }};" onclick="preChangeFontColor(this.id)">{{ $bName }}</p>
@@ -430,7 +431,7 @@
                                                     <input class="inputBox" onkeyup="writeAbove(0)" id="inputBox0" type="text" maxlength="30" value="{{ $bName }}">
                                                 </div>
                                             </div>
-                                            <img id="parent" width="1000px" height="1000px" src="assets/img/background.jpg" alt="background">
+                                            <img id="parent" width="990px" style="height: 510px !important" src="assets/img/background.png" alt="background">
                                         </div>
                                         
                                     </div>
@@ -481,6 +482,25 @@
                                         <a id="unPrev" class="default-btn col-lg-3 margin" style="cursor: pointer; display: none">
                                             UnPreview
                                         </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="logoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                    <div class="modal-content" style="height:510px !important;">
+                                        {{-- <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div> --}}
+                                        <div class="modal-body" id="modalContent">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" id="closeModal">Close</button>
+                                            {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -729,6 +749,8 @@
         <!-- Jquery Slim JS -->
         <script src="assets/js/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/gh/godswearhats/jquery-ui-rotatable@1.1/jquery.ui.rotatable.min.js"></script>
+
         <!-- Bootstrap JS -->
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- Meanmenu JS -->
@@ -796,6 +818,7 @@
                         $('#inputBoxResult' + i).css("transform", `scale(${1 + ww}, ${1 + hh})`); 
                     }
                 });
+                $('#elementResizable' + i).rotatable();
             }
 
             $(document).ready(function(){
@@ -831,6 +854,13 @@
 
                         $('#logoImage').width(size.width - 10); 
                         $('#logoImage').height(size.height - 10); 
+                    }
+                });
+
+                $('#elementResizable').rotatable({
+                    handleOffset: {
+                        top: -15,
+                        left: 0
                     }
                 });
 
@@ -894,7 +924,7 @@
             $('#addTextBox').click(function(){ 
                 i++;
                 var a = `
-                            <div id="dragTextBox${i}" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 359px auto auto 512.188px">
+                            <div id="dragTextBox${i}" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 200px auto auto 500px">
                                 <div class="d-flex justify-content-between" style="position: relative">
                                     <div id='elementResizable${i}' class="elementResizable" style="width: 270px">
                                         <p class="inputBoxResult" id="inputBoxResult${i}" onclick="preChangeFontColor(this.id)">This is a textfield</p>
@@ -985,7 +1015,7 @@
                 var src = $('#logoImage').attr('src');
                 $('#txtField').html(`
                     <img width="400px" height="400px" onclick="main()" style="cursor: move" id="logoImage" src="${src}" alt="image" >
-                    <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 359px auto auto 512.188px">
+                    <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 200px auto auto 500px">
                         <div class="d-flex justify-content-between" style="position: relative">
                                 <div id='elementResizable0' class="elementResizable">
                                     <p class="inputBoxResult" id="inputBoxResult0" style="color: {{ $fontColor }}; font-family: {{ $fontFamily }};" onclick="preChangeFontColor(this.id)">{{ $bName }}</p>
@@ -1072,11 +1102,28 @@
             }
                        
             $('#prevNow').click(function(){
-                $(this).hide();
+                // $(this).hide();
                 $('#toolBar').hide();
-                $('#unPrev').show();
-                $('#logoImage').draggable({ disabled: true });
-                // $('#modalBody').html($('#finalLogo').html());
+                // $('#unPrev').show();
+                $('#elementResizable').draggable({ disabled: true });
+                $('.ui-rotatable-handle').hide();
+                $('#elementResizable').css('border', '0px');
+                $('#nwgrip').css('display', 'none');
+                $('#negrip').css('display', 'none');
+                $('#swgrip').css('display', 'none');
+                $('#segrip').css('display', 'none');
+                $('#ngrip').css('display', 'none');
+                $('#egrip').css('display', 'none');
+                $('#sgrip').css('display', 'none');
+                $('#wgrip').css('display', 'none');
+                
+                var logoInset = $('#elementResizable').css('inset');
+                var x = parseInt(logoInset.split(' ')[0]) + 60;
+                var y = parseInt(logoInset.split(' ')[3]) - 80;
+                var newInset = `${x}px auto auto ${y}px`;
+                $('#elementResizable').css('inset', newInset);
+
+                var insets = [];
                 for(var j=0; j<=i; j++){
                     $('#inputBox' + j).attr('type', 'hidden');
                     $('#remove' + j).html('');
@@ -1092,7 +1139,21 @@
                     $('#dragTextBox' + j).draggable({
                         disabled: true
                     });
+                    var tmp = $('#dragTextBox'  + j).css('inset');
+                    insets.push(tmp);
+                    x = parseInt(tmp.split(' ')[0]) + 40;
+                    y = parseInt(tmp.split(' ')[3]) - 50;
+                    newInset = `${x}px auto auto ${y}px`;
+                    $('#dragTextBox' + j).css('inset', newInset);
                 }
+
+                $('#modalContent').html($('#txtField').html());
+
+                $('#logoModal').modal('show');
+
+                $('#logoModal').on('hidden.bs.modal', function () {
+                    set(logoInset, insets);
+                });
 
                 $('.div2').show();
                 $('.div3').show();
@@ -1110,13 +1171,28 @@
                 $('.p3').css('color', tmp1);
                 $('.p3').css('font-family', tmp2);
             });
+            
+            $('#closeModal').click(function(){
+                $('#logoModal').modal('hide');
+            });
 
-            $('#unPrev').click(function(){
-                $(this).hide();
+            function set(logoInset, insets){
+                // $(this).hide();
                 $('#toolBar').show();
-                $('#prevNow').show();
-                $('#logoImage').draggable({ disabled: false });
-                // $('#modalBody').html($('#finalLogo').html());
+                // $('#prevNow').show();
+                $('#elementResizable').draggable({ disabled: false });
+                $('.ui-rotatable-handle').show();
+                $('#elementResizable').css('border', '1px solid black');
+                $('#nwgrip').css('display', 'block');
+                $('#negrip').css('display', 'block');
+                $('#swgrip').css('display', 'block');
+                $('#segrip').css('display', 'block');
+                $('#ngrip').css('display', 'block');
+                $('#egrip').css('display', 'block');
+                $('#sgrip').css('display', 'block');
+                $('#wgrip').css('display', 'block');
+                $('#elementResizable').css('inset', logoInset);
+
                 for(var j=0; j<=i; j++){
                     $('#inputBox' + j).attr('type', 'text');
                     $('#remove' + j).html('x');
@@ -1132,8 +1208,9 @@
                     $('#dragTextBox' + j).draggable({
                         disabled: false
                     });
+                    $('#dragTextBox' + j).css('inset', insets[j]);
                 }
-            });
+            }
 
             var colors;
 
