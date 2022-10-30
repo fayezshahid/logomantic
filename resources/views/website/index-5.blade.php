@@ -39,7 +39,7 @@
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
     
-    <body>
+    <body @if($view == 0) style="display: none" @endif>
 
         <!-- Start Preloader Area -->
         <!-- <div class="preloader">
@@ -76,7 +76,7 @@
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="{{ route('home') }}" class="nav-link active">
                                         Home 
                                        
                                     </a>
@@ -164,13 +164,34 @@
                                     </a>
                                    
                                 </li>
+                                
+                                @auth
+                                    <li class="nav-item">
+                                        <a href="{{ route('wishlist') }}" class="nav-link">
+                                            Wishlist
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('cart') }}" class="nav-link">
+                                            Cart
+                                        </a>
+                                    </li>
+                                @endauth
+
                                 <li class="nav-item">
-                                    <a href="{{ route('login') }}" class="nav-link">
-                                      Login / Register
-                                      
-                                    </a>
-                                   
+                                    @auth
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('login') }}" class="nav-link">
+                                        Login / Register
+                                        
+                                        </a>
+                                    @endauth
                                 </li>
+
                                 <div class="option-item" style="align-self:center ;">
                                     <a href="pricing-2.html" class="default-btn">
                                        Pricing
@@ -457,71 +478,19 @@
                     <div class="bar"></div>
                 </div>
                 
-                <div class="team-slider owl-carousel owl-theme">
-                    <div class="single-team">
-                        <div class="image">
-                                    <img src="assets/new-image/logo/image-1.png" alt="image">
-                        
-                            
-
-                            <div class="content">
-                                <h3>Logo Name</h3>
-                                <span>Category</span>
+                {{-- <div class="team-slider owl-carousel owl-theme"> --}}
+                    @foreach ($premiumLogos as $logo)
+                        <div class="single-team">
+                            <div class="image">
+                                <img src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
+                                <div class="content">
+                                    <h3>{{ $logo->name }}</h3>
+                                    <span>{{ $logo->logoType }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="single-team">
-                        <div class="image">
-                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                        
-                         
-
-                            <div class="content">
-                                <h3>Logo Name</h3>
-                                <span>Category</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-team">
-                        <div class="image">
-                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                        
-                          
-                            <div class="content">
-                                <h3>Logo Name</h3>
-                                <span>Category</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-team">
-                        <div class="image">
-                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                        
-                        
-
-                            <div class="content">
-                                <h3>Logo Name</h3>
-                                <span>Category</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-team">
-                        <div class="image">
-                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                        
-                       
-
-                            <div class="content">
-                                <h3>Logo Name</h3>
-                                <span>Category</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                {{-- </div> --}}
             </div>
         </section>
         <!-- Start Features Area -->

@@ -290,12 +290,13 @@
                                 </div>
                             @endif
                             <form action="{{ route('login') }}" method="post">
-                            @csrf
+                                @csrf
+                                <input type="hidden" value="{{ $mode }}" name="mode">
                                 <div class="form-group">
-                                    <label>Username or email</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Username or email">
+                                    <label>Email</label>
+                                    <input type="text" name="email" class="form-control" placeholder="Email">
                                 </div>
-                                @error('username')
+                                @error('email')
                                     <div class="text-red-500 text-sm mb-4">
                                         {{ $message }}
                                     </div>

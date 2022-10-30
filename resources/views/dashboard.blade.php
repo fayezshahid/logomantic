@@ -1,6 +1,13 @@
 <?php
     use App\Models\Admin;
+    use App\Models\Display;
+
     $username = Admin::where('is_loggedIn', '=', 1)->value('username');
+    $view = Display::find(1);
+    if($view)
+        $view = $view->view;
+    else
+        $view = 1;
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +33,68 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 {{-- <link rel="stylesheet" href="{{url('assets/css/fontawesome.css')}}"> --}}
 {{-- <link rel="stylesheet" href="{{url('assets/css/owl.css')}}"> --}}
+
+<style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+</style>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -121,9 +190,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('premiumLogos') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Premium Logo</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('addLogoType') }}" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add Logo Type</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('coupons') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Coupon</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('fonts') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Fonts</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('guide') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Guide</p>
                     </a>
                 </li>
             </ul>
@@ -150,6 +243,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <p>Add Design Category</p>
                     </a>
                 </li>
+            </ul>
+        </li>
+
+        <li class="nav-item ">
+            <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Users
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('users') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>See Users</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('wishlists') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>See Wishlists</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('carts') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>See Carts</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('orders') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>See Orders</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item" style="margin-top: 15px">
+            <ul class="d-flex justify-content-between">
+                <label class="switch">
+                    <input id="checkbox" type="checkbox" @if($view) checked @endif>
+                    <span class="slider round"></span>
+                </label>
+                <p style="font-size: 15px; color: white; padding-top: 6px; padding-right: 6px">On/Off the fontend view</p>
             </ul>
         </li>
 
@@ -199,6 +338,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
+    });
+
+    $('#checkbox').change(function(){
+        $.get('changeDisplay', function(){
+
+        })
     });
 
 </script>

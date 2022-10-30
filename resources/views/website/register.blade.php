@@ -286,10 +286,10 @@
                             <form action="{{ route('register') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Username">
+                                    <label>Name</label>
+                                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') }}">
                                 </div>
-                                @error('username')
+                                @error('name')
                                     <div class="text-red-500 text-sm mb-4">
                                         {{ $message }}
                                     </div>
@@ -297,7 +297,7 @@
 
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Email">
+                                    <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
                                 </div>
                                 @error('email')
                                     <div class="text-red-500 text-sm mb-4">
@@ -316,6 +316,16 @@
                                 @enderror
 
                                 <p class="description">The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & )</p>
+
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="text" name="phone" class="form-control" placeholder="Phone" value="{{ old('phone') }}">
+                                </div>
+                                @error('phone')
+                                    <div class="text-red-500 text-sm mb-4">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
 
                                 <button type="submit" class="default-btn">Register</button>
                             </form>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\LogoType;
 use RealRashid\SweetAlert\Facades\Alert;
-
 use Illuminate\Http\Request;
 
 class LogoTypesController extends Controller

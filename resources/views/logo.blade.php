@@ -31,7 +31,12 @@
                     <td>{{ $logo->id }}</td>
                     <td>{{ $logo->name }}</td>
                     <td>{{ $logo->description }}</td>
-                    <td>{{ $logo->price }}</td>
+                    <td>
+                        ${{ $logo->price }} 
+                        @if(App\Models\Coupon::where('logo_id', '=', $logo->id)->value('discount') && App\Models\Coupon::where('logo_id', '=', $logo->id)->value('isActive') == 1) 
+                            (Discounted: ${{ $logo->price - $logo->price*(App\Models\Coupon::where('logo_id', '=', $logo->id)->value('discount') /100) }}) 
+                        @endif
+                    </td>
                     <td>{{ $logo->logoType }}</td>
                     <td>
                         <img src="{{ config('logo.logoUrl').$logo->image }}" alt="item" height="80px" width="80px" class="mx-auto">

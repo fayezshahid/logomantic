@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\LogoType;
 use App\Models\Hexcode;
 use App\Models\Logo;
-// use App\Models\Color_Logo;
+use App\Models\Font;
+use App\Models\Display;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 
@@ -146,6 +147,7 @@ class LogosController extends Controller
             'industries' => LogoType::all(),
             'logoType' => $request->logoType,
             'bName' => $request->bName,
+            'fonts' => Font::all()
         ]);
     }
 
@@ -158,6 +160,30 @@ class LogosController extends Controller
             'fontColor' => $request->fontColor,
             'fontFamily' => $request->fontFamily
         ]);
+    }
+
+    public function getFonts()
+    {
+        return Font::all();
+    }
+
+    public function changeDisplay()
+    {
+        if(Display::find(1))
+        {
+            $d = Display::find(1);
+            if($d->view == 1)
+                $d->view = 0;
+            else
+                $d->view = 1;
+            $d->save();
+        }
+        else
+        {
+            $d = new Display();
+            $d->view = 0;
+            $d->save();
+        }
     }
 
 }

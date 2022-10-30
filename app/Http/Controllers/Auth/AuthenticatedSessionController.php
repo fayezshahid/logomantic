@@ -8,6 +8,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Wishlist;
+use App\Models\Cart;
 use Illuminate\Validation\Rules;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +23,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('website.login');
+        return view('website.login', ['mode' => 'null']);
     }
 
     /**
@@ -39,41 +41,44 @@ class AuthenticatedSessionController extends Controller
         // return redirect()->route('dashboard');
 
         $this->validate($request, [
-            'username' => 'required|max:255',
+            'email' => 'required|max:255',
             'password' => 'required',
         ]);
 
-        if(!auth()->attempt($request->only('username', 'password'), $request->remember))
+        if(!auth()->attempt($request->only('email', 'password'), $request->remember))
         {
             return back()->with('status', 'Invalid login details');
         }
 
+        if($request->mode == 'save')
+        {
+            $wishlist = new Wishlist();
+            $wishlist->user_id = auth()->user()->id;
+            $wishlist->logo_id = $request->session()->get('saveLogoId');
+            $wishlist->logo = $request->session()->get('saveLogoSRC');
+            $wishlist->save();
+
+            return redirect()->route('wishlist');
+        }
+        else if($request->mode == 'purchase')
+        {
+            $cart = new Cart();
+            $cart->user_id = auth()->user()->id;
+            $cart->logo_id = $request->session()->get('purchaseLogoId');
+            $cart->logo = $request->session()->get('purchaseLogoSRC');
+            $cart->save();
+    
+            $wishlist = Wishlist::where('logo_id', '=', $request->session()->get('purchaseLogoId'));
+    
+            if($wishlist)
+            {
+                $wishlist->delete();
+            }
+    
+            return redirect()->route('cart');
+        }
+
         return redirect()->route('home');
-    }
-
-    public function edit(User $user)
-    {
-        return view('editPass', ['user' => $user]);
-    }
-
-    public function editStore(Request $request, User $user)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
-            // 'current_password' => 'required|string|max:255',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = Auth::user();
-        $user->name = $request->name;
-        $user->username = $request->username;
-        $user->password = Hash::make($request->password);
-        $user->save();
-
-        Alert::success('Congrats', 'You\'ve successfully updated your credentials.');
-
-        return redirect()->route('dashboard');
     }
 
     /**
@@ -90,6 +95,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

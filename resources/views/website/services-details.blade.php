@@ -35,7 +35,7 @@
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		
 		<title>logo design</title>
-
+        <style id="fonts"></style>
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
 
@@ -71,7 +71,7 @@
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="{{ route('home') }}" class="nav-link active">
                                         Home 
                                        
                                     </a>
@@ -159,6 +159,33 @@
                                       
                                     </a>
                                    
+                                </li>
+
+                                @auth
+                                <li class="nav-item">
+                                    <a href="{{ route('wishlist') }}" class="nav-link">
+                                        Wishlist
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('cart') }}" class="nav-link">
+                                        Cart
+                                    </a>
+                                </li>
+                                @endauth
+
+                                <li class="nav-item">
+                                    @auth
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <a onclick="this.parentNode.submit();" class="nav-link">Logout</a>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('login') }}" class="nav-link">
+                                        Login / Register
+                                        
+                                        </a>
+                                    @endauth
                                 </li>
                                 
                             </ul>
@@ -545,7 +572,13 @@
                                         <div class="products-content center">
                                             {{-- <h3 class="fomt-size"><a href="shop-details.html">{{ $logo->name }}</a></h3> --}}
                                             <div class="price">                                                
-                                                <span class="new-price">{{ $logo->price }}</span>
+                                                <span class="new-price">
+                                                    @if(App\Models\Coupon::where('logo_id', '=', $logo->id)->value('discount') && App\Models\Coupon::where('logo_id', '=', $logo->id)->value('isActive') == 1) 
+                                                        ${{ $logo->price - $logo->price*(App\Models\Coupon::where('logo_id', '=', $logo->id)->value('discount')/100) }}
+                                                    @else
+                                                        ${{ $logo->price }}
+                                                    @endif
+                                                </span>
                                             </div>
                                             
                                             {{-- <a href="cart.html" class="add-to-cart">Add to Cart</a> --}}
@@ -582,7 +615,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-12">
+                    {{-- <div class="col-lg-4 col-md-12">
                         <div class="services-details-information">
                             <ul class="services-list">
                                 <li><a href="#" class="active">Creative Web Design</a></li>
@@ -608,7 +641,7 @@
 
                      
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>
@@ -873,8 +906,32 @@
             }).join('')
 
             // var colors = ["blue", "black", "red", "green", "maroon", "purple", 'fuchsia', "lime", "navy", "teal", "aqua"];
-            var fonts = ["Arial", "Helvetica", "Tahoma", "Trebuchet MS", "Times New Roman" , "Georgia", "Garamond", "Courier New", "Brush Script MT", "Comic Sans"]
+            var fonts = []
             var colorThief = new ColorThief();
+
+            $.ajax({                                            
+                url: 'getFonts',                        
+                async:false,                    
+                success: function(data){   
+                    for(var i=0; i<data.length; i++){
+                        var fontName = data[i].name.split('.')[0];
+                        var fontType = data[i].name.split('.')[1];
+                        if(fontType.toLowerCase == 'ttf'){
+                            fontType = "truetype";
+                        }
+                        else if(fontType.toLowerCase == 'otf'){
+                            fontType = "truetype";
+                        }
+                        $('#fonts').append(`
+                            @font-face {
+                                font-family: ${fontName};
+                                src: url(fontpack/${data[i].name}) format("truetype");
+                            }
+                        `)
+                        fonts[i] = fontName;
+                    }
+                },
+            });
 
             function setIds(ids){
                 for(var i=0; i<ids.length; i++){
@@ -882,7 +939,9 @@
                     var color = colorThief.getColor(sourceImage);
                     color = rgbToHex(color[0], color[1], color[2]);
                     $('#txt' + ids[i].id).html($('#bName').val()).css('color', color);
-                    $('#txt' + ids[i].id).css('font-family', fonts[Math.floor(Math.random() * fonts.length)]);
+                    var tmp = fonts[Math.floor(Math.random() * fonts.length)];
+                    console.log(tmp);
+                    $('#txt' + ids[i].id).css('font-family', tmp);
                 }
                 var x = $('.smallLogo').width() - $('.txt').width();
                 $('.txt').css('left', x/2 + 'px');

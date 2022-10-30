@@ -34,7 +34,7 @@
         <!-- Popup CSS -->
         <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
         <!-- Nice Select CSS -->
-        <link rel="stylesheet" href="assets/css/nice-select.min.css">
+        {{-- <link rel="stylesheet" href="assets/css/nice-select.min.css"> --}}
         <!-- Style CSS -->
         <link rel="stylesheet" href="assets/css/style.css">
         <!-- RTL CSS -->
@@ -43,7 +43,8 @@
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		
 		<title>Logo tool</title>
-
+        <style id="fonts">
+        </style>
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
 
@@ -79,7 +80,7 @@
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="{{ route('home') }}" class="nav-link active">
                                         Home 
                                        
                                     </a>
@@ -167,6 +168,33 @@
                                       
                                     </a>
                                    
+                                </li>
+
+                                @auth
+                                    <li class="nav-item">
+                                        <a href="{{ route('wishlist') }}" class="nav-link">
+                                            Wishlist
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('cart') }}" class="nav-link">
+                                            Cart
+                                        </a>
+                                    </li>
+                                @endauth
+
+                                <li class="nav-item">
+                                    @auth
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <a onclick="this.parentNode.submit();" class="nav-link">Logout</a>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('login') }}" class="nav-link">
+                                        Login / Register
+                                        
+                                        </a>
+                                    @endauth
                                 </li>
                                 
                             </ul>
@@ -286,16 +314,7 @@
                                                         <label>Select Font Family <span class="required">*</span></label>
                                                         <div class="select-box">
                                                             <select class="form-control" id="font-family">
-                                                                <option value="Arial">Arial</option>
-                                                                <option value="Helvetica">Helvetica</option>
-                                                                <option value="Tahoma">Tahoma</option>
-                                                                <option value="Trebuchet MS">Trebuchet MS</option>
-                                                                <option value="Times New Roman">Times New Roman</option>
-                                                                <option value="Georgia">Georgia</option>
-                                                                <option value="Garamond">Garamond</option>
-                                                                <option value="Courier New">Courier New</option>
-                                                                <option value="Brush Script MT">Brush Script MT</option>
-                                                                <option value="Comic Sans">Comic Sans</option>
+                                                                
                                                             </select>
                                                             <!-- <div class="nice-select form-control" tabindex="0"><span class="current">United Arab Emirates</span><ul class="list"><li data-value="5" class="option selected focus">United Arab Emirates</li><li data-value="1" class="option">China</li><li data-value="2" class="option">United Kingdom</li><li data-value="0" class="option">Germany</li><li data-value="3" class="option">France</li><li data-value="4" class="option">Japan</li></ul></div> -->
                                                         </div>
@@ -344,7 +363,9 @@
                                                             @csrf
                                                             <input type="hidden" name="logoType" value="{{ $logo->logoType }}">
                                                             <input type="hidden" name="bName" value="{{ $bName }}">
-                                                            <button type="submit"><i class="bi-reply-fill" style="font-size:40px; cursor: pointer"></i></button>
+                                                            <a onclick="this.parentNode.submit()">
+                                                                <i class="bi-reply-fill" style="font-size:40px; cursor: pointer; margin-left: 25px"></i>
+                                                            </a>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -403,7 +424,7 @@
                                         <div id="finalLogo" style="position: relative;">
                                             <div class="txtContainer" id="txtField">
                                                 <div style="width: 250px; height: 250px; inset: -55px auto auto 510px; display: none;" id='elementResizable' class="elementResizable">
-                                                    <img width="250px" height="250px" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
+                                                    <img crossorigin="Anonymous" width="250px" height="250px" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
                                                     <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip" ></div>
                                                     <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip" ></div>
                                                     <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip" ></div>
@@ -431,7 +452,7 @@
                                                     <input class="inputBox" onkeyup="writeAbove(0)" id="inputBox0" type="text" maxlength="30" value="{{ $bName }}">
                                                 </div>
                                             </div>
-                                            <img id="parent" width="990px" style="height: 510px !important" src="assets/img/background.png" alt="background">
+                                            <img id="parent" width="990px" style="height: 510px !important" src="assets/img/background.jpg" alt="background">
                                         </div>
                                         
                                     </div>
@@ -469,12 +490,21 @@
                                  
     
                                     <div class="payment-box center">
-                                       
-                                        <a href="#" class="default-btn col-lg-3 margin">
-                                             Want To purchase 
+                                       <form action="{{ route('saveLogo') }}" style="display: none" id="saveForm" method="POST">
+                                            @csrf
+                                            <input type="text" name="logo" id="saveLogo" value="">
+                                            <input type="text" name="logoId" id="saveLogoId" value="{{ $logo->id }}">
+                                       </form>
+                                       <form action="{{ route('purchaseLogo') }}" style="display: none" id="purchaseForm" method="POST">
+                                            @csrf
+                                            <input type="text" name="logo" id="purchaseLogo" value="">
+                                            <input type="text" name="logoId" id="purchaseLogoId" value="{{ $logo->id }}">
+                                        </form>
+                                        <a onclick="proceedLogo('purchase')" class="default-btn col-lg-3 margin" style="cursor: pointer">
+                                            Want To purchase
                                         </a>
-                                        <a href="#" class="default-btn col-lg-3 margin">
-                                            Saved Now
+                                        <a onclick="proceedLogo('save')" class="default-btn col-lg-3 margin" style="cursor: pointer">
+                                            Save Now
                                         </a>
                                         <a id="prevNow" class="default-btn col-lg-3 margin" style="cursor: pointer">
                                             Preview Now
@@ -512,7 +542,7 @@
                                         <div class="single-products-box">
                                             <div class="products-image">
                                                 <div style="position: relative; left: 0; top: 0;">
-                                                    <img src="https://img.freepik.com/free-psd/stylish-liquidity-psd-business-card-template_1409-1516.jpg?w=740&t=st=1659094329~exp=1659094929~hmac=8282478c9c67ac277e9f6eea529383e71165363791dc82488dee4928e95b5971" alt="image">
+                                                    <img src="assets/img/preview1.jpg" alt="image">
                                                     <div class="div2" style="display: none">
                                                         <img class="img2" src="">
                                                         <p class="p2"></p>
@@ -532,13 +562,9 @@
                                         <div class="single-products-box">
                                             <div class="products-image">
                                                 <div style="position: relative; left: 0; top: 0;">
-                                                    <img class="img1" src="https://img.freepik.com/free-vector/realistic-mockup-male-white-polo-shirt_107791-2142.jpg?w=740&t=st=1659094408~exp=1659095008~hmac=4de7ae02aa5dec9f69f44ca36ca1d19efc8feea8a7caa4194ac458b12d9bc37f" alt="image">
-                                                    <div class="div2" style="display: none">
+                                                    <img src="assets/img/preview2.jpg" alt="image">
+                                                    <div class="div4" style="display: none">
                                                         <img class="img2" src="">
-                                                        <p class="p2"></p>
-                                                    </div>
-                                                    <div class="div3" style="display: none">
-                                                        <img class="img3" src="" alt="">
                                                         <p class="p2"></p>
                                                     </div>
                                                 </div>
@@ -552,13 +578,9 @@
                                         <div class="single-products-box">
                                             <div class="products-image">
                                                 <div style="position: relative; left: 0; top: 0;">
-                                                    <img src="https://img.freepik.com/premium-psd/modern-business-card-mockup-design_381336-166.jpg?w=740" alt="image">
-                                                    <div class="div2" style="display: none">
+                                                    <img src="assets/img/preview3.jpg" alt="image">
+                                                    <div class="div5" style="display: none">
                                                         <img class="img2" src="">
-                                                        <p class="p2"></p>
-                                                    </div>
-                                                    <div class="div3" style="display: none">
-                                                        <img class="img3" src="" alt="">
                                                         <p class="p2"></p>
                                                     </div>
                                                 </div>
@@ -764,7 +786,7 @@
         <!-- Popup JS -->
         <script src="assets/js/jquery.magnific-popup.min.js"></script>
         <!-- Nice Select JS -->
-        <script src="assets/js/jquery.nice-select.min.js"></script>
+        {{-- <script src="assets/js/jquery.nice-select.min.js"></script> --}}
         <!-- Ajaxchimp JS -->
 		<script src="assets/js/jquery.ajaxchimp.min.js"></script>
 		<!-- Form Validator JS -->
@@ -780,6 +802,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
         <script src="assets/js/vibrant.js"></script>
         <script src="assets/js/paletteExtractor.js"></script>
+
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
         <script>
 
             var img = document.getElementById("logoImage");
@@ -822,6 +847,28 @@
             }
 
             $(document).ready(function(){
+
+                $.get('getFonts', function(data){
+                    for(var i=0; i<data.length; i++){
+                        var fontName = data[i].name.split('.')[0];
+                        var fontType = data[i].name.split('.')[1];
+                        if(fontType.toLowerCase == 'ttf'){
+                            fontType = "truetype";
+                        }
+                        else if(fontType.toLowerCase == 'otf'){
+                            fontType = "truetype";
+                        }
+                        $('#fonts').append(`
+                            @font-face {
+                                font-family: ${fontName};
+                                src: url(fontpack/${data[i].name}) format("truetype");
+                            }
+                        `)
+                        $('#font-family').append(`
+                            <option value="${fontName}">${fontName}</option>
+                        `);
+                    }
+                });
 
                 hexcodes = $('#colorPalette').html();
 
@@ -1157,6 +1204,8 @@
 
                 $('.div2').show();
                 $('.div3').show();
+                $('.div4').show();
+                $('.div5').show();
 
                 var previewImgSrc = $('#logoImage').attr('src');
                 $('.img2').attr('src', previewImgSrc);
@@ -1266,6 +1315,41 @@
             //         <input type="color" onclick="getColor(this.value)" onchange="setColor(this.value)" id="${color}" value="${color}" style="width: 3rem; height: 3rem;">
             //     `);
             // });
+
+            function proceedLogo(mode) {
+                
+                $('.ui-rotatable-handle').hide();
+                $('#elementResizable').css('border', '0px');
+                $('#nwgrip').css('display', 'none');
+                $('#negrip').css('display', 'none');
+                $('#swgrip').css('display', 'none');
+                $('#segrip').css('display', 'none');
+                $('#ngrip').css('display', 'none');
+                $('#egrip').css('display', 'none');
+                $('#sgrip').css('display', 'none');
+                $('#wgrip').css('display', 'none');
+
+                for(var j=0; j<=i; j++){
+                    $('#inputBox' + j).attr('type', 'hidden');
+                    $('#remove' + j).html('');
+                    $('#elementResizable' + j).css('border', '0px');
+                    $('#nwgrip' + j).css('display', 'none');
+                    $('#negrip' + j).css('display', 'none');
+                    $('#swgrip' + j).css('display', 'none');
+                    $('#segrip' + j).css('display', 'none');
+                    $('#ngrip' + j).css('display', 'none');
+                    $('#egrip' + j).css('display', 'none');
+                    $('#sgrip' + j).css('display', 'none');
+                    $('#wgrip' + j).css('display', 'none');
+                }
+
+                var container = document.getElementById("finalLogo");; /* full page */
+                html2canvas(container, { allowTaint: true, useCORS:true }).then(function (canvas) {
+                    var src = canvas.toDataURL();
+                    $('#' + mode + 'Logo').val(src);
+                    $('#' + mode + 'Form').submit();
+                });
+            }
 
         </script>
 

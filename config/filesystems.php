@@ -42,6 +42,13 @@ return [
             'visibility' => 'public',   
         ],
 
+        'fonts' => [
+            'driver' => 'local',
+            'root' => public_path("fontpack/"),
+            'url' => env('APP_URL').'/fontpack/',
+            'visibility' => 'public',   
+        ],
+
         'google' => [
             'driver' => 'google',
             'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
