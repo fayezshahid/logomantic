@@ -29,6 +29,16 @@
                 </div>
 
                 <div class="mb-4">
+                    <label class="form-label" style="font-weight: normal">Coupon Code</label>
+                    <input type="text" name="code" placeholder="Enter code" class="form-control @error('code') border-3 border-danger @enderror" value="{{ $coupon->code }}">
+                    @error('code')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
                     <label class="form-label" style="font-weight: normal">Discount</label>
                     <input type="text" name="discount" placeholder="Enter discount" class="form-control @error('discount') border-3 border-danger @enderror" value="{{ $coupon->discount }}">
                     @error('discount')

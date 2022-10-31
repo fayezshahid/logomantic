@@ -15,4 +15,9 @@ class Cart extends Model
         'logo',
         'isOrdered',
     ];
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }

@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Cart;
+use App\Models\Logo;
+use App\Models\Cart_Order;
+use App\Models\Coupon;
 
 class OrderController extends Controller
 {
     public function create()
     {
-        return view('website.checkout');
+        $logoIds = Cart::where('user_id', auth()->user()->id)->where('isOrdered', 0)->pluck('logo_id');
+        return view('website.checkout', [
+            'ammount' => Logo::whereIn('id', $logoIds)->sum('price')
+        ]);
     }
 
     public function store(Request $request)
@@ -26,6 +32,7 @@ class OrderController extends Controller
             'zip' => 'required|numeric',
             'email' => 'required|string|max:255',
             'phone' =>'required|numeric',
+            'ammount' => 'required',
             'payment' => 'required'
         ]);
 
@@ -37,16 +44,33 @@ class OrderController extends Controller
         if($request->notes)
             $data['notes'] = $request->notes;
 
-        Order::create($data);
+        $data['isCompleted'] = 0;
 
-        $logos = Cart::where('user_id', '=', auth()->user()->id)->get();
+        $order = Order::create($data);
+
+        $logos = Cart::where('user_id', '=', auth()->user()->id)->where('isOrdered', '=', 0)->get();
         foreach($logos as $logo)
         {
             $logo->isOrdered = 1;
             $logo->save();
+
+            $c = new Cart_Order();
+            $c->cart_id = $logo->id;
+            $c->order_id = $order->id;
+            $c->save();
         }
 
         return redirect()->route('cart');
-
     }
+
+    public function checkCoupon($coupon)
+    {
+        $discount = Coupon::where('code', $coupon)->where('isActive', 1)->value('discount');
+        
+        if($discount)
+            return $discount;
+        else
+            return 0;
+    }
+
 }

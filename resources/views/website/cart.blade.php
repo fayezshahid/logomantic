@@ -298,8 +298,8 @@
                                             <th scope="col">Product</th>
                                             <th scope="col">Logo Name</th>
                                             <th scope="col">Price</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Total</th>
+                                            {{-- <th scope="col">Quantity</th> --}}
+                                            {{-- <th scope="col">Total</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -318,19 +318,19 @@
                                                             ${{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }}
                                                         </span>
                                                     </td>
-                                                    <td class="product-quantity">
+                                                    {{-- <td class="product-quantity">
                                                         <div class="input-counter">
-                                                            <span onclick="decrease()" class="minus-btn">
+                                                            <span onclick="decrease({{ $cart->id }}, {{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }})" class="minus-btn">
                                                                 <i class='bx bx-minus'></i>
                                                             </span>
-                                                            <input type="text" value="1" id="quantity">
-                                                            <span onclick="increase()" class="plus-btn">
+                                                            <input type="text" value="1" id="quantity{{ $cart->id }}">
+                                                            <span onclick="increase({{ $cart->id }}, {{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }})" class="plus-btn">
                                                                 <i class='bx bx-plus'></i>
                                                             </span>
                                                         </div>
-                                                    </td>
-                                                    <td class="product-subtotal">
-                                                        <span id="price" class="subtotal-amount">
+                                                    </td> --}}
+                                                    {{-- <td class="product-subtotal">
+                                                        <span id="price{{ $cart->id }}" class="subtotal-amount">
                                                             ${{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }}
                                                         </span>
                                                         <form action="{{ route('deleteCartItem', $cart->id) }}" method="post">
@@ -340,7 +340,7 @@
                                                                 <i class='bx bx-trash'></i>
                                                             </a>
                                                         </form>
-                                                    </td>
+                                                    </td> --}}
                                                 </tr>
                                         @endforeach
                                     </tbody>
@@ -365,13 +365,13 @@
                                 <h3>Cart Totals</h3>
                                 <ul>
                                     <li>Subtotal 
-                                        <span>$1683.50</span>
+                                        <span class="total">${{ $ammount }}</span>
                                     </li>
                                     <li>Tax 
-                                        <span>$30.00</span>
+                                        <span>$0.00</span>
                                     </li>
                                     <li>Total 
-                                        <span><b>$1713.50</b></span>
+                                        <span><b class="total">${{ $ammount }}</b></span>
                                     </li>
                                 </ul>
                                 <a href="{{ route('checkout') }}" class="default-btn">
@@ -599,24 +599,28 @@
         <script src="assets/js/main.js"></script>
 
         <script>
-            var price = $('#price').html().replace('$', '');
 
-            function increase(){
-                var newPrice = parseFloat($('#price').html().replace('$', '')) + parseFloat(price);
-                $('#price').html('$' + newPrice);
-            }
 
-            function decrease(){
-                if($('#price').html() != '$0')
-                {
-                    var newPrice = parseFloat($('#price').html().replace('$', '')) - parseFloat(price);
-                    $('#price').html('$' + newPrice);
-                }
-                else
-                {
-                    $('#quantity').val(1);
-                }
-            }
+
+            // function increase(id, price){
+            //     var newPrice = parseFloat($('#price' + id).html().replace('$', '')) + parseFloat(price);
+            //     $('#price' + id).html('$' + newPrice);
+            //     var p = parseInt($('.total').html());
+            //     $('.total').html('$' + (p + newPrice));
+            // }
+
+            // function decrease(id, price){
+            //     if($('#price' + id).html() != '$0')
+            //     {
+            //         var newPrice = parseFloat($('#price' + id).html().replace('$', '')) - parseFloat(price);
+            //         $('#price' + id).html('$' + newPrice);
+            //         $('.total').html('$' + newPrice);
+            //     }
+            //     else
+            //     {
+            //         $('#quantity' + id).val(1);
+            //     }
+            // }
         </script>
 
     </body>

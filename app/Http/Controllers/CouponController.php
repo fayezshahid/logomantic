@@ -28,27 +28,12 @@ class CouponController extends Controller
     {
         $data = $request->validate([
             'logo_id' => 'required',
+            'code' => 'required',
             'discount' => 'required',
             'isActive' => 'required',
         ]);
 
-        if($request->logo_id == "All")
-        {
-            $logos = Logo::where('id', '>', 0)->pluck('id')->toArray();
-            for($i=0; $i<count($logos); $i++)
-            {
-                $coupoun = new Coupon();
-                $coupoun->logo_id = $logos[$i];
-                $coupoun->discount = $request->discount;
-                $coupoun->isActive = $request->isActive;
-                $coupoun->save();
-            }
-        }
-        else
-        {
-            Coupon::create($data);
-        }
-        
+        Coupon::create($data);
 
         Alert::success('Success', 'Logo Coupon added successfully');
 
@@ -67,6 +52,7 @@ class CouponController extends Controller
     {
         $data = $request->validate([
             'logo_id' => 'required',
+            'code' => 'required',
             'discount' => 'required',
             'isActive' => 'required',
         ]);

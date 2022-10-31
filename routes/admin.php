@@ -102,6 +102,20 @@ Route::group(['middleware'=>'isAdmin'], function(){
         ]);
     })->name('orders');
 
+    Route::get('/orderComplete/{id}', function($id){
+        $order = Order::find($id);
+        $order->isCompleted = 1;
+        $order->save();
+        return redirect()->route('orders');
+    })->name('orderComplete');
+
+    Route::get('/orderIncomplete/{id}', function($id){
+        $order = Order::find($id);
+        $order->isCompleted = 0;
+        $order->save();
+        return redirect()->route('orders');
+    })->name('orderIncomplete');
+
     Route::get('/changeDisplay', [LogosController::class, 'changeDisplay'])->name('changeDisplay');
 
     Route::get('/guide', function(){

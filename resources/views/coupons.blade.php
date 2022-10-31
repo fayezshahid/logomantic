@@ -17,6 +17,7 @@
             <tr>
             <th scope="col">Coupon Id</th>
             <th scope="col">Logo Id</th>
+            <th scope="col">Code</th>
             <th scope="col">Discount</th>
             <th scope="col">Is Active</th>
             <th scope="col">Action</th>
@@ -27,6 +28,7 @@
                 <tr>
                     <td>{{ $coupon->id }}</td>
                     <td>{{ $coupon->logo_id }}</td>
+                    <td>{{ $coupon->code }}</td>
                     <td>{{ $coupon->discount }}%</td>
                     <td>@if($coupon->isActive == 1) Yes @else No @endif</td>
                     <td class="d-flex justify-content-center form-inline">

@@ -111,6 +111,7 @@ Route::group(['middleware'=>'auth'], function(){
 
     Route::get('/checkout', [OrderController::class, 'create'])->name('checkout');
     Route::post('/checkout', [OrderController::class, 'store']);
+    Route::get('/checkCoupon/{coupon}', [OrderController::class, 'checkCoupon'])->name('checkCoupon');
 
 });
 

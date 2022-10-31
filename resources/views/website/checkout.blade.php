@@ -396,7 +396,8 @@
                                                     <span>Order Total</span>
                                                 </td>
                                                 <td class="product-subtotal">
-                                                    <span class="subtotal-amount">$1713.50</span>
+                                                    <span class="subtotal-amount">${{ $ammount }}</span>
+                                                    <input type="hidden" id="ammount" name="ammount" value="{{ $ammount }}">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -419,6 +420,11 @@
                                             <label for="cash-on-delivery">Stripe</label>
                                         </p>
                                     </div>
+                                    <p style="display: none; font-size: 14px !important; color: red" id="couponMsg">Invalid Copon Code</p>
+                                    <label for="">Coupon</label>
+                                    <input type="text" name="" id="coupon">
+                                    <button type="button" onclick="checkCoupon()" class="btn btn-sm btn-primary">Apply Coupon</button>
+                                    <br><br>
                                     <button type="submit" class="default-btn">
                                         Place Order
                                     </button>
@@ -617,6 +623,28 @@
         <script src="assets/js/wow.min.js"></script>
         <!-- Custom JS -->
         <script src="assets/js/main.js"></script>
+
+        <script>
+            var price = parseInt($('.subtotal-amount').html().replace('$', ''));
+
+            function checkCoupon(){
+                $.get('checkCoupon' + '/' + $('#coupon').val(), function(res){
+                    if(res == 0){
+                        $('#coupon').css('border-color', 'red');
+                        $('#couponMsg').show();
+                        $('.subtotal-amount').html('$' + price);
+                        $('#ammount').val(price);
+                    }
+                    else{
+                        $('#coupon').css('border-color', 'blue');
+                        $('#couponMsg').hide();
+                        $('.subtotal-amount').html('$' + (price - (price*res)/100));
+                        $('#ammount').val(price - (price*res)/100);
+                    }
+                });
+            }
+        </script>
+
     </body>
 
 <!-- Mirrored from templates.envytheme.com/spix/default/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Jul 2022 18:09:30 GMT -->

@@ -6,13 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Wishlist;
+use App\Models\Logo;
 
 class CartController extends Controller
 {
 
     public function index()
     {
-        return view('website.cart', ['cartItems' => Cart::where('user_id', '=', auth()->user()->id)->where('isOrdered', '=', 0)->get()]);
+        $logoIds = Cart::where('user_id', auth()->user()->id)->where('isOrdered', 0)->pluck('logo_id');
+        return view('website.cart', [
+            'cartItems' => Cart::where('user_id', '=', auth()->user()->id)->where('isOrdered', '=', 0)->get(),
+            'ammount' => Logo::whereIn('id', $logoIds)->sum('price')
+        ]);
     }
 
     public function store(Request $request)

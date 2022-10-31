@@ -22,6 +22,13 @@ class Order extends Model
         'email',
         'phone',
         'notes',
+        'ammount',
         'payment',
+        'isCompleted'
     ];
+
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class);
+    }
 }
