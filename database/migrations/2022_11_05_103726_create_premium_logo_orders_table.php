@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePremiumLogosTable extends Migration
+class CreatePremiumLogoOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreatePremiumLogosTable extends Migration
      */
     public function up()
     {
-        Schema::create('premium_logos', function (Blueprint $table) {
+        Schema::create('premium_logo_orders', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            // $table->string('description');
-            $table->integer('price');
-            // $table->string('logoType');
-            $table->string('image');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('premium_logo_id');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreatePremiumLogosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('premium_logos');
+        Schema::dropIfExists('premium_logo_orders');
     }
 }

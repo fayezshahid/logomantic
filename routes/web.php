@@ -11,6 +11,7 @@ use App\Http\Controllers\LogosController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PremiumLogoOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,10 @@ Route::get('/', function () {
         'premiumLogos' => PremiumLogo::all()
     ]);
 })->name('home');
+
+Route::get('/premium', function(){
+    return view('website.premium-logo-design', ['premiumLogos' => PremiumLogo::all()]);
+})->name('premium');
 
 // Route::get('/allLogos', [LogosController::class, 'allLogos'])->name('allLogos');
 Route::post('/allLogos', [LogosController::class, 'allLogos'])->name('allLogos');
@@ -112,6 +117,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/checkout', [OrderController::class, 'create'])->name('checkout');
     Route::post('/checkout', [OrderController::class, 'store']);
     Route::get('/checkCoupon/{coupon}', [OrderController::class, 'checkCoupon'])->name('checkCoupon');
+
+    Route::post('/premiumLogo', [PremiumLogoOrderController::class, 'store'])->name('premiumLogoBuy');
 
 });
 

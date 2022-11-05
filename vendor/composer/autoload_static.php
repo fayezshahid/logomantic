@@ -628,6 +628,7 @@ class ComposerStaticInit8b0ef5baeee5589aeb3e725a769f8caa
         'App\\Models\\LogoType' => __DIR__ . '/../..' . '/app/Models/LogoType.php',
         'App\\Models\\Order' => __DIR__ . '/../..' . '/app/Models/Order.php',
         'App\\Models\\PremiumLogo' => __DIR__ . '/../..' . '/app/Models/PremiumLogo.php',
+        'App\\Models\\PremiumLogoOrder' => __DIR__ . '/../..' . '/app/Models/PremiumLogoOrder.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Wishlist' => __DIR__ . '/../..' . '/app/Models/Wishlist.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

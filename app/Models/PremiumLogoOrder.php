@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PremiumLogo extends Model
+class PremiumLogoOrder extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        // 'description',
-        'price',
-        // 'logoType',
-        'image',
+        'email',
+        'phone',
+        'premium_logo_id'
     ];
 
 }

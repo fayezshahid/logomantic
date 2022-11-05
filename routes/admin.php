@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Wishlist;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\PremiumLogoOrder;
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LogosController;
@@ -101,6 +102,12 @@ Route::group(['middleware'=>'isAdmin'], function(){
             'orders' => Order::all(),
         ]);
     })->name('orders');
+
+    Route::get('/premiumOrders', function(){
+        return view('premiumOrders', [
+            'premiumOrders' => PremiumLogoOrder::all(),
+        ]);
+    })->name('premiumOrders');
 
     Route::get('/orderComplete/{id}', function($id){
         $order = Order::find($id);

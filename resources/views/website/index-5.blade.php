@@ -7,6 +7,8 @@
                 <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="keywords" content="meta tags, meta description, meta keywords, SEO, search engine optimization">
+        <meta name="description" content="logo design logo logo maker facebook logo free logo maker wix logo maker twitter logo logo maker online adidas logo starbucks logo netflix logo wix logo free logo design linkedin logo spotify logo samsung logo canva logo zoom logo microsoft logo chanel logo logo apple twitch logo facebook png pepsi logo logo nike snapchat logo versace logo hatchful fedex logo fb logo free logo maker online s logo pringles logo walmart logo a logo m logo placeit logo photography logo logo online kia new logo music logo tailorbrands mastercard logo target logo supreme logo logo creator free playboy logo lion logo designevo company logo placeit logo maker logo by memory canva logo maker
+        visa logo logo design online ikea logo hatchful shopify cricket logo create logo online free food logo fruit of the loom logo business logo fox logo free logo design templates">
         <!-- Bootstrap CSS --> 
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <!-- Animate CSS --> 
@@ -34,7 +36,7 @@
         <!-- Responsive CSS -->
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		
-		<title>web title </title>
+		<title>Logomantic</title>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
@@ -68,7 +70,7 @@
             <div class="main-navbar">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="{{ route('home') }}">
                             <img src="assets/new-image/web-logo/new-2.png" class="black-logo" alt="image">
                             <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
                         </a>
@@ -84,7 +86,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('premium') }}" class="nav-link">
                                         Premium Logo  
                                        
                                     </a>
@@ -162,7 +164,6 @@
                                         Contact
                                       
                                     </a>
-                                   
                                 </li>
                                 
                                 @auth
@@ -198,8 +199,6 @@
                                     </a>
                                 </div>
                             </ul>
-
-                           
                         </div>
                     </nav>
                 </div>
@@ -477,20 +476,21 @@
                     <h2>Our <span class="blue">  Premium </span>Logo</h2>
                     <div class="bar"></div>
                 </div>
-                
-                {{-- <div class="team-slider owl-carousel owl-theme"> --}}
+                <div class="team-slider owl-carousel owl-theme">
+                    {{ $logoCount = 0 }}
                     @foreach ($premiumLogos as $logo)
-                        <div class="single-team">
-                            <div class="image">
-                                <img src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
-                                <div class="content">
-                                    <h3>{{ $logo->name }}</h3>
-                                    <span>{{ $logo->logoType }}</span>
+                        @if ((++$logoCount) <= 10)
+                            <div class="single-team">
+                                <div class="image">
+                                    <img src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
+                                    <div class="content">
+                                        <h3>{{ $logo->name }}</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
-                {{-- </div> --}}
+                </div>
             </div>
         </section>
         <!-- Start Features Area -->
@@ -1562,7 +1562,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Company Name All Rights Reserved by
+                                Copyright @ 2022 Logomantic All Rights Reserved by
                                 <a href="#" target="_blank">
                                   abc
                                 </a>

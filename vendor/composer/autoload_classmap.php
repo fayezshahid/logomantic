@@ -53,6 +53,7 @@ return array(
     'App\\Models\\LogoType' => $baseDir . '/app/Models/LogoType.php',
     'App\\Models\\Order' => $baseDir . '/app/Models/Order.php',
     'App\\Models\\PremiumLogo' => $baseDir . '/app/Models/PremiumLogo.php',
+    'App\\Models\\PremiumLogoOrder' => $baseDir . '/app/Models/PremiumLogoOrder.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\Wishlist' => $baseDir . '/app/Models/Wishlist.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

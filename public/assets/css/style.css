@@ -41,6 +41,9 @@
   overflow: hidden;
   margin-bottom: 10px;
 }
+.ui-resizable-handle{
+  /* display: none !important;  */
+}
 .nwgrip, .negrip, .swgrip, .segrip, .ngrip, .egrip, .sgrip, .wgrip {
   width: 10px;
   height: 10px;

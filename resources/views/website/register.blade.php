@@ -37,7 +37,7 @@
         <!-- Responsive CSS -->
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		
-		<title>Register</title>
+		<title>Logomantic</title>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
@@ -71,15 +71,15 @@
             <div class="main-navbar">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <!-- <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" class="black-logo" alt="image">
-                            <img src="assets/img/logo-2.png" class="white-logo" alt="image">
-                        </a> -->
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                            <img src="assets/new-image/web-logo/new-2.png" class="black-logo" alt="image">
+                            <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
+                        </a>
 
-                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                        <div class="navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="{{ route('home') }}" class="nav-link active">
                                         Home 
                                        
                                     </a>
@@ -88,7 +88,7 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        Premium Logo Design 
+                                        Premium Logo  
                                        
                                     </a>
 
@@ -97,7 +97,7 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        Logo Design with logo Maker
+                                         logo Maker
                                        
                                     </a>
 
@@ -113,52 +113,47 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="blog-1.html" class="nav-link">
+                                            <a href="{{ route('businessCardDesign') }}" class="nav-link">
                                                Business card Design
                                             </a>
                                         </li>
-
-                                       
-
-                                       
-
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('letterHeadDesign') }}" class="nav-link">
                                                 Letter Head  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('tShirtDesign') }}" class="nav-link">
                                                 T-Shirt  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('envelopDesign') }}" class="nav-link">
                                                 Envelop  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('webDesign') }}" class="nav-link">
                                                 Web Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('mugDesign') }}" class="nav-link">
                                                Mug Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('flyerDesign') }}" class="nav-link">
                                               Flyer Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('signatureDesign') }}" class="nav-link">
                                               Signature Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('weddingCardDesign') }}" class="nav-link">
                                               Wedding Card Design
                                             </a>
                                         </li>
@@ -170,30 +165,43 @@
                                         Contact
                                       
                                     </a>
-                                   
                                 </li>
                                 
-                            </ul>
-
-                            <div class="others-options d-flex align-items-center">
-                                <!-- <div class="option-item">
-                                    <div class="cart-btn">
-                                        <a href="cart.html">
-                                            <i class='flaticon-shopping-cart'></i>
-                                            <span>0</span>
+                                @auth
+                                    <li class="nav-item">
+                                        <a href="{{ route('wishlist') }}" class="nav-link">
+                                            Wishlist
                                         </a>
-                                    </div>
-                                </div> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('cart') }}" class="nav-link">
+                                            Cart
+                                        </a>
+                                    </li>
+                                @endauth
 
-                            
+                                <li class="nav-item">
+                                    @auth
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('login') }}" class="nav-link">
+                                        Login / Register
+                                        
+                                        </a>
+                                    @endauth
+                                </li>
 
-                                <div class="option-item">
-                                    <a href="pricing-1.html" class="default-btn">
+                                <div class="option-item" style="align-self:center ;">
+                                    <a href="pricing-2.html" class="default-btn">
                                        Pricing
                                     </a>
                                 </div>
-                            </div>
+                            </ul>   
                         </div>
+
                     </nav>
                 </div>
             </div>
@@ -467,7 +475,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Company Name All Rights Reserved by
+                                Copyright @ 2022 Logomantic All Rights Reserved by
                                 <a href="#" target="_blank">
                                   abc
                                 </a>

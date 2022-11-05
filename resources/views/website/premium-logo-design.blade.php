@@ -34,7 +34,7 @@
         <!-- Responsive CSS -->
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		
-		<title>web titl </title>
+		<title>Logomantic</title>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
@@ -63,15 +63,15 @@
             <div class="main-navbar">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <!-- <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" class="black-logo" alt="image">
-                            <img src="assets/img/logo-2.png" class="white-logo" alt="image">
-                        </a> -->
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                            <img src="assets/new-image/web-logo/new-2.png" class="black-logo" alt="image">
+                            <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
+                        </a>
 
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="{{ route('home') }}" class="nav-link active">
                                         Home 
                                        
                                     </a>
@@ -79,8 +79,8 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Premium Logo Design 
+                                    <a href="{{ route('premium') }}" class="nav-link">
+                                        Premium Logo  
                                        
                                     </a>
 
@@ -89,7 +89,7 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        Logo Design with logo Maker
+                                         logo Maker
                                        
                                     </a>
 
@@ -105,52 +105,47 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="blog-1.html" class="nav-link">
+                                            <a href="{{ route('businessCardDesign') }}" class="nav-link">
                                                Business card Design
                                             </a>
                                         </li>
-
-                                       
-
-                                       
-
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('letterHeadDesign') }}" class="nav-link">
                                                 Letter Head  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('tShirtDesign') }}" class="nav-link">
                                                 T-Shirt  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('envelopDesign') }}" class="nav-link">
                                                 Envelop  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('webDesign') }}" class="nav-link">
                                                 Web Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('mugDesign') }}" class="nav-link">
                                                Mug Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('flyerDesign') }}" class="nav-link">
                                               Flyer Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('signatureDesign') }}" class="nav-link">
                                               Signature Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('weddingCardDesign') }}" class="nav-link">
                                               Wedding Card Design
                                             </a>
                                         </li>
@@ -162,29 +157,41 @@
                                         Contact
                                       
                                     </a>
-                                   
                                 </li>
                                 
-                            </ul>
-
-                            <div class="others-options d-flex align-items-center">
-                                <!-- <div class="option-item">
-                                    <div class="cart-btn">
-                                        <a href="cart.html">
-                                            <i class='flaticon-shopping-cart'></i>
-                                            <span>0</span>
+                                @auth
+                                    <li class="nav-item">
+                                        <a href="{{ route('wishlist') }}" class="nav-link">
+                                            Wishlist
                                         </a>
-                                    </div>
-                                </div> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('cart') }}" class="nav-link">
+                                            Cart
+                                        </a>
+                                    </li>
+                                @endauth
 
-                            
+                                <li class="nav-item">
+                                    @auth
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('login') }}" class="nav-link">
+                                        Login / Register
+                                        
+                                        </a>
+                                    @endauth
+                                </li>
 
-                                <div class="option-item">
-                                    <a href="pricing-1.html" class="default-btn">
+                                <div class="option-item" style="align-self:center ;">
+                                    <a href="pricing-2.html" class="default-btn">
                                        Pricing
                                     </a>
                                 </div>
-                            </div>
+                            </ul>
                         </div>
                     </nav>
                 </div>
@@ -327,129 +334,66 @@
                         
 
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-portfolio-item">
-                                    <div class="portfolio-image">
-                                        <a href="portfolio-details.html">
-                                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                                        </a>
-                                    </div>
-        
-                                    <div class="portfolio-content">
-                                        <h3 class="fomt-size">
-                                            <a href="portfolio-details.html">Logo Name Here</a>
-                                        </h3>
-                                        <span>Category</span>
-                                        <div class="features-btn">
-                                            <a href="#" class="default-btn new-btn">Buy Now</a>
+
+                            @foreach ($premiumLogos as $logo)
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="single-portfolio-item">
+                                        <div class="portfolio-image">
+                                            <a href="portfolio-details.html">
+                                                <img src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
+                                            </a>
+                                        </div>
+            
+                                        <div class="portfolio-content">
+                                            <h3 class="fomt-size">
+                                                <a href="portfolio-details.html">{{ $logo->name }}</a>
+                                            </h3>
+                                            <span>{{ $logo->logoType }}</span>
+                                            <div class="features-btn">
+                                                <a onclick="buyPremiumLogo({{ $logo->id }})" class="default-btn new-btn" style="cursor: pointer">Buy Now</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-portfolio-item">
-                                    <div class="portfolio-image">
-                                        <a href="portfolio-details.html">
-                                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                                        </a>
-                                    </div>
-        
-                                    <div class="portfolio-content">
-                                        <h3 class="fomt-size">
-                                            <a href="portfolio-details.html">Logo Name Here</a>
-                                        </h3>
-                                        <span>Category</span>
-                                        <div class="features-btn">
-                                            <a href="#" class="default-btn new-btn">Buy Now</a>
+
+                                <div class="modal" id="logoModal{{ $logo->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                        <div class="modal-content" style="height:510px !important;">
+                                            <div class="modal-body d-flex justify-content-between" style="height: 500px">
+                                                <div>
+                                                    <form action="{{ route('premiumLogoBuy') }}" method="POST" id="form{{ $logo->id }}" style="width: 510px; padding-top: 110px;">
+                                                        @csrf
+                                                        <div class="form-group" style="margin-bottom: 15px">
+                                                            <label for="">Name</label>
+                                                            <input type="text" id="name" class="form-control" name="name" placeholder="Enter name">
+                                                            <div class="text-danger" id="nameError"></div>
+                                                        </div>
+                                                        <div class="form-group" style="margin-bottom: 15px">
+                                                            <label for="">Email address</label>
+                                                            <input type="email" id="email" class="form-control" name="email" placeholder="Enter email">
+                                                            <div class="text-danger" id="emailError"></div>
+                                                        </div>
+                                                        <div class="form-group" style="margin-bottom: 15px">
+                                                            <label for="">Phone</label>
+                                                            <input type="text" id="phone" class="form-control" name="phone" placeholder="Enter phone number">
+                                                            <div class="text-danger" id="phoneError"></div>
+                                                        </div>
+                                                        <input type="hidden" value="{{ $logo->id }}" name="premium_logo_id">
+                                                    </form>
+                                                </div>
+                                                <div style="width: 500px; height: 405px">
+                                                    <img style="height: 100% !important" width="400px" src="{{ config('logo.logoUrl').$logo->image }}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" onclick="buy({{ $logo->id }})">Buy</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-portfolio-item">
-                                    <div class="portfolio-image">
-                                        <a href="portfolio-details.html">
-                                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                                        </a>
-                                    </div>
-        
-                                    <div class="portfolio-content">
-                                        <h3 class="fomt-size">
-                                            <a href="portfolio-details.html">Logo Name Here</a>
-                                        </h3>
-                                        <span>Category</span>
-                                        <div class="features-btn">
-                                            <a href="#" class="default-btn new-btn">Buy Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-portfolio-item">
-                                    <div class="portfolio-image">
-                                        <a href="portfolio-details.html">
-                                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                                        </a>
-                                    </div>
-        
-                                    <div class="portfolio-content">
-                                        <h3 class="fomt-size">
-                                            <a href="portfolio-details.html">Logo Name Here</a>
-                                        </h3>
-                                        <span>Category</span>
-                                        <div class="features-btn">
-                                            <a href="#" class="default-btn new-btn">Buy Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-portfolio-item">
-                                    <div class="portfolio-image">
-                                        <a href="portfolio-details.html">
-                                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                                        </a>
-                                    </div>
-        
-                                    <div class="portfolio-content">
-                                        <h3 class="fomt-size">
-                                            <a href="portfolio-details.html">Logo Name Here</a>
-                                        </h3>
-                                        <span>Category</span>
-                                        <div class="features-btn">
-                                            <a href="#" class="default-btn new-btn">Buy Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-portfolio-item">
-                                    <div class="portfolio-image">
-                                        <a href="portfolio-details.html">
-                                            <img src="assets/new-image/logo/image-1.png" alt="image">
-                                        </a>
-                                    </div>
-        
-                                    <div class="portfolio-content">
-                                        <h3 class="fomt-size">
-                                            <a href="portfolio-details.html">Logo Name Here</a>
-                                        </h3>
-                                        <span>Category</span>
-                                        <div class="features-btn">
-                                            <a href="#" class="default-btn new-btn">Buy Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-        
-                           
-        
-                            
-        
-                            
-        
-                            
-        
+
+                            @endforeach
+     
                             <div class="col-lg-12 col-md-12">
                                 <div class="pagination-area">
                                     <a href="#" class="prev page-numbers">
@@ -467,7 +411,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-12">
+                    {{-- <div class="col-lg-4 col-md-12">
                         <div class="services-details-information">
                             <ul class="services-list">
                                 <li><a href="#" class="active">Creative Web Design</a></li>
@@ -493,7 +437,7 @@
 
                           
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>
@@ -653,6 +597,8 @@
         </div>
         <!-- End Copy Right Area -->
 
+        
+
         <!-- Start Go Top Area -->
         <div class="go-top">
             <i class='bx bx-chevron-up'></i>
@@ -689,6 +635,44 @@
         <script src="assets/js/wow.min.js"></script>
         <!-- Custom JS -->
         <script src="assets/js/main.js"></script>
+
+        <script>
+            function buyPremiumLogo(id){
+                $('#logoModal' + id).show();
+            }
+
+            function buy(id){
+                var f = 1;
+                
+                if(!$('#name').val()){
+                    f = 0;
+                    $('#nameError').html('Name is required');
+                }
+                else{
+                    $('#nameError').html('');
+                }
+                
+                if(!$('#email').val()){
+                    f = 0;
+                    $('#emailError').html('Email is required');
+                }
+                else{
+                    $('#emailError').html('');
+                }
+
+                if(!$('#phone').val()){
+                    f = 0;
+                    $('#phoneError').html('Phone is required');
+                }
+                else{
+                    $('#phoneError').html('');
+                }
+                    
+                if(f)
+                    $('#form' + id).submit();
+            }
+        </script>
+
     </body>
 
 <!-- Mirrored from templates.envytheme.com/spix/default/services-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Jul 2022 18:09:33 GMT -->

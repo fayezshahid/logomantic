@@ -20,18 +20,16 @@ class PremiumLogoController extends Controller
 
     public function create()
     {
-        return view('addPremiumLogo', [
-            'logoTypes' => LogoType::all(),
-        ]);
+        return view('addPremiumLogo');
     }
 
     public function store(Request $request)
     {   
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            // 'description' => 'required|string|max:255',
             'price' => 'required|integer',
-            'logoType' => 'required',
+            // 'logoType' => 'required',
             'image' => 'required',
         ]);
         
@@ -49,7 +47,6 @@ class PremiumLogoController extends Controller
     {
         return view('editPremiumLogo', [
             'logo' => PremiumLogo::find($logo),
-            'logoTypes' => LogoType::all(),
         ]);
     }
 
@@ -59,18 +56,18 @@ class PremiumLogoController extends Controller
         {
             $data = $request->validate([
                 'name' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
+                // 'description' => 'required|string|max:255',
                 'price' => 'required|integer',
-                'logoType' => 'required',
+                // 'logoType' => 'required',
             ]);
         }
         else
         {
             $data = $request->validate([
                 'name' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
+                // 'description' => 'required|string|max:255',
                 'price' => 'required|integer',
-                'logoType' => 'required',
+                // 'logoType' => 'required',
                 'image' => 'required',
             ]);
 

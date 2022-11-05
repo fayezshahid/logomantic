@@ -201,24 +201,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <p>Add Logo Type</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('coupons') }}" class="nav-link active">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add Coupon</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('fonts') }}" class="nav-link active">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add Fonts</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('guide') }}" class="nav-link active">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Guide</p>
-                    </a>
-                </li>
             </ul>
         </li>
 
@@ -241,6 +223,60 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="{{ route('addDesignCategory') }}" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add Design Category</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item ">
+            <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Fonts
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('fonts') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Fonts</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item ">
+            <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Coupons
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('coupons') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Coupon</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item ">
+            <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Guide
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('guide') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>See Guide</p>
                     </a>
                 </li>
             </ul>
@@ -277,6 +313,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="{{ route('orders') }}" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
                     <p>See Orders</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('premiumOrders') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>See Premium Orders</p>
                     </a>
                 </li>
             </ul>

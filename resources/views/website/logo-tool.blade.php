@@ -42,7 +42,7 @@
         <!-- Responsive CSS -->
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		
-		<title>Logo tool</title>
+		<title>Logomantic</title>
         <style id="fonts">
         </style>
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -88,7 +88,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('premium') }}" class="nav-link">
                                         Premium Logo Design 
                                        
                                     </a>
@@ -274,7 +274,7 @@
         <!-- End Navbar Area -->
 
         <!-- Start Page Banner -->
-        <div class="page-banner-area item-bg333">
+        {{-- <div class="page-banner-area item-bg333">
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
@@ -290,7 +290,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- End Page Banner -->
         <section class="checkout-area" id="toolBar">
             <div class="container">
@@ -425,31 +425,31 @@
                                             <div class="txtContainer" id="txtField">
                                                 <div style="width: 250px; height: 250px; inset: -55px auto auto 510px; display: none;" id='elementResizable' class="elementResizable">
                                                     <img crossorigin="Anonymous" width="250px" height="250px" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
-                                                    <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip" ></div>
-                                                    <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip" ></div>
-                                                    <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip" ></div>
-                                                    <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip" ></div>
-                                                    <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip" ></div>
-                                                    <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip" ></div>
-                                                    <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip" ></div>
-                                                    <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip" ></div>
+                                                    <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip"></div>
+                                                    <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip"></div>
+                                                    <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip"></div>
+                                                    <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip"></div>
+                                                    <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip"></div>
+                                                    <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip"></div>
+                                                    <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip"></div>
+                                                    <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip"></div>
                                                 </div>
                                                 <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 200px auto auto 530px">
                                                     <div class="d-flex justify-content-between" style="position: relative">
                                                             <div id='elementResizable0' class="elementResizable">
                                                                 <p class="inputBoxResult" id="inputBoxResult0" style="color: {{ $fontColor }}; font-family: {{ $fontFamily }};" onclick="preChangeFontColor(this.id)">{{ $bName }}</p>
-                                                                <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip0" ></div>
-                                                                <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip0" ></div>
-                                                                <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip0" ></div>
-                                                                <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip0" ></div>
-                                                                <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip0" ></div>
-                                                                <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip0" ></div>
-                                                                <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip0" ></div>
-                                                                <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip0" ></div>
+                                                                <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip0"></div>
+                                                                <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip0"></div>
+                                                                <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip0"></div>
+                                                                <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip0"></div>
+                                                                <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip0"></div>
+                                                                <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip0"></div>
+                                                                <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip0"></div>
+                                                                <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip0"></div>
                                                             </div>
-                                                        <span id="remove0" class="removeInputBoxIcon" onclick="removeInputBox(0)">x</span>
+                                                        <span id="remove0" style="display: none" class="removeInputBoxIcon" onclick="removeInputBox(0)">x</span>
                                                     </div>
-                                                    <input class="inputBox" onkeyup="writeAbove(0)" id="inputBox0" type="text" maxlength="30" value="{{ $bName }}">
+                                                    <input class="inputBox" style="display: none" onkeyup="writeAbove(0)" id="inputBox0" type="text" maxlength="30" value="{{ $bName }}">
                                                 </div>
                                             </div>
                                             <img id="parent" width="990px" style="height: 510px !important" src="assets/img/background.jpg" alt="background">
@@ -733,7 +733,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Company Name All Rights Reserved by
+                                Copyright @ 2022 Logomantic All Rights Reserved by
                                 <a href="#" target="_blank">
                                   abc
                                 </a>
@@ -824,6 +824,7 @@
                 $('#elementResizable' + i).resizable({
                     maxWidth: 500,
                     maxHeight: 150,
+                    containment: "#finalLogo",
                     handles: {
                         'nw': '#nwgrip' + i,
                         'ne': '#negrip' + i,
@@ -884,8 +885,7 @@
                 });
 
                 $('#elementResizable').resizable({
-                    // maxWidth: 500,
-                    // maxHeight: 150,
+                    containment: "#finalLogo",
                     handles: {
                         'nw': '#nwgrip',
                         'ne': '#negrip',
@@ -975,18 +975,18 @@
                                 <div class="d-flex justify-content-between" style="position: relative">
                                     <div id='elementResizable${i}' class="elementResizable" style="width: 270px">
                                         <p class="inputBoxResult" id="inputBoxResult${i}" onclick="preChangeFontColor(this.id)">This is a textfield</p>
-                                        <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip${i}" ></div>
+                                        <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip${i}"></div>
                                     </div>
-                                    <span id="remove${i}" class="removeInputBoxIcon" onclick="removeInputBox(${i})">x</span>
+                                    <span id="remove${i}" style="display: none" class="removeInputBoxIcon" onclick="removeInputBox(${i})">x</span>
                                 </div>
-                                <input class="inputBox" onkeyup="writeAbove(${i})" id="inputBox${i}" type="text" maxlength="30" value="This is a textfield">
+                                <input class="inputBox" style="display: none" onkeyup="writeAbove(${i})" id="inputBox${i}" type="text" maxlength="30" value="This is a textfield">
                             </div>
                         `;
                 $('#txtField').append(a);
@@ -1012,18 +1012,18 @@
                                 <div class="d-flex justify-content-between" style="position: relative">
                                     <div id='elementResizable${i}' class="elementResizable">
                                         <p class="inputBoxResult" id="inputBoxResult${i}" style='font-size: ${fz}; font-family: ${ff}; color: ${c}' onclick="preChangeFontColor(this.id)"></p>
-                                        <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip${i}" ></div>
-                                        <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip${i}" ></div>
+                                        <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-se segrip" id="segrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-s sgrip" id="sgrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-e egrip" id="egrip${i}"></div>
+                                        <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip${i}"></div>
                                     </div>
-                                    <span id="remove${i}" class="removeInputBoxIcon" onclick="removeInputBox(${i})">x</span>
+                                    <span id="remove${i}" style="display: none" class="removeInputBoxIcon" onclick="removeInputBox(${i})">x</span>
                                 </div>
-                                <input class="inputBox" onkeyup="writeAbove(${i})" id="inputBox${i}" type="text" maxlength="30" value="This is a textfield">
+                                <input class="inputBox" style="display: none" onkeyup="writeAbove(${i})" id="inputBox${i}" type="text" maxlength="30" value="This is a textfield">
                             </div>
                         `;
                 saveMemento(a);
@@ -1037,6 +1037,18 @@
 
             function idChange(tmp){
                 id = tmp.charAt(tmp.length - 1);
+                // $('#elementResizable0').css('border', '1px solid');
+                // $('#nwgrip' + id).show();
+                // $('#negrip' + id).show();
+                // $('#swgrip' + id).show();
+                // $('#segrip' + id).show();
+                // $('#ngrip' + id).show();
+                // $('#sgrip' + id).show();
+                // $('#egrip' + id).show();
+                // $('#wgrip' + id).show();
+                $('#inputBox' + id).show();
+                $('#remove' + id).show();
+                
             }
 
             function preChangeFontColor(id){

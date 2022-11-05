@@ -23,34 +23,9 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Description</label>
-                    <input type="text" name="description" placeholder="Enter logo description" class="form-control @error('description') border-3 border-danger @enderror" value="{{ old('description') }}">
-                    @error('description')
-                        <div class="text-danger">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
                     <label class="form-label" style="font-weight: normal">Logo Price</label>
                     <input type="text" name="price" placeholder="Enter logo price" class="form-control @error('price') border-3 border-danger @enderror" value="{{ old('price') }}">
                     @error('price')
-                        <div class="text-danger">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label class="form-label" style="font-weight: normal">Logo Type</label>
-                    <select class="form-control @error('logoType') border-3 border-danger @enderror" style="width: 100%" name="logoType" value="{{ old('logoType') }}">
-                        <option selected disabled>Select a logo type</option>
-                        @foreach ($logoTypes as $logoType)
-                            <option value="{{ $logoType->name }}">{{ $logoType->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('logoType')
                         <div class="text-danger">
                             {{ $message }}
                         </div>

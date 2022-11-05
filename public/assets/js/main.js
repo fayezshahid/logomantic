@@ -102,7 +102,7 @@ jQuery(function ($) {
 	
 	// Team Slider
 	$('.team-slider').owlCarousel({
-		loop: true,
+		// loop: true,
 		nav: false,
 		dots: true,
 		smartSpeed: 200,

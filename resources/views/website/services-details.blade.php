@@ -34,7 +34,7 @@
         <!-- Responsive CSS -->
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		
-		<title>logo design</title>
+		<title>Logomantic</title>
         <style id="fonts"></style>
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
@@ -63,10 +63,10 @@
             <div class="main-navbar">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <!-- <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" class="black-logo" alt="image">
-                            <img src="assets/img/logo-2.png" class="white-logo" alt="image">
-                        </a> -->
+                        {{-- <a class="navbar-brand" href="{{ route('home') }}">
+                            <img src="assets/new-image/web-logo/new-2.png" class="black-logo" alt="image">
+                            <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
+                        </a> --}}
 
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
@@ -79,7 +79,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('premium') }}" class="nav-link">
                                         Premium Logo Design 
                                        
                                     </a>
@@ -265,7 +265,7 @@
         <!-- End Navbar Area -->
 
         <!-- Start Page Banner -->
-        <div class="page-banner-area item-bg33">
+        {{-- <div class="page-banner-area item-bg33">
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
@@ -281,7 +281,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- End Page Banner -->
         <section class="checkout-area">
             <div class="container">
@@ -351,7 +351,7 @@
         <section class="services-details-area ptb-100">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                        
 
                         <div class="row">
@@ -558,10 +558,10 @@
                             </div> --}}
 
                             @foreach ($logos as $logo)
-                                <div class="col-lg-4 col-md-6">
+                                <div class="col-lg-4 col-md-6" style="border: 1px solid gray">
                                     <div class="single-products-box">
                                         <div class="products-image">
-                                            <a href="shop-details.html">
+                                            <a onclick="submitForm('form{{ $logo->id }}')">
                                                 <div class="smallLogo" style="height: 290px">
                                                     <img width="260px" height="260px" id="logoImage{{ $logo->id }}" src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
                                                     <p class="txt" id="txt{{ $logo->id }}"></p>
@@ -583,7 +583,7 @@
                                             
                                             {{-- <a href="cart.html" class="add-to-cart">Add to Cart</a> --}}
                                         </div>
-                                        <div class="features-btn">
+                                        <div class="features-btn" style="text-align: center">
                                             {{-- <a href="{{ route('customizeLogo', $logo->id) }}" class="default-btn new-btn">Want To Customize Free?</a> --}}
                                             <form action="{{ route('customizeLogo') }}" method="POST" id="form{{ $logo->id }}">
                                                 @csrf
@@ -836,7 +836,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Company Name All Rights Reserved by
+                                Copyright @ 2022 Logomantic All Rights Reserved by
                                 <a href="#" target="_blank">
                                   abc
                                 </a>

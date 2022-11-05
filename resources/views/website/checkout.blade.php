@@ -34,7 +34,7 @@
         <!-- Responsive CSS -->
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		
-		<title>Checkout </title>
+		<title>Logomantic</title>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
@@ -84,7 +84,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('premium') }}" class="nav-link">
                                         Premium Logo Design 
                                        
                                     </a>
@@ -564,7 +564,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Company Name All Rights Reserved by
+                                Copyright @ 2022 Logomantic All Rights Reserved by
                                 <a href="#" target="_blank">
                                   abc
                                 </a>

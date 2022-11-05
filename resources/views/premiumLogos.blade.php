@@ -17,9 +17,7 @@
             <tr>
             <th scope="col">Logo Id</th>
             <th scope="col">Name</th>
-            <th scope="col">Description</th>
             <th scope="col">Price</th>
-            <th scope="col">Logo Type</th>
             <th scope="col">Logo Image</th>
             <th scope="col">Action</th>
             </tr>
@@ -29,9 +27,7 @@
                 <tr>
                     <td>{{ $logo->id }}</td>
                     <td>{{ $logo->name }}</td>
-                    <td>{{ $logo->description }}</td>
                     <td>${{ $logo->price }}</td>
-                    <td>{{ $logo->logoType }}</td>
                     <td>
                         <img src="{{ config('logo.logoUrl').$logo->image }}" alt="item" height="80px" width="80px" class="mx-auto">
                     </td>
