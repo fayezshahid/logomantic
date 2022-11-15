@@ -88,10 +88,10 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                         logo Maker
-                                       
-                                    </a>
+                                    <form action="{{ route('allLogos') }}" method="POST">
+                                        <input type="hidden" name="logoType" value="{{ App\Models\LogoType::where('id', '1')->value('name') }}">
+                                        <a style="cursor: pointer" onclick="this.parentNode.submit()" class="nav-link">Logo Maker</a>
+                                    </form>
 
                                   
                                 </li>
@@ -153,7 +153,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('contact') }}" class="nav-link">
                                         Contact
                                       
                                     </a>
@@ -186,11 +186,11 @@
                                     @endauth
                                 </li>
 
-                                <div class="option-item" style="align-self:center ;">
+                                {{-- <div class="option-item" style="align-self:center ;">
                                     <a href="pricing-2.html" class="default-btn">
                                        Pricing
                                     </a>
-                                </div>
+                                </div> --}}
                             </ul>
                         </div>
                     </nav>
@@ -330,8 +330,12 @@
         <section class="services-details-area ptb-100">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
-                        
+                    <div class="col-lg-12">
+                        @if(session('status'))
+                            <div class="alert alert-success" style="text-align: center">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
                         <div class="row">
 
@@ -339,18 +343,18 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="single-portfolio-item">
                                         <div class="portfolio-image">
-                                            <a href="portfolio-details.html">
+                                            <a style="cursor: pointer" onclick="buyPremiumLogo({{ $logo->id }})">
                                                 <img src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
                                             </a>
                                         </div>
             
                                         <div class="portfolio-content">
                                             <h3 class="fomt-size">
-                                                <a href="portfolio-details.html">{{ $logo->name }}</a>
+                                                <a style="cursor: pointer" onclick="buyPremiumLogo({{ $logo->id }})">{{ $logo->name }}</a>
                                             </h3>
                                             <span>{{ $logo->logoType }}</span>
                                             <div class="features-btn">
-                                                <a onclick="buyPremiumLogo({{ $logo->id }})" class="default-btn new-btn" style="cursor: pointer">Buy Now</a>
+                                                <a onclick="buyPremiumLogo({{ $logo->id }})" class="default-btn new-btn" style="cursor: pointer">Contact Now</a>
                                             </div>
                                         </div>
                                     </div>
@@ -365,18 +369,18 @@
                                                         @csrf
                                                         <div class="form-group" style="margin-bottom: 15px">
                                                             <label for="">Name</label>
-                                                            <input type="text" id="name" class="form-control" name="name" placeholder="Enter name">
-                                                            <div class="text-danger" id="nameError"></div>
+                                                            <input type="text" id="name{{ $logo->id }}" class="form-control" name="name" placeholder="Enter name">
+                                                            <div class="text-danger" id="nameError{{ $logo->id }}"></div>
                                                         </div>
                                                         <div class="form-group" style="margin-bottom: 15px">
                                                             <label for="">Email address</label>
-                                                            <input type="email" id="email" class="form-control" name="email" placeholder="Enter email">
-                                                            <div class="text-danger" id="emailError"></div>
+                                                            <input type="email" id="email{{ $logo->id }}" class="form-control" name="email" placeholder="Enter email">
+                                                            <div class="text-danger" id="emailError{{ $logo->id }}"></div>
                                                         </div>
                                                         <div class="form-group" style="margin-bottom: 15px">
                                                             <label for="">Phone</label>
-                                                            <input type="text" id="phone" class="form-control" name="phone" placeholder="Enter phone number">
-                                                            <div class="text-danger" id="phoneError"></div>
+                                                            <input type="text" id="phone{{ $logo->id }}" class="form-control" name="phone" placeholder="Enter phone number">
+                                                            <div class="text-danger" id="phoneError{{ $logo->id }}"></div>
                                                         </div>
                                                         <input type="hidden" value="{{ $logo->id }}" name="premium_logo_id">
                                                     </form>
@@ -386,7 +390,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" onclick="buy({{ $logo->id }})">Buy</button>
+                                                <button type="button" class="btn btn-primary" onclick="buy({{ $logo->id }})">Contact</button>
                                             </div>
                                         </div>
                                     </div>
@@ -574,10 +578,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Company Name All Rights Reserved by
-                                <a href="#" target="_blank">
-                                  abc
-                                </a>
+                                Copyright @ 2022 Logomantic
                             </p>
                         </div>
 
@@ -638,39 +639,51 @@
 
         <script>
             function buyPremiumLogo(id){
-                $('#logoModal' + id).show();
+                $('#logoModal' + id).fadeIn(300);
             }
 
             function buy(id){
                 var f = 1;
                 
-                if(!$('#name').val()){
+                if(!$('#name' + id).val()){
                     f = 0;
-                    $('#nameError').html('Name is required');
+                    $('#nameError' + id).html('Name is required');
                 }
                 else{
-                    $('#nameError').html('');
+                    $('#nameError' + id).html('');
                 }
                 
-                if(!$('#email').val()){
+                if(!$('#email' + id).val()){
                     f = 0;
-                    $('#emailError').html('Email is required');
+                    $('#emailError' + id).html('Email is required');
                 }
                 else{
-                    $('#emailError').html('');
+                    $('#emailError' + id).html('');
                 }
 
-                if(!$('#phone').val()){
+                if(!$('#phone' + id).val()){
                     f = 0;
-                    $('#phoneError').html('Phone is required');
+                    $('#phoneError' + id).html('Phone is required');
                 }
                 else{
-                    $('#phoneError').html('');
+                    $('#phoneError' + id).html('');
                 }
                     
                 if(f)
                     $('#form' + id).submit();
             }
+
+            $(document).click(function (e) {
+                if ($(e.target).is('.modal')) {
+                    $('.modal').fadeOut(300);
+                }
+            });
+
+            window.setTimeout(function() {
+                $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
+                    $(this).remove();
+                });
+            }, 5000);
         </script>
 
     </body>

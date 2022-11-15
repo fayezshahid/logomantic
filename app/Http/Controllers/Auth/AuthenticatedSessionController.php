@@ -23,7 +23,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('website.login', ['mode' => 'null']);
+        return view('website.login');
     }
 
     /**
@@ -33,13 +33,7 @@ class AuthenticatedSessionController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
-    {
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
-
-        // return redirect()->route('dashboard');
-
+    {       
         $this->validate($request, [
             'email' => 'required|max:255',
             'password' => 'required',
@@ -47,28 +41,29 @@ class AuthenticatedSessionController extends Controller
 
         if(!auth()->attempt($request->only('email', 'password'), $request->remember))
         {
-            return back()->with('status', 'Invalid login details');
+            return back()->with('status', 'Invalid login Details');
         }
 
-        if($request->mode == 'save')
-        {
+        if(session('mode') == 'save')
+        {   
             $wishlist = new Wishlist();
             $wishlist->user_id = auth()->user()->id;
-            $wishlist->logo_id = $request->session()->get('saveLogoId');
-            $wishlist->logo = $request->session()->get('saveLogoSRC');
+            $wishlist->logo_id = session('saveLogoId');
+            $wishlist->logo = session('saveLogoSRC');
             $wishlist->save();
 
             return redirect()->route('wishlist');
         }
-        else if($request->mode == 'purchase')
-        {
+        else if(session('mode') == 'purchase')
+        {   
             $cart = new Cart();
             $cart->user_id = auth()->user()->id;
-            $cart->logo_id = $request->session()->get('purchaseLogoId');
-            $cart->logo = $request->session()->get('purchaseLogoSRC');
+            $cart->logo_id = session('purchaseLogoId');
+            $cart->logo = session('purchaseLogoSRC');
+            $cart->isOrdered = 0;
             $cart->save();
     
-            $wishlist = Wishlist::where('logo_id', '=', $request->session()->get('purchaseLogoId'));
+            $wishlist = Wishlist::where('logo_id', '=', session('purchaseLogoId'));
     
             if($wishlist)
             {

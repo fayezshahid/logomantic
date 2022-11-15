@@ -9,9 +9,6 @@
     </div>
 @endif
 <div class="row">
-    <div class="mb-3 d-flex justify-content-end">
-        <a href="{{ route('addLogo') }}" class="btn btn-primary">+ Add a Logo</a>
-    </div>
     <table class="table text-center">
         <thead>
             <tr>

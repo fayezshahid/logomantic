@@ -95,10 +95,10 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                         logo Maker
-                                       
-                                    </a>
+                                    <form action="{{ route('allLogos') }}" method="POST">
+                                        <input type="hidden" name="logoType" value="{{ App\Models\LogoType::where('id', '1')->value('name') }}">
+                                        <a style="cursor: pointer" onclick="this.parentNode.submit()" class="nav-link">Logo Maker</a>
+                                    </form>
 
                                   
                                 </li>
@@ -160,7 +160,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('contact') }}" class="nav-link">
                                         Contact
                                       
                                     </a>
@@ -193,11 +193,11 @@
                                     @endauth
                                 </li>
 
-                                <div class="option-item" style="align-self:center ;">
+                                {{-- <div class="option-item" style="align-self:center ;">
                                     <a href="pricing-2.html" class="default-btn">
                                        Pricing
                                     </a>
-                                </div>
+                                </div> --}}
                             </ul>
                         </div>
                     </nav>
@@ -476,21 +476,69 @@
                     <h2>Our <span class="blue">  Premium </span>Logo</h2>
                     <div class="bar"></div>
                 </div>
+                @if(session('status'))
+                    <div class="alert alert-success" style="width: 75%; margin-left: 230px; text-align: center">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                {{ $logoCount = 0 }}
                 <div class="team-slider owl-carousel owl-theme">
-                    {{ $logoCount = 0 }}
                     @foreach ($premiumLogos as $logo)
                         @if ((++$logoCount) <= 10)
                             <div class="single-team">
                                 <div class="image">
-                                    <img src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
+                                    <a onclick="buyPremiumLogo({{ $logo->id }})" style="cursor: pointer">
+                                        <img src="{{ config('logo.logoUrl').$logo->image }}" alt="image">
+                                    </a>
                                     <div class="content">
-                                        <h3>{{ $logo->name }}</h3>
+                                        <a onclick="buyPremiumLogo({{ $logo->id }})" style="cursor: pointer">
+                                            <h3>{{ $logo->name }}</h3>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         @endif
                     @endforeach
                 </div>
+                @foreach ($premiumLogos as $logo)
+                    @if ((++$logoCount) <= 10)
+                        <div class="modal" id="logoModal{{ $logo->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                <div class="modal-content" style="height:510px !important;">
+                                    <div class="modal-body d-flex justify-content-between" style="height: 500px">
+                                        <div>
+                                            <form action="{{ route('premiumLogoBuy') }}" method="POST" id="form{{ $logo->id }}" style="width: 510px; padding-top: 110px;">
+                                                @csrf
+                                                <div class="form-group" style="margin-bottom: 15px">
+                                                    <label for="">Name</label>
+                                                    <input type="text" id="name{{ $logo->id }}" class="form-control" name="name" placeholder="Enter name">
+                                                    <div class="text-danger" id="nameError{{ $logo->id }}"></div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom: 15px">
+                                                    <label for="">Email address</label>
+                                                    <input type="email" id="email{{ $logo->id }}" class="form-control" name="email" placeholder="Enter email">
+                                                    <div class="text-danger" id="emailError{{ $logo->id }}"></div>
+                                                </div>
+                                                <div class="form-group" style="margin-bottom: 15px">
+                                                    <label for="">Phone</label>
+                                                    <input type="text" id="phone{{ $logo->id }}" class="form-control" name="phone" placeholder="Enter phone number">
+                                                    <div class="text-danger" id="phoneError{{ $logo->id }}"></div>
+                                                </div>
+                                                <input type="hidden" value="{{ $logo->id }}" name="premium_logo_id">
+                                            </form>
+                                        </div>
+                                        <div style="width: 500px; height: 405px">
+                                            <img style="height: 100% !important" width="400px" src="{{ config('logo.logoUrl').$logo->image }}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" onclick="buy({{ $logo->id }})">Buy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </section>
         <!-- Start Features Area -->
@@ -1383,18 +1431,70 @@
                                 <h3 class="widget-title">Popular Tags</h3>
 
                                 <div class="tagcloud">
-                                    <a href="#">Business <span class="tag-link-count"> (3)</span></a>
-                                    <a href="#">Design <span class="tag-link-count"> (3)</span></a>
-                                    <a href="#">Digital <span class="tag-link-count"> (2)</span></a>
-                                    <a href="#">SEO <span class="tag-link-count"> (2)</span></a>
-                                    <a href="#">Braike <span class="tag-link-count"> (2)</span></a>
-                                    <a href="#">Fashion <span class="tag-link-count"> (2)</span></a>
-                                    <a href="#">Software <span class="tag-link-count"> (2)</span></a>
-                                    <a href="#">Travel <span class="tag-link-count"> (1)</span></a>
-                                    <a href="#">Smart <span class="tag-link-count"> (1)</span></a>
-                                    <a href="#">Marketing <span class="tag-link-count"> (1)</span></a>
-                                    <a href="#">Tips <span class="tag-link-count"> (2)</span></a>
-                                    <a href="#">Website <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo design <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo maker <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">facebook logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">free logo maker <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">wix logo maker <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">twitter logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo maker online <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">adidas logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">starbucks logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">netflix logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">wix logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">free logo design <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">linkedin logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">spotify logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">samsung logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">canva logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">zoom logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">microsoft logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">chanel logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo apple <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">twitch logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">facebook png <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">pepsi logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo nike <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">snapchat logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">versace logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">hatchful <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">fedex logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">fb logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">free logo maker online <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">s logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">pringles logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">walmart logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">a logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">m logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">placeit logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">photography logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo online <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">kia new logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">music logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">tailorbrands <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">mastercard logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">target logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">supreme logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo creator free <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">playboy logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">lion logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">designevo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">company logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">placeit logo maker <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo by memory <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">canva logo maker <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">visa logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">logo design online <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">ikea logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">hatchful shopify <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">cricket logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">create logo online free <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">food logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">fruit of the loom logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">business logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">fox logo <span class="tag-link-count"> (2)</span></a>
+                                    <a href="#">free logo design templates <span class="tag-link-count"> (2)</span></a>
                                 </div>
                             </section>
                         </aside>
@@ -1562,10 +1662,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Logomantic All Rights Reserved by
-                                <a href="#" target="_blank">
-                                  abc
-                                </a>
+                                Copyright @ 2022 Logomantic
                             </p>
                         </div>
 
@@ -1623,9 +1720,52 @@
         <script src="assets/js/main.js"></script>
 
         <script>
-            // $('#sbm').click(function(){
+            function buyPremiumLogo(id){
+                $('#logoModal' + id).fadeIn(300);
+            }
+
+            function buy(id){
+                var f = 1;
                 
-            // });
+                if(!$('#name' + id).val()){
+                    f = 0;
+                    $('#nameError' + id).html('Name is required');
+                }
+                else{
+                    $('#nameError' + id).html('');
+                }
+                
+                if(!$('#email' + id).val()){
+                    f = 0;
+                    $('#emailError' + id).html('Email is required');
+                }
+                else{
+                    $('#emailError' + id).html('');
+                }
+
+                if(!$('#phone' + id).val()){
+                    f = 0;
+                    $('#phoneError' + id).html('Phone is required');
+                }
+                else{
+                    $('#phoneError' + id).html('');
+                }
+                    
+                if(f)
+                    $('#form' + id).submit();
+            }
+
+            $(document).click(function (e) {
+                if ($(e.target).is('.modal')) {
+                    $('.modal').fadeOut(300);
+                }
+            });
+            
+            window.setTimeout(function() {
+                $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
+                    $(this).remove();
+                });
+            }, 5000);
         </script>
 
     </body>

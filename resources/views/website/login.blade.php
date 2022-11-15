@@ -87,7 +87,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('premium') }}" class="nav-link">
                                         Premium Logo  
                                        
                                     </a>
@@ -96,10 +96,10 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                         logo Maker
-                                       
-                                    </a>
+                                    <form action="{{ route('allLogos') }}" method="POST">
+                                        <input type="hidden" name="logoType" value="{{ App\Models\LogoType::where('id', '1')->value('name') }}">
+                                        <a style="cursor: pointer" onclick="this.parentNode.submit()" class="nav-link">Logo Maker</a>
+                                    </form>
 
                                   
                                 </li>
@@ -161,7 +161,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('contact') }}" class="nav-link">
                                         Contact
                                       
                                     </a>
@@ -194,11 +194,11 @@
                                     @endauth
                                 </li>
 
-                                <div class="option-item" style="align-self:center ;">
+                                {{-- <div class="option-item" style="align-self:center ;">
                                     <a href="pricing-2.html" class="default-btn">
                                        Pricing
                                     </a>
-                                </div>
+                                </div> --}}
                             </ul>   
                         </div>
 
@@ -299,7 +299,6 @@
                             @endif
                             <form action="{{ route('login') }}" method="post">
                                 @csrf
-                                <input type="hidden" value="{{ $mode }}" name="mode">
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input type="text" name="email" class="form-control" placeholder="Email">
@@ -335,7 +334,7 @@
 
                                 <button type="submit" class="default-btn">Login</button>
                             </form>
-                            <a href="{{ route('register') }}">Don't have an account?</a>
+                            <a href="{{ route('register') }}" style="cursor: pointer">Don't have an account?</a>
                         </div>
                     </div>
                 </div>
@@ -474,10 +473,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Logomantic All Rights Reserved by
-                                <a href="#" target="_blank">
-                                  abc
-                                </a>
+                                Copyright @ 2022 Logomantic
                             </p>
                         </div>
 

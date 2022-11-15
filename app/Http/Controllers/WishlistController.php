@@ -17,9 +17,10 @@ class WishlistController extends Controller
     {
         $request->session()->put('saveLogoSRC', $request->logo);
         $request->session()->put('saveLogoId', $request->logoId);
+        $request->session()->put('mode', 'save');
 
         if(!auth()->user())
-            return view('website.login', ['mode' => 'save']);
+        return redirect()->route('login');
         
         $wishlist = new Wishlist();
         $wishlist->user_id = auth()->user()->id;

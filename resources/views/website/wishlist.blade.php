@@ -96,10 +96,10 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Logo Design with logo Maker
-                                       
-                                    </a>
+                                    <form action="{{ route('allLogos') }}" method="POST">
+                                        <input type="hidden" name="logoType" value="{{ App\Models\LogoType::where('id', '1')->value('name') }}">
+                                        <a style="cursor: pointer" onclick="this.parentNode.submit()" class="nav-link">Logo Maker</a>
+                                    </form>
 
                                   
                                 </li>
@@ -162,7 +162,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('contact') }}" class="nav-link">
                                         Contact
                                       
                                     </a>
@@ -186,7 +186,7 @@
                                     @auth
                                         <form action="{{ route('logout') }}" method="post">
                                             @csrf
-                                            <a onclick="this.parentNode.submit();" class="nav-link">Logout</a>
+                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
                                         </form>
                                     @else
                                         <a href="{{ route('login') }}" class="nav-link">
@@ -210,11 +210,11 @@
 
                             
 
-                                <div class="option-item">
+                                {{-- <div class="option-item">
                                     <a href="pricing-1.html" class="default-btn">
                                        Pricing
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </nav>
@@ -444,10 +444,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Logomantic All Rights Reserved by
-                                <a href="#" target="_blank">
-                                  abc
-                                </a>
+                                Copyright @ 2022 Logomantic
                             </p>
                         </div>
 

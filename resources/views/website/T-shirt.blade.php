@@ -63,15 +63,15 @@
             <div class="main-navbar">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <!-- <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" class="black-logo" alt="image">
-                            <img src="assets/img/logo-2.png" class="white-logo" alt="image">
-                        </a> -->
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                            <img src="assets/new-image/web-logo/new-2.png" class="black-logo" alt="image">
+                            <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
+                        </a>
 
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="{{ route('home') }}" class="nav-link active">
                                         Home 
                                        
                                     </a>
@@ -79,8 +79,8 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Premium Logo Design 
+                                    <a href="{{ route('premium') }}" class="nav-link">
+                                        Premium Logo  
                                        
                                     </a>
 
@@ -88,10 +88,10 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Logo Design with logo Maker
-                                       
-                                    </a>
+                                    <form action="{{ route('allLogos') }}" method="POST">
+                                        <input type="hidden" name="logoType" value="{{ App\Models\LogoType::where('id', '1')->value('name') }}">
+                                        <a style="cursor: pointer" onclick="this.parentNode.submit()" class="nav-link">Logo Maker</a>
+                                    </form>
 
                                   
                                 </li>
@@ -108,11 +108,10 @@
                                             <a href="{{ route('businessCardDesign') }}" class="nav-link">
                                                Business card Design
                                             </a>
-                                        </li>                                      
-
+                                        </li>
                                         <li class="nav-item">
                                             <a href="{{ route('letterHeadDesign') }}" class="nav-link">
-                                                Letter Head Design
+                                                Letter Head  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -154,33 +153,45 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('contact') }}" class="nav-link">
                                         Contact
                                       
                                     </a>
-                                   
                                 </li>
                                 
-                            </ul>
-
-                            <div class="others-options d-flex align-items-center">
-                                <!-- <div class="option-item">
-                                    <div class="cart-btn">
-                                        <a href="cart.html">
-                                            <i class='flaticon-shopping-cart'></i>
-                                            <span>0</span>
+                                @auth
+                                    <li class="nav-item">
+                                        <a href="{{ route('wishlist') }}" class="nav-link">
+                                            Wishlist
                                         </a>
-                                    </div>
-                                </div> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('cart') }}" class="nav-link">
+                                            Cart
+                                        </a>
+                                    </li>
+                                @endauth
 
-                            
+                                <li class="nav-item">
+                                    @auth
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('login') }}" class="nav-link">
+                                        Login / Register
+                                        
+                                        </a>
+                                    @endauth
+                                </li>
 
-                                <div class="option-item">
-                                    <a href="pricing-1.html" class="default-btn">
+                                {{-- <div class="option-item" style="align-self:center ;">
+                                    <a href="pricing-2.html" class="default-btn">
                                        Pricing
                                     </a>
-                                </div>
-                            </div>
+                                </div> --}}
+                            </ul>
                         </div>
                     </nav>
                 </div>
@@ -504,10 +515,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Company Name All Rights Reserved by
-                                <a href="#" target="_blank">
-                                  abc
-                                </a>
+                                Copyright @ 2022 Logomantic
                             </p>
                         </div>
 

@@ -97,10 +97,10 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Logo Design with logo Maker
-                                       
-                                    </a>
+                                    <form action="{{ route('allLogos') }}" method="POST">
+                                        <input type="hidden" name="logoType" value="{{ App\Models\LogoType::where('id', '1')->value('name') }}">
+                                        <a style="cursor: pointer" onclick="this.parentNode.submit()" class="nav-link">Logo Maker</a>
+                                    </form>
 
                                   
                                 </li>
@@ -163,9 +163,8 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('contact') }}" class="nav-link">
                                         Contact
-                                      
                                     </a>
                                    
                                 </li>
@@ -187,7 +186,7 @@
                                     @auth
                                         <form action="{{ route('logout') }}" method="post">
                                             @csrf
-                                            <a onclick="this.parentNode.submit();" class="nav-link">Logout</a>
+                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
                                         </form>
                                     @else
                                         <a href="{{ route('login') }}" class="nav-link">
@@ -211,11 +210,11 @@
 
                             
 
-                                <div class="option-item">
+                                {{-- <div class="option-item">
                                     <a href="pricing-1.html" class="default-btn">
                                        Pricing
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </nav>
@@ -421,10 +420,10 @@
                             <div class="col-lg-12 col-md-6">
                                 <div class="single-products-box">
                                     <div class="products-image">
-                                        <div id="finalLogo" style="position: relative;">
+                                        <div id="finalLogo" onclick="hideAll()" style="position: relative;">
                                             <div class="txtContainer" id="txtField">
-                                                <div style="width: 250px; height: 250px; inset: -55px auto auto 510px; display: none;" id='elementResizable' class="elementResizable">
-                                                    <img crossorigin="Anonymous" width="250px" height="250px" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
+                                                <div onclick="hideAllExceptLogo()" style="width: 250px; height: 250px; inset: -55px auto auto 510px; display: none;" id='elementResizable' class="elementResizable">
+                                                    <img crossorigin="Anonymous" style="cursor: move" id="logoImage" src="{{ config('logo.logoUrl').$logo->image }}" alt="image" >
                                                     <div class="ui-resizable-handle ui-resizable-nw nwgrip" id="nwgrip"></div>
                                                     <div class="ui-resizable-handle ui-resizable-ne negrip" id="negrip"></div>
                                                     <div class="ui-resizable-handle ui-resizable-sw swgrip" id="swgrip"></div>
@@ -548,7 +547,7 @@
                                                         <p class="p2"></p>
                                                     </div>
                                                     <div class="div3" style="display: none">
-                                                        <img class="img3" src="" alt="">
+                                                        <img class="img2" src="" alt="">
                                                         <p class="p2"></p>
                                                     </div>
                                                 </div>
@@ -733,10 +732,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Logomantic All Rights Reserved by
-                                <a href="#" target="_blank">
-                                  abc
-                                </a>
+                                Copyright @ 2022 Logomantic
                             </p>
                         </div>
 
@@ -1037,18 +1033,106 @@
 
             function idChange(tmp){
                 id = tmp.charAt(tmp.length - 1);
-                // $('#elementResizable0').css('border', '1px solid');
-                // $('#nwgrip' + id).show();
-                // $('#negrip' + id).show();
-                // $('#swgrip' + id).show();
-                // $('#segrip' + id).show();
-                // $('#ngrip' + id).show();
-                // $('#sgrip' + id).show();
-                // $('#egrip' + id).show();
-                // $('#wgrip' + id).show();
+                $('#elementResizable' + id).css('border', '1px solid');
+                $('#nwgrip' + id).css('border', '1px solid');
+                $('#negrip' + id).css('border', '1px solid');
+                $('#swgrip' + id).css('border', '1px solid');
+                $('#segrip' + id).css('border', '1px solid');
+                $('#ngrip' + id).css('border', '1px solid');
+                $('#egrip' + id).css('border', '1px solid');
+                $('#sgrip' + id).css('border', '1px solid');
+                $('#wgrip' + id).css('border', '1px solid');
                 $('#inputBox' + id).show();
                 $('#remove' + id).show();
+                $('#elementResizable' + id + ' div:last-child').css('display', 'block');
                 
+                for(var k=0; k<=i; k++){
+                    if(k != id){
+                        $('#elementResizable' + k).css('border', '0');
+                        $('#nwgrip' + k).css('border', '0');
+                        $('#negrip' + k).css('border', '0');
+                        $('#swgrip' + k).css('border', '0');
+                        $('#segrip' + k).css('border', '0');
+                        $('#ngrip' + k).css('border', '0');
+                        $('#egrip' + k).css('border', '0');
+                        $('#sgrip' + k).css('border', '0');
+                        $('#wgrip' + k).css('border', '0');
+                        $('#inputBox' + k).hide();
+                        $('#remove' + k).hide();
+                        $('#elementResizable' + k + ' div:last-child').css('display', 'none');
+                    }
+                }
+
+                $('#elementResizable').css('border', '0');
+                $('#negrip').css('border', '0');
+                $('#swgrip').css('border', '0');
+                $('#nwgrip').css('border', '0');
+                $('#segrip').css('border', '0');
+                $('#ngrip').css('border', '0');
+                $('#egrip').css('border', '0');
+                $('#sgrip').css('border', '0');
+                $('#wgrip').css('border', '0');
+                $('#elementResizable div:last-child').css('display', 'none');
+            }
+
+            function hideAllExceptLogo(){
+                
+                $('#elementResizable').css('border', '1px solid');
+                $('#nwgrip').css('border', '1px solid');
+                $('#negrip').css('border', '1px solid');
+                $('#swgrip').css('border', '1px solid');
+                $('#segrip').css('border', '1px solid');
+                $('#ngrip').css('border', '1px solid');
+                $('#egrip').css('border', '1px solid');
+                $('#sgrip').css('border', '1px solid');
+                $('#wgrip').css('border', '1px solid');
+                $('#elementResizable div:last-child').css('display', 'block');
+
+                for(var k=0; k<=i; k++){
+                    $('#elementResizable' + k).css('border', '0');
+                    $('#nwgrip' + k).css('border', '0');
+                    $('#negrip' + k).css('border', '0');
+                    $('#swgrip' + k).css('border', '0');
+                    $('#segrip' + k).css('border', '0');
+                    $('#ngrip' + k).css('border', '0');
+                    $('#egrip' + k).css('border', '0');
+                    $('#sgrip' + k).css('border', '0');
+                    $('#wgrip' + k).css('border', '0');
+                    $('#inputBox' + k).hide();
+                    $('#remove' + k).hide();
+                    $('#elementResizable' + k + ' div:last-child').css('display', 'none');
+                }
+            }
+
+            function hideAll(){
+                var x = event.target.id;
+                if(x == 'finalLogo' || x == 'txtField' || x == 'parent'){
+                    $('#elementResizable').css('border', '0');
+                    $('#negrip').css('border', '0');
+                    $('#swgrip').css('border', '0');
+                    $('#nwgrip').css('border', '0');
+                    $('#segrip').css('border', '0');
+                    $('#ngrip').css('border', '0');
+                    $('#egrip').css('border', '0');
+                    $('#sgrip').css('border', '0');
+                    $('#wgrip').css('border', '0');
+                    $('#elementResizable div:last-child').css('display', 'none');
+
+                    for(var k=0; k<=i; k++){
+                        $('#elementResizable' + k).css('border', '0');
+                        $('#nwgrip' + k).css('border', '0');
+                        $('#negrip' + k).css('border', '0');
+                        $('#swgrip' + k).css('border', '0');
+                        $('#segrip' + k).css('border', '0');
+                        $('#ngrip' + k).css('border', '0');
+                        $('#egrip' + k).css('border', '0');
+                        $('#sgrip' + k).css('border', '0');
+                        $('#wgrip' + k).css('border', '0');
+                        $('#inputBox' + k).hide();
+                        $('#remove' + k).hide();
+                        $('#elementResizable' + k + ' div:last-child').css('display', 'none');
+                    }
+                }
             }
 
             function preChangeFontColor(id){
@@ -1073,7 +1157,7 @@
                 i = 0;
                 var src = $('#logoImage').attr('src');
                 $('#txtField').html(`
-                    <img width="400px" height="400px" onclick="main()" style="cursor: move" id="logoImage" src="${src}" alt="image" >
+                    <img onclick="main()" style="cursor: move" id="logoImage" src="${src}" alt="image" >
                     <div id="dragTextBox0" class="inputBoxDiv" onclick="idChange(this.id)" style="inset: 200px auto auto 500px">
                         <div class="d-flex justify-content-between" style="position: relative">
                                 <div id='elementResizable0' class="elementResizable">
@@ -1181,6 +1265,8 @@
                 var y = parseInt(logoInset.split(' ')[3]) - 80;
                 var newInset = `${x}px auto auto ${y}px`;
                 $('#elementResizable').css('inset', newInset);
+                $('#elementResizable').css('width', '314px');
+                $('#elementResizable').css('height', '314px');
 
                 var insets = [];
                 for(var j=0; j<=i; j++){
@@ -1200,8 +1286,8 @@
                     });
                     var tmp = $('#dragTextBox'  + j).css('inset');
                     insets.push(tmp);
-                    x = parseInt(tmp.split(' ')[0]) + 40;
-                    y = parseInt(tmp.split(' ')[3]) - 50;
+                    x = parseInt(tmp.split(' ')[0]) + 115;
+                    y = parseInt(tmp.split(' ')[3]) - 35;
                     newInset = `${x}px auto auto ${y}px`;
                     $('#dragTextBox' + j).css('inset', newInset);
                 }
@@ -1221,7 +1307,7 @@
 
                 var previewImgSrc = $('#logoImage').attr('src');
                 $('.img2').attr('src', previewImgSrc);
-                $('.img3').attr('src', previewImgSrc);
+                // $('.img3').attr('src', previewImgSrc);
 
                 var tmp1 = $('#inputBoxResult0').css('color');
                 var tmp2 = $('#inputBoxResult0').css('font-family');
@@ -1271,6 +1357,9 @@
                     });
                     $('#dragTextBox' + j).css('inset', insets[j]);
                 }
+
+                $('#elementResizable').css('width', '250px');
+                $('#elementResizable').css('height', '250px');
             }
 
             var colors;

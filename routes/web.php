@@ -42,6 +42,10 @@ Route::get('/premium', function(){
     return view('website.premium-logo-design', ['premiumLogos' => PremiumLogo::all()]);
 })->name('premium');
 
+Route::get('/contact' , function(){
+    return view('website.contact-1');
+})->name('contact');
+
 // Route::get('/allLogos', [LogosController::class, 'allLogos'])->name('allLogos');
 Route::post('/allLogos', [LogosController::class, 'allLogos'])->name('allLogos');
 

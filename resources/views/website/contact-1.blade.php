@@ -34,7 +34,7 @@
         <!-- Responsive CSS -->
 		<link rel="stylesheet" href="assets/css/responsive.css">
 		
-		<title>web Title</title>
+		<title>Logomantic</title>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
@@ -68,15 +68,15 @@
             <div class="main-navbar">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <!-- <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" class="black-logo" alt="image">
-                            <img src="assets/img/logo-2.png" class="white-logo" alt="image">
-                        </a> -->
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                            <img src="assets/new-image/web-logo/new-2.png" class="black-logo" alt="image">
+                            <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
+                        </a>
 
-                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent" style="display: block;">
+                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="{{ route('home') }}" class="nav-link active">
                                         Home 
                                        
                                     </a>
@@ -84,8 +84,8 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Premium Logo Design 
+                                    <a href="{{ route('premium') }}" class="nav-link">
+                                        Premium Logo  
                                        
                                     </a>
 
@@ -93,10 +93,10 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Logo Design with logo Maker
-                                       
-                                    </a>
+                                    <form action="{{ route('allLogos') }}" method="POST">
+                                        <input type="hidden" name="logoType" value="{{ App\Models\LogoType::where('id', '1')->value('name') }}">
+                                        <a style="cursor: pointer" onclick="this.parentNode.submit()" class="nav-link">Logo Maker</a>
+                                    </form>
 
                                   
                                 </li>
@@ -106,56 +106,51 @@
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         Other Services 
-                                        <i class="bx bx-chevron-down"></i>
+                                        <i class='bx bx-chevron-down'></i>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="blog-1.html" class="nav-link">
+                                            <a href="{{ route('businessCardDesign') }}" class="nav-link">
                                                Business card Design
                                             </a>
                                         </li>
-
-                                       
-
-                                       
-
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('letterHeadDesign') }}" class="nav-link">
                                                 Letter Head  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('tShirtDesign') }}" class="nav-link">
                                                 T-Shirt  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('envelopDesign') }}" class="nav-link">
                                                 Envelop  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('webDesign') }}" class="nav-link">
                                                 Web Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('mugDesign') }}" class="nav-link">
                                                Mug Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('flyerDesign') }}" class="nav-link">
                                               Flyer Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('signatureDesign') }}" class="nav-link">
                                               Signature Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="{{ route('weddingCardDesign') }}" class="nav-link">
                                               Wedding Card Design
                                             </a>
                                         </li>
@@ -163,27 +158,45 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('contact') }}" class="nav-link">
                                         Contact
                                       
                                     </a>
-                                   
                                 </li>
+                                
+                                @auth
+                                    <li class="nav-item">
+                                        <a href="{{ route('wishlist') }}" class="nav-link">
+                                            Wishlist
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('cart') }}" class="nav-link">
+                                            Cart
+                                        </a>
+                                    </li>
+                                @endauth
+
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                      Login / Register
-                                      
-                                    </a>
-                                   
+                                    @auth
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('login') }}" class="nav-link">
+                                        Login / Register
+                                        
+                                        </a>
+                                    @endauth
                                 </li>
-                                <div class="option-item" style="align-self:center ;">
-                                    <a href="pricing-1.html" class="default-btn">
+
+                                {{-- <div class="option-item" style="align-self:center ;">
+                                    <a href="pricing-2.html" class="default-btn">
                                        Pricing
                                     </a>
-                                </div>
+                                </div> --}}
                             </ul>
-
-                           
                         </div>
                     </nav>
                 </div>
@@ -526,10 +539,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Company Name All Rights Reserved by
-                                <a href="#" target="_blank">
-                                  abc
-                                </a>
+                                Copyright @ 2022 Logomantic
                             </p>
                         </div>
 

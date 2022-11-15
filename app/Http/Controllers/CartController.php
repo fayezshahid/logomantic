@@ -24,9 +24,10 @@ class CartController extends Controller
     {
         $request->session()->put('purchaseLogoSRC', $request->logo);
         $request->session()->put('purchaseLogoId', $request->logoId);
-
+        $request->session()->put('mode', 'purchase');
+        
         if(!auth()->user())
-            return view('website.login', ['mode' => 'purchase']);
+            return redirect()->route('login');
         
         $cart = new Cart();
         $cart->user_id = auth()->user()->id;

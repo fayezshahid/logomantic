@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Wishlist;
+use App\Models\Cart;
 
 class RegisteredUserController extends Controller
 {
@@ -21,7 +23,6 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-
         return view('website.register');
     }
 
@@ -52,6 +53,35 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        if(session('mode') == 'save')
+        {   
+            $wishlist = new Wishlist();
+            $wishlist->user_id = auth()->user()->id;
+            $wishlist->logo_id = session('saveLogoId');
+            $wishlist->logo = session('saveLogoSRC');
+            $wishlist->save();
+
+            return redirect()->route('wishlist');
+        }
+        else if(session('mode') == 'purchase')
+        {   
+            $cart = new Cart();
+            $cart->user_id = auth()->user()->id;
+            $cart->logo_id = session('purchaseLogoId');
+            $cart->logo = session('purchaseLogoSRC');
+            $cart->isOrdered = 0;
+            $cart->save();
+    
+            $wishlist = Wishlist::where('logo_id', '=', $request->session()->get('purchaseLogoId'));
+    
+            if($wishlist)
+            {
+                $wishlist->delete();
+            }
+    
+            return redirect()->route('cart');
+        }
 
         return redirect()->route('home');
         

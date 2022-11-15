@@ -12,13 +12,13 @@ class PremiumLogoOrderController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|unique:premium_logo_orders',
+            'email' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
             'premium_logo_id' => 'required',
         ]);
 
         PremiumLogoOrder::create($data);
 
-        return redirect()->route('premium');
+        return back()->with('status', 'Success. We will contact you soon.');
     }
 }
