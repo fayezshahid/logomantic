@@ -72,10 +72,10 @@
             <div class="main-navbar">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <!-- <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" class="black-logo" alt="image">
-                            <img src="assets/img/logo-2.png" class="white-logo" alt="image">
-                        </a> -->
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                            <img src="assets/new-image/web-logo/new-2.png" class="black-logo" alt="image">
+                            <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
+                        </a>
 
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
@@ -89,7 +89,7 @@
 
                                 <li class="nav-item">
                                     <a href="{{ route('premium') }}" class="nav-link">
-                                        Premium Logo Design 
+                                        Premium Logo 
                                        
                                     </a>
 
@@ -840,7 +840,9 @@
                         $('#inputBoxResult' + i).css("transform", `scale(${1 + ww}, ${1 + hh})`); 
                     }
                 });
-                $('#elementResizable' + i).rotatable();
+                $('#elementResizable' + i).rotatable({
+                    wheelRotate: false
+                });
             }
 
             $(document).ready(function(){
@@ -904,7 +906,8 @@
                     handleOffset: {
                         top: -15,
                         left: 0
-                    }
+                    },
+                    wheelRotate: false
                 });
 
                 $('#elementResizable').show();

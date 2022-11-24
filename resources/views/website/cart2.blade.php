@@ -1,18 +1,10 @@
-<?PHP
-    header('Access-Control-Allow-Origin: *');
-?>
-
 <!doctype html>
 <html lang="zxx" class="theme-light">
     
 <head>
         <!-- Required meta tags -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-        <!-- Bootstrap Font Icon CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <link href="https://fonts.googleapis.com/css2?family=Merienda&family=Playball&family=Poppins&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/godswearhats/jquery-ui-rotatable@1.1/jquery.ui.rotatable.css">
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS --> 
@@ -49,9 +41,7 @@
 
     <body>
 
-        <!-- Start Preloader Area -->
-      
-        <!-- End Preloader Area -->
+  
 
         <!-- Start Navbar Area -->
         <div class="navbar-area">
@@ -71,10 +61,10 @@
             <div class="main-navbar">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="navbar-brand" href="{{ route('home') }}">
-                            <img src="assets/new-image/web-logo/new-2.png" class="black-logo" alt="image">
-                            <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
-                        </a>
+                        <!-- <a class="navbar-brand" href="index.html">
+                            <img src="assets/img/logo.png" class="black-logo" alt="image">
+                            <img src="assets/img/logo-2.png" class="white-logo" alt="image">
+                        </a> -->
 
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
@@ -88,7 +78,7 @@
 
                                 <li class="nav-item">
                                     <a href="{{ route('premium') }}" class="nav-link">
-                                        Premium Logo 
+                                        Premium Logo Design 
                                        
                                     </a>
 
@@ -113,48 +103,52 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="{{ route('businessCardDesign') }}" class="nav-link">
+                                            <a href="blog-1.html" class="nav-link">
                                                Business card Design
                                             </a>
-                                        </li>                                      
+                                        </li>
+
+                                       
+
+                                       
 
                                         <li class="nav-item">
-                                            <a href="{{ route('letterHeadDesign') }}" class="nav-link">
-                                                Letter Head Design
+                                            <a href="blog-details.html" class="nav-link">
+                                                Letter Head  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('tShirtDesign') }}" class="nav-link">
+                                            <a href="blog-details.html" class="nav-link">
                                                 T-Shirt  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('envelopDesign') }}" class="nav-link">
+                                            <a href="blog-details.html" class="nav-link">
                                                 Envelop  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('webDesign') }}" class="nav-link">
+                                            <a href="blog-details.html" class="nav-link">
                                                 Web Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('mugDesign') }}" class="nav-link">
+                                            <a href="blog-details.html" class="nav-link">
                                                Mug Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('flyerDesign') }}" class="nav-link">
+                                            <a href="blog-details.html" class="nav-link">
                                               Flyer Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('signatureDesign') }}" class="nav-link">
+                                            <a href="blog-details.html" class="nav-link">
                                               Signature Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('weddingCardDesign') }}" class="nav-link">
+                                            <a href="blog-details.html" class="nav-link">
                                               Wedding Card Design
                                             </a>
                                         </li>
@@ -190,8 +184,7 @@
                                         </form>
                                     @else
                                         <a href="{{ route('login') }}" class="nav-link">
-                                        Login / Register
-                                        
+                                            Login / Register
                                         </a>
                                     @endauth
                                 </li>
@@ -272,50 +265,151 @@
         </div>
         <!-- End Navbar Area -->
 
-        <div class="container">
-            <div class="row">
-                <table class="table text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">Logo Id</th>
-                            <th scope="col">Logo</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($wishlists as $wishlist)
-                            <tr>
-                                <td>
-                                    <div style="margin-top: 40px">
-                                        {{ $wishlist->logo_id }}
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="{{ $wishlist->logo }}" height="300px" width="300px" alt="">
-                                </td>
-                                <td style="width: 30%">
-                                    <div class="d-flex justify-content-between" style="margin-top: 40px">
-                                        <form action="{{ route('purchaseLogo') }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="logo" id="purchaseLogo" value="{{ $wishlist->logo }}">
-                                            <input type="hidden" name="logoId" id="purchaseLogoId" value="{{ $wishlist->logo_id }}">
-                                            <button class="btn btn-sm btn-primary ml-2">Add To Cart</button>
-                                        </form>
-                                        <form action="{{ route('deleteWishlistItem', $wishlist->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-sm btn-danger ml-2">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-            
-                    </tbody>
-                </table>
+        <!-- Start Page Banner -->
+        <div class="page-banner-area item-bg2">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-banner-content">
+                            <h2>Cart</h2>
+                            <ul>
+                                <li>
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li>Cart</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
+        <!-- End Page Banner -->
+
+        <!-- Start Cart Area -->
+		<section class="cart-area ptb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        {{-- <form> --}}
+                            <div class="cart-table table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Logo Name</th>
+                                            <th scope="col">Price</th>
+                                            {{-- <th scope="col">Quantity</th> --}}
+                                            {{-- <th scope="col">Total</th> --}}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($cartItems as $cart)
+                                                <tr>
+                                                    <td class="product-thumbnail">
+                                                        <a href="#">
+                                                            <img src="{{ $cart->logo }}" alt="item">
+                                                        </a>
+                                                    </td>
+                                                    <td class="product-name">
+                                                        <a href="#">{{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('name') }}</a>
+                                                    </td>
+                                                    <td class="product-price">
+                                                        <span class="unit-amount">
+                                                            ${{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }}
+                                                        </span>
+                                                    </td>
+                                                    {{-- <td class="product-quantity">
+                                                        <div class="input-counter">
+                                                            <span onclick="decrease({{ $cart->id }}, {{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }})" class="minus-btn">
+                                                                <i class='bx bx-minus'></i>
+                                                            </span>
+                                                            <input type="text" value="1" id="quantity{{ $cart->id }}">
+                                                            <span onclick="increase({{ $cart->id }}, {{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }})" class="plus-btn">
+                                                                <i class='bx bx-plus'></i>
+                                                            </span>
+                                                        </div>
+                                                    </td> --}}
+                                                    <td class="product-subtotal">
+                                                        {{-- <span id="price{{ $cart->id }}" class="subtotal-amount">
+                                                            ${{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }}
+                                                        </span> --}}
+                                                        <form action="{{ route('deleteCartItem', $cart->id) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a onclick="this.parentNode.submit()" class="remove" style="cursor: pointer">
+                                                                <i class='bx bx-trash'></i>
+                                                            </a>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="cart-buttons">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-7 col-sm-7 col-md-7">
+                                        <a href="shop-1.html" class="default-btn">
+                                            Back to Shop
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-5 col-sm-5 col-md-5 text-right">
+                                        <a href="#" class="default-btn">
+                                            Update Cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cart-totals">
+                                <h3>Cart Totals</h3>
+                                <ul>
+                                    <li>Subtotal 
+                                        <span class="total">${{ $amount }}</span>
+                                    </li>
+                                    <li>Tax 
+                                        <span>$0.00</span>
+                                    </li>
+                                    <li>Total 
+                                        <span><b class="total">${{ $amount }}</b></span>
+                                    </li>
+                                </ul>
+                                <a href="{{ route('checkout') }}" class="default-btn">
+                                    Proceed to Checkout
+                                </a>
+                            </div>
+                        {{-- </form> --}}
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="about-content warp">
+                             <div class="about-inner-content">
+                                <div class="icon">
+                                    <i class="flaticon-check"></i>
+                                </div>
+                                <h4>You will Get AI OR PSD FILE</h4>
+                            </div>
+
+                            <div class="about-inner-content">
+                                <div class="icon">
+                                    <i class="flaticon-check"></i>
+                                </div>
+                                <h4>You will Get JPRG OR PNG FILE</h4>
+                            </div>
+
+                            <div class="about-inner-content">
+                                <div class="icon">
+                                    <i class="flaticon-check"></i>
+                                </div>
+                                <h4>You will Get PDF FILE</h4>
+                            </div>
+                            
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		<!-- End Cart Area -->
 
         <!-- Start Footer Area -->
         <div class="footer-area pt-100 pb-70">
@@ -468,19 +562,14 @@
         <div class="go-top">
             <i class='bx bx-chevron-up'></i>
         </div>
-
-        <input type="file" id="imgFile" hidden>
         <!-- End Go Top Area -->
 
         <!-- Dark version -->
-        
+     
         <!-- Dark version -->
 
         <!-- Jquery Slim JS -->
         <script src="assets/js/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/gh/godswearhats/jquery-ui-rotatable@1.1/jquery.ui.rotatable.min.js"></script>
-
         <!-- Bootstrap JS -->
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- Meanmenu JS -->
@@ -505,15 +594,33 @@
         <script src="assets/js/wow.min.js"></script>
         <!-- Custom JS -->
         <script src="assets/js/main.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
-        <script src="assets/js/vibrant.js"></script>
-        <script src="assets/js/paletteExtractor.js"></script>
+        <script>
 
-        <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+
+            // function increase(id, price){
+            //     var newPrice = parseFloat($('#price' + id).html().replace('$', '')) + parseFloat(price);
+            //     $('#price' + id).html('$' + newPrice);
+            //     var p = parseInt($('.total').html());
+            //     $('.total').html('$' + (p + newPrice));
+            // }
+
+            // function decrease(id, price){
+            //     if($('#price' + id).html() != '$0')
+            //     {
+            //         var newPrice = parseFloat($('#price' + id).html().replace('$', '')) - parseFloat(price);
+            //         $('#price' + id).html('$' + newPrice);
+            //         $('.total').html('$' + newPrice);
+            //     }
+            //     else
+            //     {
+            //         $('#quantity' + id).val(1);
+            //     }
+            // }
+        </script>
 
     </body>
 
-
+<!-- Mirrored from templates.envytheme.com/spix/default/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Jul 2022 18:09:30 GMT -->
 </html>

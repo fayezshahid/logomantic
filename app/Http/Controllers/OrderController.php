@@ -12,11 +12,11 @@ use App\Models\Coupon;
 
 class OrderController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
         $logoIds = Cart::where('user_id', auth()->user()->id)->where('isOrdered', 0)->pluck('logo_id');
         return view('website.checkout', [
-            'ammount' => Logo::whereIn('id', $logoIds)->sum('price')
+            'amount' => $request->amount,
         ]);
     }
 
@@ -32,14 +32,14 @@ class OrderController extends Controller
             'zip' => 'required|numeric',
             'email' => 'required|string|max:255',
             'phone' =>'required|numeric',
-            'ammount' => 'required',
+            'amount' => 'required',
             'payment' => 'required'
         ]);
 
         $data['user_id'] = auth()->user()->id;
 
         if($request->company)
-            $data['comapny'] = $request->company;
+            $data['company'] = $request->company;
 
         if($request->notes)
             $data['notes'] = $request->notes;

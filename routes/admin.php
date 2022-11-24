@@ -19,6 +19,8 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FontController;
 use App\Http\Controllers\PremiumLogoController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\ServiceController;
 
 
 //admin panel
@@ -78,6 +80,20 @@ Route::group(['middleware'=>'isAdmin'], function(){
     Route::get('/editPremiumLogo/{id}', [PremiumLogoController::class, 'edit'])->name('editPremiumLogo');
     Route::put('/editPremiumLogo/{id}', [PremiumLogoController::class, 'update']);
     Route::delete('/deletePremiumLogo/{id}', [PremiumLogoController::class, 'delete'])->name('deletePremiumLogo');
+
+    Route::get('/packages', [PackageController::class, 'index'])->name('packages');
+    Route::get('/addPackage', [PackageController::class, 'create'])->name('addPackage');
+    Route::post('/addPackage', [PackageController::class, 'store']);
+    Route::get('/editPackage/{id}', [PackageController::class, 'edit'])->name('editPackage');
+    Route::put('/editPackage/{id}', [PackageController::class, 'update']);
+    Route::delete('/deletePackage/{id}', [PackageController::class, 'delete'])->name('deletePackage');
+
+    Route::get('/services', [ServiceController::class, 'index'])->name('services');
+    Route::get('/addService', [ServiceController::class, 'create'])->name('addService');
+    Route::post('/addService', [ServiceController::class, 'store']);
+    Route::get('/editService/{id}', [ServiceController::class, 'edit'])->name('editService');
+    Route::put('/editService/{id}', [ServiceController::class, 'update']);
+    Route::delete('/deleteService/{id}', [ServiceController::class, 'delete'])->name('deleteService');
 
     Route::get('/users', function(){
         return view('users', [

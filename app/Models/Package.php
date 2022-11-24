@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Package extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'price',
+    ];
+
+    public function items()
+    {
+        return $this->hasMany(PackageItem::class);
+    }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
+}

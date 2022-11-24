@@ -12,6 +12,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PremiumLogoOrderController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,11 +119,13 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::delete('/deleteCartItem/{id}', [CartController::class, 'delete'])->name('deleteCartItem');
 
-    Route::get('/checkout', [OrderController::class, 'create'])->name('checkout');
-    Route::post('/checkout', [OrderController::class, 'store']);
+    Route::post('/checkout', [OrderController::class, 'create'])->name('checkout');
+    Route::post('/checkoutUser', [OrderController::class, 'store'])->name('checkoutUser');
     Route::get('/checkCoupon/{coupon}', [OrderController::class, 'checkCoupon'])->name('checkCoupon');
 
     Route::post('/premiumLogo', [PremiumLogoOrderController::class, 'store'])->name('premiumLogoBuy');
+
+    Route::get('/getServices/{packageId}', [ServiceController::class, 'getServices'])->name('getServices');
 
 });
 

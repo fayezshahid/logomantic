@@ -27,7 +27,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('notes')->nullable();
-            $table->string('ammount');
+            $table->string('amount');
             $table->string('payment');
             $table->boolean('isCompleted');
             $table->timestamps();

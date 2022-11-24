@@ -22,7 +22,7 @@ class Order extends Model
         'email',
         'phone',
         'notes',
-        'ammount',
+        'amount',
         'payment',
         'isCompleted'
     ];

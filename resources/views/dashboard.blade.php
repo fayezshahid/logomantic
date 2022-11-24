@@ -324,6 +324,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
         </li>
 
+        <li class="nav-item ">
+            <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Packages and Services
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('packages') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Packages</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('services') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Services</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li class="nav-item" style="margin-top: 15px">
             <ul class="d-flex justify-content-between">
                 <label class="switch">

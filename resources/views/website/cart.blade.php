@@ -41,242 +41,166 @@
 
     <body>
 
-  
+        <!-- Start Preloader Area -->
+        <div class="preloader">
+            <div class="loader">
+                <div class="shadow"></div>
+                <div class="box"></div>
+            </div>
+        </div>
+        <!-- End Preloader Area -->
 
         <!-- Start Navbar Area -->
-        <div class="navbar-area">
-            <div class="main-responsive-nav">
-                <div class="container">
-                    <div class="main-responsive-menu">
-                        <!-- <div class="logo">
-                            <a href="index.html">
-                                <img src="assets/img/logo.png" class="black-logo" alt="image">
-                                <img src="assets/img/logo-2.png" class="white-logo" alt="image">
-                            </a>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
+        <div class="main-navbar">
+            <div class="container">
+                <nav class="navbar navbar-expand-md navbar-light">
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        <img src="assets/new-image/web-logo/new-2.png" class="black-logo" alt="image">
+                        <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
+                    </a>
 
-            <div class="main-navbar">
-                <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light">
-                        <!-- <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" class="black-logo" alt="image">
-                            <img src="assets/img/logo-2.png" class="white-logo" alt="image">
-                        </a> -->
-
-                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a href="{{ route('home') }}" class="nav-link active">
-                                        Home 
-                                       
-                                    </a>
-                                  
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="{{ route('premium') }}" class="nav-link">
-                                        Premium Logo Design 
-                                       
-                                    </a>
-
+                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="{{ route('home') }}" class="nav-link active">
+                                    Home 
                                    
-                                </li>
+                                </a>
+                              
+                            </li>
 
-                                <li class="nav-item">
-                                    <form action="{{ route('allLogos') }}" method="POST">
-                                        <input type="hidden" name="logoType" value="{{ App\Models\LogoType::where('id', '1')->value('name') }}">
-                                        <a style="cursor: pointer" onclick="this.parentNode.submit()" class="nav-link">Logo Maker</a>
-                                    </form>
-
-                                  
-                                </li>
-
-                    
-
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Other Services 
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="blog-1.html" class="nav-link">
-                                               Business card Design
-                                            </a>
-                                        </li>
-
-                                       
-
-                                       
-
-                                        <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
-                                                Letter Head  Design
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
-                                                T-Shirt  Design
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
-                                                Envelop  Design
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
-                                                Web Design
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
-                                               Mug Design
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
-                                              Flyer Design
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
-                                              Signature Design
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
-                                              Wedding Card Design
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="{{ route('contact') }}" class="nav-link">
-                                        Contact
-                                      
-                                    </a>
+                            <li class="nav-item">
+                                <a href="{{ route('premium') }}" class="nav-link">
+                                    Premium Logo  
                                    
-                                </li>
+                                </a>
 
-                                @auth
+                               
+                            </li>
+
+                            <li class="nav-item">
+                                <form action="{{ route('allLogos') }}" method="POST">
+                                    <input type="hidden" name="logoType" value="{{ App\Models\LogoType::where('id', '1')->value('name') }}">
+                                    <a style="cursor: pointer" onclick="this.parentNode.submit()" class="nav-link">Logo Maker</a>
+                                </form>
+
+                              
+                            </li>
+
+                
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    Other Services 
+                                    <i class='bx bx-chevron-down'></i>
+                                </a>
+                                <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                        <a href="{{ route('wishlist') }}" class="nav-link">
-                                            Wishlist
+                                        <a href="{{ route('businessCardDesign') }}" class="nav-link">
+                                           Business card Design
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('cart') }}" class="nav-link">
-                                            Cart
+                                        <a href="{{ route('letterHeadDesign') }}" class="nav-link">
+                                            Letter Head  Design
                                         </a>
                                     </li>
-                                @endauth
-
-                                <li class="nav-item">
-                                    @auth
-                                        <form action="{{ route('logout') }}" method="post">
-                                            @csrf
-                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
-                                        </form>
-                                    @else
-                                        <a href="{{ route('login') }}" class="nav-link">
-                                            Login / Register
+                                    <li class="nav-item">
+                                        <a href="{{ route('tShirtDesign') }}" class="nav-link">
+                                            T-Shirt  Design
                                         </a>
-                                    @endauth
-                                </li>
-                                
-                            </ul>
-
-                            <div class="others-options d-flex align-items-center">
-                                <!-- <div class="option-item">
-                                    <div class="cart-btn">
-                                        <a href="cart.html">
-                                            <i class='flaticon-shopping-cart'></i>
-                                            <span>0</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('envelopDesign') }}" class="nav-link">
+                                            Envelop  Design
                                         </a>
-                                    </div>
-                                </div> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('webDesign') }}" class="nav-link">
+                                            Web Design
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('mugDesign') }}" class="nav-link">
+                                           Mug Design
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('flyerDesign') }}" class="nav-link">
+                                          Flyer Design
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('signatureDesign') }}" class="nav-link">
+                                          Signature Design
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('weddingCardDesign') }}" class="nav-link">
+                                          Wedding Card Design
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
+                            <li class="nav-item">
+                                <a href="{{ route('contact') }}" class="nav-link">
+                                    Contact
+                                  
+                                </a>
+                            </li>
                             
-
-                                {{-- <div class="option-item">
-                                    <a href="pricing-1.html" class="default-btn">
-                                       Pricing
+                            @auth
+                                <li class="nav-item">
+                                    <a href="{{ route('wishlist') }}" class="nav-link">
+                                        Wishlist
                                     </a>
-                                </div> --}}
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-
-            <div class="others-option-for-responsive">
-                <div class="container">
-                    <div class="dot-menu">
-                        <div class="inner">
-                            <div class="circle circle-one"></div>
-                            <div class="circle circle-two"></div>
-                            <div class="circle circle-three"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="container">
-                        <div class="option-inner">
-                            <div class="others-options d-flex align-items-center">
-                                <div class="option-item">
-                                    <div class="cart-btn">
-                                        <a href="cart.html">
-                                            <i class='flaticon-shopping-cart'></i>
-                                            <span>0</span>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="option-item">
-                                    <i class="search-btn flaticon-loupe"></i>
-                                    <i class="close-btn flaticon-cancel"></i>
-                                    <div class="search-overlay search-popup">
-                                        <div class='search-box'>
-                                            <form class="search-form">
-                                                <input class="search-input" name="search" placeholder="Search" type="text">
-
-                                                <button class="search-button" type="submit">
-                                                    <i class="flaticon-loupe"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="option-item">
-                                    <a href="pricing-1.html" class="default-btn">
-                                        Get Quote
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('cart') }}" class="nav-link">
+                                        Cart
                                     </a>
-                                </div>
-                            </div>
-                        </div>
+                                </li>
+                            @endauth
+
+                            <li class="nav-item">
+                                @auth
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
+                                    </form>
+                                @else
+                                    <a href="{{ route('login') }}" class="nav-link">
+                                    Login / Register
+                                    
+                                    </a>
+                                @endauth
+                            </li>
+
+                            {{-- <div class="option-item" style="align-self:center ;">
+                                <a href="pricing-2.html" class="default-btn">
+                                   Pricing
+                                </a>
+                            </div> --}}
+                        </ul>
                     </div>
-                </div>
+                </nav>
             </div>
         </div>
         <!-- End Navbar Area -->
 
         <!-- Start Page Banner -->
-        <div class="page-banner-area item-bg2">
+        <div class="page-banner-area item-bg1">
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-banner-content">
-                            <h2>Cart</h2>
+                            <h2>FAQ</h2>
                             <ul>
                                 <li>
                                     <a href="index.html">Home</a>
                                 </li>
-                                <li>Cart</li>
+                                <li>FAQ</li>
                             </ul>
                         </div>
                     </div>
@@ -285,131 +209,170 @@
         </div>
         <!-- End Page Banner -->
 
-        <!-- Start Cart Area -->
-		<section class="cart-area ptb-100">
+        <!-- Start FAQ Area -->
+       
+        <section class="terms-of-service-area ptb-100">
+            <div class="container" style="margin-bottom: 15px">
+                <div class="cart-table table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Logo Name</th>
+                                <th scope="col">Price</th>
+                                {{-- <th scope="col">Quantity</th> --}}
+                                {{-- <th scope="col">Total</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($cartItems as $cart)
+                                <tr>
+                                    <td class="product-thumbnail">
+                                        <a href="#">
+                                            <img src="{{ $cart->logo }}" alt="item">
+                                        </a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="#">{{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('name') }}</a>
+                                    </td>
+                                    <td class="product-price">
+                                        <span class="unit-amount">
+                                            ${{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }}
+                                        </span>
+                                    </td>
+                                    {{-- <td class="product-quantity">
+                                        <div class="input-counter">
+                                            <span onclick="decrease({{ $cart->id }}, {{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }})" class="minus-btn">
+                                                <i class='bx bx-minus'></i>
+                                            </span>
+                                            <input type="text" value="1" id="quantity{{ $cart->id }}">
+                                            <span onclick="increase({{ $cart->id }}, {{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }})" class="plus-btn">
+                                                <i class='bx bx-plus'></i>
+                                            </span>
+                                        </div>
+                                    </td> --}}
+                                    <td class="product-subtotal">
+                                        {{-- <span id="price{{ $cart->id }}" class="subtotal-amount">
+                                            ${{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }}
+                                        </span> --}}
+                                        <form action="{{ route('deleteCartItem', $cart->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a onclick="this.parentNode.submit()" class="remove" style="cursor: pointer">
+                                                <i class='bx bx-trash'></i>
+                                            </a>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-md-12">
-                        {{-- <form> --}}
-                            <div class="cart-table table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Logo Name</th>
-                                            <th scope="col">Price</th>
-                                            {{-- <th scope="col">Quantity</th> --}}
-                                            {{-- <th scope="col">Total</th> --}}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($cartItems as $cart)
-                                                <tr>
-                                                    <td class="product-thumbnail">
-                                                        <a href="#">
-                                                            <img src="{{ $cart->logo }}" alt="item">
-                                                        </a>
-                                                    </td>
-                                                    <td class="product-name">
-                                                        <a href="#">{{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('name') }}</a>
-                                                    </td>
-                                                    <td class="product-price">
-                                                        <span class="unit-amount">
-                                                            ${{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }}
-                                                        </span>
-                                                    </td>
-                                                    {{-- <td class="product-quantity">
-                                                        <div class="input-counter">
-                                                            <span onclick="decrease({{ $cart->id }}, {{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }})" class="minus-btn">
-                                                                <i class='bx bx-minus'></i>
-                                                            </span>
-                                                            <input type="text" value="1" id="quantity{{ $cart->id }}">
-                                                            <span onclick="increase({{ $cart->id }}, {{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }})" class="plus-btn">
-                                                                <i class='bx bx-plus'></i>
-                                                            </span>
-                                                        </div>
-                                                    </td> --}}
-                                                    <td class="product-subtotal">
-                                                        {{-- <span id="price{{ $cart->id }}" class="subtotal-amount">
-                                                            ${{ App\Models\Logo::where('id', '=', $cart->logo_id)->value('price') }}
-                                                        </span> --}}
-                                                        <form action="{{ route('deleteCartItem', $cart->id) }}" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <a onclick="this.parentNode.submit()" class="remove" style="cursor: pointer">
-                                                                <i class='bx bx-trash'></i>
-                                                            </a>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="cart-buttons">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-7 col-sm-7 col-md-7">
-                                        <a href="shop-1.html" class="default-btn">
-                                            Back to Shop
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-5 col-sm-5 col-md-5 text-right">
-                                        <a href="#" class="default-btn">
-                                            Update Cart
-                                        </a>
-                                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <div class="user-actions">
+                            <h5 class="title">Our Bundles
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+				<div class="terms-of-service-content">
+                    @foreach ($packages as $package)
+                        <h3>  
+                            <input type="radio" value="{{ $package->price }}" onchange="updateService({{ $package->id }}, {{ $package->price }})" id="paypal" name="radio-group"> {{ $package->name }} ${{ $package->price }}
+                        </h3>
+                        <ol>
+                            @foreach ($package->items as $item)
+                                <li>{{ $item->item }}</li>
+                            @endforeach
+                        </ol>
+                    @endforeach
+				</div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="user-actions">
+                            <h5 class="title">Our Services
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+				<div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="cart-table table-responsive">
+                            <table class="table table-bordered">
+                                <!-- <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Unit Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead> -->
+                                <tbody id="services">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cart-buttons">
+                            <div class="row align-items-center">
+                                <div class="col-lg-7 col-sm-7 col-md-7">
+                                    <a href="shop-1.html" class="default-btn">
+                                        Back to Shop
+                                    </a>
+                                </div>
+                                <div class="col-lg-5 col-sm-5 col-md-5 text-right">
+                                    <a href="#" class="default-btn">
+                                        Update Cart
+                                    </a>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="cart-totals">
-                                <h3>Cart Totals</h3>
-                                <ul>
-                                    <li>Subtotal 
-                                        <span class="total">${{ $ammount }}</span>
-                                    </li>
-                                    <li>Tax 
-                                        <span>$0.00</span>
-                                    </li>
-                                    <li>Total 
-                                        <span><b class="total">${{ $ammount }}</b></span>
-                                    </li>
-                                </ul>
-                                <a href="{{ route('checkout') }}" class="default-btn">
+                        <div class="cart-totals">
+                            <h3>Cart Totals</h3>
+                            <ul>
+                                <li>Subtotal 
+                                    <span class="total">${{ $amount }}</span>
+                                </li>
+                                <li>Tax 
+                                    <span>$0.00</span>
+                                </li>
+                                <li>Total 
+                                    <span><b class="total">${{ $amount }}</b></span>
+                                </li>
+                            </ul>
+                            <div class="mb-3" id="couponDiv">
+                                <p style="display: none; font-size: 14px !important; color: red" id="couponMsg">Invalid Coupon Code</p>
+                                <label for="">Coupon</label>
+                                <input type="text" name="" id="coupon">
+                                <button type="button" onclick="checkCoupon()" class="btn btn-sm btn-primary">Apply Coupon</button>
+                            </div>
+                            <p style="display: none; font-size: 14px !important; color: green" id="couponSuccess">Coupon Activated</p>
+                            <form action="{{ route('checkout') }}" id="form" method="POST">
+                                @csrf
+                                <input type="hidden" id="amount" value="" name="amount">
+                                <a style="cursor: pointer" onclick="submitForm()" class="default-btn">
                                     Proceed to Checkout
                                 </a>
-                            </div>
-                        {{-- </form> --}}
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="about-content warp">
-                             <div class="about-inner-content">
-                                <div class="icon">
-                                    <i class="flaticon-check"></i>
-                                </div>
-                                <h4>You will Get AI OR PSD FILE</h4>
-                            </div>
-
-                            <div class="about-inner-content">
-                                <div class="icon">
-                                    <i class="flaticon-check"></i>
-                                </div>
-                                <h4>You will Get JPRG OR PNG FILE</h4>
-                            </div>
-
-                            <div class="about-inner-content">
-                                <div class="icon">
-                                    <i class="flaticon-check"></i>
-                                </div>
-                                <h4>You will Get PDF FILE</h4>
-                            </div>
-                            
-                           
+                            </form>
+                            {{-- <a href="{{ route('checkout') }}" class="default-btn">
+                                Proceed to Checkout
+                            </a> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-		<!-- End Cart Area -->
+        <!-- End FAQ Area -->
+
+        <!-- Start FAQ Contact Area -->
+       
+        <!-- End Subscribe Area -->
 
         <!-- Start Footer Area -->
         <div class="footer-area pt-100 pb-70">
@@ -538,7 +501,10 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <p>
-                                Copyright @ 2022 Logomantic
+                                Copyright @ 2022 Company Name All Rights Reserved by
+                                <a href="#" target="_blank">
+                                  abc
+                                </a>
                             </p>
                         </div>
 
@@ -565,7 +531,7 @@
         <!-- End Go Top Area -->
 
         <!-- Dark version -->
-     
+       
         <!-- Dark version -->
 
         <!-- Jquery Slim JS -->
@@ -596,31 +562,71 @@
         <script src="assets/js/main.js"></script>
 
         <script>
+            var amount = parseInt($('.total').html().replace('$', ''));
 
+            function updateService(packageId, price){
+                $.get('getServices/' + packageId, function(data){
+                    var output = '';
+                    for(var i=0; i<data.length; i++){
+                        output += `
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <div class="form-check">
+                                        <div class="form-check">
+                                            <input type="checkbox" onchange="updateAmount(${data[i].price})" class="form-check-input" id="checkme">
+                                            <label class="form-check-label" for="checkme">${data[i].service}</label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="product-name">
+                                    1qty
+                                </td>
+                                <td class="product-price">
+                                    <span class="unit-amount">Price - $${data[i].price}</span>
+                                </td>
+                            </tr>
+                        `;
+                    }
+                    $('#services').html(output);
+                });
+                $('.total').html('$' + (amount + price));
+            }
 
+            function updateAmount(price){
+                var tmp = parseInt($('.total').html().replace('$', ''));
+                if(event.currentTarget.checked){
+                    $('.total').html('$' + (tmp + price));
+                }
+                else{
+                    $('.total').html('$' + (tmp - price));
+                }
+            }
 
-            // function increase(id, price){
-            //     var newPrice = parseFloat($('#price' + id).html().replace('$', '')) + parseFloat(price);
-            //     $('#price' + id).html('$' + newPrice);
-            //     var p = parseInt($('.total').html());
-            //     $('.total').html('$' + (p + newPrice));
-            // }
+            function checkCoupon(){
+                var price =  parseFloat($('.total').html().replace('$', ''));
+                $.get('checkCoupon/' + $('#coupon').val(), function(res){
+                    if(res == 0){
+                        $('#coupon').css('border-color', 'red');
+                        $('#couponMsg').show();
+                        $('.total').html('$' + price);
+                    }
+                    else{
+                        $('#couponDiv').hide();
+                        $('#couponSuccess').show();
+                        $('.total').html('$' + (price - (price*res)/100));
+                        $('#coupon').val('');
+                    }
+                });
+            }
 
-            // function decrease(id, price){
-            //     if($('#price' + id).html() != '$0')
-            //     {
-            //         var newPrice = parseFloat($('#price' + id).html().replace('$', '')) - parseFloat(price);
-            //         $('#price' + id).html('$' + newPrice);
-            //         $('.total').html('$' + newPrice);
-            //     }
-            //     else
-            //     {
-            //         $('#quantity' + id).val(1);
-            //     }
-            // }
+            function submitForm(){
+                $('#amount').val($('.total').html().replace('$', ''));
+                $('#form').submit();
+            }
+
         </script>
 
     </body>
 
-<!-- Mirrored from templates.envytheme.com/spix/default/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Jul 2022 18:09:30 GMT -->
+<!-- Mirrored from templates.envytheme.com/spix/default/faq.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Jul 2022 18:09:31 GMT -->
 </html>

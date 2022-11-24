@@ -80,7 +80,7 @@
 
                                 <li class="nav-item">
                                     <a href="{{ route('premium') }}" class="nav-link">
-                                        Premium Logo Design 
+                                        Premium Logo 
                                        
                                     </a>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Wishlist;
 use App\Models\Logo;
+use App\Models\Package;
 
 class CartController extends Controller
 {
@@ -16,7 +17,8 @@ class CartController extends Controller
         $logoIds = Cart::where('user_id', auth()->user()->id)->where('isOrdered', 0)->pluck('logo_id');
         return view('website.cart', [
             'cartItems' => Cart::where('user_id', '=', auth()->user()->id)->where('isOrdered', '=', 0)->get(),
-            'ammount' => Logo::whereIn('id', $logoIds)->sum('price')
+            'amount' => Logo::whereIn('id', $logoIds)->sum('price'),
+            'packages' => Package::all()
         ]);
     }
 
