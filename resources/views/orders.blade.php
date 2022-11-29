@@ -94,12 +94,13 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Address</th>
+                        {{-- <th>Address</th>
                         <th>City</th>
-                        <th>State</th>
+                        <th>State</th> --}}
                         <th>Country</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Total</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -108,20 +109,28 @@
                         @if($order->isCompleted == 1)
                             <tr>
                                 <td>{{ $order->firstName }} {{ $order->lastName }}</td>
-                                <td>{{ $order->address }}</td>
+                                {{-- <td>{{ $order->address }}</td>
                                 <td>{{ $order->city }}</td>
-                                <td>{{ $order->state }}</td>
+                                <td>{{ $order->state }}</td> --}}
                                 <td>{{ $order->country }}</td>
                                 <td>{{ $order->email }}</td>
                                 <td>{{ $order->phone }}</td>
+                                <td>${{ $order->amount }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button class="btn btn-primary mb-3" type="button" onclick="toggleCollapse({{ $order->id }})">See more</button> 
                                     <a class="btn btn-success ml-3 mb-3"  href="{{ route('orderIncomplete', $order->id) }}">Mark Incomplete</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="8">
+                                <td colspan="6">
                                     <div class="collapse" id="collapse{{ $order->id }}">
+                                        <p><b>Address: </b>{{ $order->address }}, {{ $order->city }}, {{ $order->state }}, {{ $order->country }}</p>
+                                        @if ($order->company)
+                                            <p><b>Company: </b>{{ $order->company }}</p>
+                                        @endif
+                                        @if ($order->notes)
+                                            <p><b>Note: </b>{{ $order->notes }}</p>
+                                        @endif
                                         <div class="card card-body">
                                             <table class="table text-center">
                                                 <thead>

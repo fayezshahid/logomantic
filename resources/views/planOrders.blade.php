@@ -16,19 +16,19 @@
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
-            <th scope="col">Logo Id</th>
+            <th scope="col">Plan Id</th>
             <th scope="col">Price</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($premiumOrders as $order)
+            @foreach ($planOrders as $order)
                 <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->name }}</td>
                     <td>{{ $order->email }}</td>
                     <td>{{ $order->phone }}</td>
-                    <td>{{ $order->premium_logo_id }}</td>
-                    <td>${{ App\Models\PremiumLogo::where('id', $order->premium_logo_id)->value('price') }}</td>
+                    <td>{{ $order->plan_id }}</td>
+                    <td>${{ App\Models\Plan::where('id', $order->plan_id)->value('price') }}</td>
                     {{-- <td>
                         <img src="{{ config('logo.logoUrl').$logo->image }}" alt="item" height="80px" width="80px" class="mx-auto">
                     </td> --}}
@@ -42,7 +42,6 @@
                     </td> --}}
                 </tr>
             @endforeach
-
         </tbody>
         </table>
 </div>

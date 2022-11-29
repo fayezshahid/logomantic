@@ -286,6 +286,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
+                Packages and Services
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('packages') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Packages</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('services') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Services</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item ">
+            <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Plans
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('plans') }}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Plans</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item ">
+            <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
                 Users
                 <i class="right fas fa-angle-left"></i>
             </p>
@@ -316,33 +358,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('premiumOrders') }}" class="nav-link active">
+                    <a href="{{ route('premiumLogoOrders') }}" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
                     <p>See Premium Orders</p>
                     </a>
                 </li>
-            </ul>
-        </li>
-
-        <li class="nav-item ">
-            <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-                Packages and Services
-                <i class="right fas fa-angle-left"></i>
-            </p>
-            </a>
-            <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('packages') }}" class="nav-link active">
+                    <a href="{{ route('planOrders') }}" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Packages</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('services') }}" class="nav-link active">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Services</p>
+                    <p>See Plan Orders</p>
                     </a>
                 </li>
             </ul>

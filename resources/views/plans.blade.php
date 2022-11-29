@@ -10,7 +10,7 @@
 @endif
 <div class="row">
     <div class="mb-3 d-flex justify-content-end">
-        <a href="{{ route('addPackage') }}" class="btn btn-primary">+ Add a Package</a>
+        <a href="{{ route('addPlan') }}" class="btn btn-primary">+ Add a Plan</a>
     </div>
     <table class="table text-center">
         <thead>
@@ -22,15 +22,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($packages as $package)
+            @foreach ($plans as $plan)
                 <tr>
-                    <td>{{ $package->id }}</td>
-                    <td>{{ $package->name }}</td>
-                    <td>${{ $package->price }}</td>
+                    <td>{{ $plan->id }}</td>
+                    <td>{{ $plan->name }}</td>
+                    <td>${{ $plan->price }}</td>
                     <td class="d-flex justify-content-center form-inline">
-                        <button class="btn btn-warning btn-sm" onclick="toggleCollapse({{ $package->id }})">See Description</button>
-                        <a href="{{ route('editPackage', $package->id) }}" class="btn btn-primary btn-sm ml-2">Edit</a>
-                        <form action="{{ route('deletePackage', $package->id) }}" method="post">
+                        <button class="btn btn-warning btn-sm" onclick="toggleCollapse({{ $plan->id }})">See Items</button>
+                        <a href="{{ route('editPlan', $plan->id) }}" class="btn btn-primary btn-sm ml-2">Edit</a>
+                        <form action="{{ route('deletePlan', $plan->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger ml-2">Delete</button>
@@ -39,16 +39,16 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <div class="collapse" id="collapse{{ $package->id }}">
+                        <div class="collapse" id="collapse{{ $plan->id }}">
                             <div class="card card-body">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Description</th>
+                                            <th scope="col">Plan Item</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($package->items as $item)
+                                        @foreach ($plan->items as $item)
                                             <tr>
                                                 <td>{{  $item->item }}</td>
                                             </tr>

@@ -203,7 +203,11 @@
                     </nav>
                 </div>
             </div>
-
+            @if(session('status'))
+                <div class="alert alert-success" style="width: 75%; margin-left: 230px; text-align: center">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="others-option-for-responsive">
                 <div class="container">
                     <div class="dot-menu">
@@ -386,7 +390,7 @@
                 </div>
             </div>
         </div> 
-
+        
         <section class="subscribe-area ptb-1000 news-bg">
             <div class="container">
                 <div class="subscribe-content" style="max-width: 90%"; >
@@ -476,11 +480,6 @@
                     <h2>Our <span class="blue">  Premium </span>Logo</h2>
                     <div class="bar"></div>
                 </div>
-                @if(session('status'))
-                    <div class="alert alert-success" style="width: 75%; margin-left: 230px; text-align: center">
-                        {{ session('status') }}
-                    </div>
-                @endif
                 {{ $logoCount = 0 }}
                 <div class="team-slider owl-carousel owl-theme">
                     @foreach ($premiumLogos as $logo)
@@ -1075,60 +1074,97 @@
                     <div class="tab_content">
                         <div class="tabs_item">
                             <div class="row">
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="single-pricing-box top-1">
-                                        <div class="pricing-header">
-                                            <h3>Basic Plan</h3>
-                                        </div>
-            
-                                        <div class="price">
-                                            $24
-                                        </div>
-            
-                                        <ul class="pricing-features">
-                                            <li>
-                                                <i class="flaticon-check-mark"></i>
-                                                SEO Audits
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check-mark"></i>
-                                                SEO Management
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check-mark"></i>
-                                                SEO Copywriting
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check-mark"></i>
-                                                Link Building
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check-mark"></i>
-                                                Site Migration
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check-mark"></i>
-                                                Video Camplaigns
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check-mark"></i>
-                                                Unlimited SEO Keywords
-                                            </li>
-                                        </ul>
-            
-                                        <div class="pricing-btn">
-                                            <a href="#" class="default-btn">
-                                                Get Started
-                                            </a>
-                                        </div>
-            
-                                        <div class="pricing-shape">
-                                            <img src="assets/img/pricing-shape.png" alt="image">
+                                @foreach ($plans as $plan)
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="single-pricing-box top-1">
+                                            <div class="pricing-header">
+                                                <h3>{{ $plan->name }}</h3>
+                                            </div>
+                
+                                            <div class="price">
+                                                ${{ $plan->price }}
+                                            </div>
+                
+                                            <ul class="pricing-features">
+                                                @foreach ($plan->items as $item)
+                                                    <li>
+                                                        <i class="flaticon-check-mark"></i>
+                                                        {{ $item->item }}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                
+                                            <div class="pricing-btn">
+                                                <a style="cursor: pointer" onclick="buyPlan({{ $plan->id }})" class="default-btn">
+                                                    Get Started
+                                                </a>
+                                            </div>
+                
+                                            <div class="pricing-shape">
+                                                <img src="assets/img/pricing-shape.png" alt="image">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+
+                                    <div class="modal" id="planModal{{ $plan->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                            <div class="modal-content" style="height:510px !important;">
+                                                <div class="modal-body d-flex justify-content-between" style="height: 500px">
+                                                    <div>
+                                                        <form action="{{ route('planBuy') }}" method="POST" id="planForm{{ $plan->id }}" style="width: 510px; padding-top: 110px;">
+                                                            @csrf
+                                                            <div class="form-group" style="margin-bottom: 15px; text-align: start;">
+                                                                <label style="" for="">Name</label>
+                                                                <input type="text" id="planName{{ $plan->id }}" class="form-control" name="name" placeholder="Enter name">
+                                                                <div class="text-danger" id="planNameError{{ $plan->id }}"></div>
+                                                            </div>
+                                                            <div class="form-group" style="margin-bottom: 15px; text-align: start;">
+                                                                <label for="">Email address</label>
+                                                                <input type="email" id="planEmail{{ $plan->id }}" class="form-control" name="email" placeholder="Enter email">
+                                                                <div class="text-danger" id="planEmailError{{ $plan->id }}"></div>
+                                                            </div>
+                                                            <div class="form-group" style="margin-bottom: 15px; text-align: start;">
+                                                                <label for="">Phone</label>
+                                                                <input type="text" id="planPhone{{ $plan->id }}" class="form-control" name="phone" placeholder="Enter phone number">
+                                                                <div class="text-danger" id="planPhoneError{{ $plan->id }}"></div>
+                                                            </div>
+                                                            <input type="hidden" value="{{ $plan->id }}" name="plan_id">
+                                                        </form>
+                                                    </div>
+                                                    <div style="width: 500px; height: 405px">
+                                                        <div style="margin-top: 0px; padding-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 30px" class="single-pricing-box top-1">
+                                                            <div class="pricing-header">
+                                                                <h3>{{ $plan->name }}</h3>
+                                                            </div>
+                                
+                                                            <div class="price">
+                                                                ${{ $plan->price }}
+                                                            </div>
+                                
+                                                            <ul class="pricing-features">
+                                                                @foreach ($plan->items as $item)
+                                                                    <li>
+                                                                        <i class="flaticon-check-mark"></i>
+                                                                        {{ $item->item }}
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                
+                                                            <div class="pricing-shape">
+                                                                <img src="assets/img/pricing-shape.png" alt="image">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" onclick="submitPlanForm({{ $plan->id }})">Buy</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
             
-                                <div class="col-lg-4 col-md-6">
+                                {{-- <div class="col-lg-4 col-md-6">
                                     <div class="single-pricing-box">
                                         <div class="pricing-header">
                                             <h3>Standard Plan</h3>
@@ -1179,9 +1215,9 @@
                                             <img src="assets/img/pricing-shape.png" alt="image">
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
             
-                                <div class="col-lg-4 col-md-6">
+                                {{-- <div class="col-lg-4 col-md-6">
                                     <div class="single-pricing-box top-2">
                                         <div class="pricing-header">
                                             <h3>Premium Plan</h3>
@@ -1232,7 +1268,8 @@
                                             <img src="assets/img/pricing-shape.png" alt="image">
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
+
                             </div>
                         </div>
 
@@ -1753,6 +1790,41 @@
                     
                 if(f)
                     $('#form' + id).submit();
+            }
+
+            function buyPlan(id){
+                $('#planModal' + id).fadeIn(300);
+            }
+
+            function submitPlanForm(id){
+                var f = 1;
+                
+                if(!$('#planName' + id).val()){
+                    f = 0;
+                    $('#planNameError' + id).html('Name is required');
+                }
+                else{
+                    $('#planNameError' + id).html('');
+                }
+                
+                if(!$('#planEmail' + id).val()){
+                    f = 0;
+                    $('#planEmailError' + id).html('Email is required');
+                }
+                else{
+                    $('#planEmailError' + id).html('');
+                }
+
+                if(!$('#planPhone' + id).val()){
+                    f = 0;
+                    $('#planPhoneError' + id).html('Phone is required');
+                }
+                else{
+                    $('#planPhoneError' + id).html('');
+                }
+                    
+                if(f)
+                    $('#planForm' + id).submit();
             }
 
             $(document).click(function (e) {

@@ -7,6 +7,7 @@ use App\Models\Wishlist;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PremiumLogoOrder;
+use App\Models\PlanOrder;
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LogosController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\PremiumLogoController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\PlanController;
 
 
 //admin panel
@@ -95,6 +97,13 @@ Route::group(['middleware'=>'isAdmin'], function(){
     Route::put('/editService/{id}', [ServiceController::class, 'update']);
     Route::delete('/deleteService/{id}', [ServiceController::class, 'delete'])->name('deleteService');
 
+    Route::get('/plans', [PlanController::class, 'index'])->name('plans');
+    Route::get('/addPlan', [PlanController::class, 'create'])->name('addPlan');
+    Route::post('/addPlan', [PlanController::class, 'store']);
+    Route::get('/editPlan/{id}', [PlanController::class, 'edit'])->name('editPlan');
+    Route::put('/editPlan/{id}', [PlanController::class, 'update']);
+    Route::delete('/deletePlan/{id}', [PlanController::class, 'delete'])->name('deletePlan');
+
     Route::get('/users', function(){
         return view('users', [
             'users' => User::all(),
@@ -119,11 +128,17 @@ Route::group(['middleware'=>'isAdmin'], function(){
         ]);
     })->name('orders');
 
-    Route::get('/premiumOrders', function(){
-        return view('premiumOrders', [
-            'premiumOrders' => PremiumLogoOrder::all(),
+    Route::get('/premiumLogoOrders', function(){
+        return view('premiumLogoOrders', [
+            'premiumLogoOrders' => PremiumLogoOrder::all(),
         ]);
-    })->name('premiumOrders');
+    })->name('premiumLogoOrders');
+
+    Route::get('/planOrders', function(){
+        return view('planOrders', [
+            'planOrders' => PlanOrder::all(),
+        ]);
+    })->name('planOrders');
 
     Route::get('/orderComplete/{id}', function($id){
         $order = Order::find($id);

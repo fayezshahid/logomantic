@@ -6,6 +6,7 @@ use App\Models\LogoType;
 use App\Models\Design;
 use App\Models\Display;
 use App\Models\PremiumLogo;
+use App\Models\Plan;
 
 use App\Http\Controllers\LogosController;
 use App\Http\Controllers\WishlistController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PremiumLogoOrderController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\PlanOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,8 @@ Route::get('/', function () {
     return view('website.index-5', [
         'industries' => LogoType::all(), 
         'view' =>  $view,
-        'premiumLogos' => PremiumLogo::all()
+        'premiumLogos' => PremiumLogo::all(),
+        'plans' => Plan::all()
     ]);
 })->name('home');
 
@@ -47,7 +50,6 @@ Route::get('/contact' , function(){
     return view('website.contact-1');
 })->name('contact');
 
-// Route::get('/allLogos', [LogosController::class, 'allLogos'])->name('allLogos');
 Route::post('/allLogos', [LogosController::class, 'allLogos'])->name('allLogos');
 
 Route::get('/business-card-design', function(){
@@ -124,6 +126,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/checkCoupon/{coupon}', [OrderController::class, 'checkCoupon'])->name('checkCoupon');
 
     Route::post('/premiumLogo', [PremiumLogoOrderController::class, 'store'])->name('premiumLogoBuy');
+
+    Route::post('/plan', [PlanOrderController::class, 'store'])->name('planBuy');
 
     Route::get('/getServices/{packageId}', [ServiceController::class, 'getServices'])->name('getServices');
 
