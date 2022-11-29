@@ -31,7 +31,7 @@ class DesignController extends Controller
             'description' => 'required|string|max:255',
             'price' => 'required|integer',
             'designCategory' => 'required',
-            'image' => 'required',
+            'image' => 'required|mimes:png',
         ]);
         
         $image = Storage::disk('logoImage')->putFile('', $request->image);
@@ -74,7 +74,7 @@ class DesignController extends Controller
                 'description' => 'required|string|max:255',
                 'price' => 'required|integer',
                 'designCategory' => 'required',
-                'image' => 'required',
+                'image' => 'required|mimes:png',
             ]);
 
             $image = Storage::disk('logoImage')->putFile('', $request->image);

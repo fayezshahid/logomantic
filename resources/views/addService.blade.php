@@ -29,8 +29,8 @@
                 <div class="mb-4" id="serviceDiv">
                     <label class="form-label" style="font-weight: normal">Services</label>
                     <div class="d-flex justify-content-between mb-2">
-                        <input type="text" placeholder="Service" name="service1" style="width: 700px" class="form-control">
-                        <input type="text" placeholder="Price" name="price1" style="width: 250px" class="form-control">
+                        <input type="text" placeholder="Service" name="service1" style="width: 700px" class="form-control" value="{{ old('service1') }}">
+                        <input type="text" placeholder="Price" name="price1" style="width: 250px" class="form-control" value="{{ old('price1') }}">
                         <button type="button" class="btn btn-warning" style="width: 109px" onclick="addMore()">Add More</button>
                     </div>
                     @error('service1')

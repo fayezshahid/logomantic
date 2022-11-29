@@ -34,7 +34,7 @@
                 <div class="mb-4" id="itemDiv">
                     <label class="form-label" style="font-weight: normal">Package items</label>
                     <div class="d-flex justify-content-between">
-                        <input type="text" name="item1" class="form-control w-75">
+                        <input type="text" name="item1" class="form-control w-75" value="{{ old('item1') }}">
                         <button type="button" class="btn btn-warning" onclick="addMore()">Add More</button>
                     </div>
                     @error('item1')

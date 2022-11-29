@@ -30,7 +30,7 @@ class PremiumLogoController extends Controller
             // 'description' => 'required|string|max:255',
             'price' => 'required|integer',
             // 'logoType' => 'required',
-            'image' => 'required',
+            'image' => 'required|mimes:png',
         ]);
         
         $image = Storage::disk('logoImage')->putFile('', $request->image);
@@ -68,7 +68,7 @@ class PremiumLogoController extends Controller
                 // 'description' => 'required|string|max:255',
                 'price' => 'required|integer',
                 // 'logoType' => 'required',
-                'image' => 'required',
+                'image' => 'required|mimes:png',
             ]);
 
             $image = Storage::disk('logoImage')->putFile('', $request->image);

@@ -75,7 +75,7 @@
                 <div class="mb-4" id="hexcodeDiv">
                     <label class="form-label" style="font-weight: normal">Logo Hexcodes</label>
                     <div class="d-flex justify-content-between">
-                        <input type="text" name="hexcode1" class="form-control w-75">
+                        <input type="text" name="hexcode1" class="form-control w-75" value="{{ old('hexcode1') }}">
                         <button type="button" class="btn btn-warning" onclick="addMore()">Add More</button>
                     </div>
                     @error('hexcode1')
@@ -137,7 +137,7 @@
                 hexInputCount++;
                 $('#hexcodeDiv').append(`
                 <div class="d-flex justify-content-between" id="hexcode${hexInputCount}">
-                    <input type="text" name="hexcode${hexInputCount}" class="form-control w-75 mt-2">
+                    <input type="text" name="hexcode${hexInputCount}" class="form-control w-75 mt-2" value="{{ old('hexcode${hexInputCount}') }}">
                     <button style="height: 30px; margin-top: 15px; font-size: 12px;" type="button" class="btn btn-danger" onclick="deleteInput(this.parentNode.id)">Delete this field</button>
                 </div>
                 `);

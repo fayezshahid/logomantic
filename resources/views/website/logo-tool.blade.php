@@ -818,7 +818,7 @@
                 w = $('#elementResizable' + i).width();
                 h = $('#elementResizable' + i).height();
                 $('#elementResizable' + i).resizable({
-                    maxWidth: 500,
+                    maxWidth: 900,
                     maxHeight: 150,
                     containment: "#finalLogo",
                     handles: {
@@ -837,7 +837,7 @@
                         ww = (size.width - w)/250;
                         hh = (size.height - h)/70;
 
-                        $('#inputBoxResult' + i).css("transform", `scale(${1 + ww}, ${1 + hh})`); 
+                        $('#inputBoxResult' + i).css("transform", `scale(${0.05 + ww}, ${0.05 + hh})`); 
                     }
                 });
                 $('#elementResizable' + i).rotatable({
@@ -1036,6 +1036,9 @@
 
             function idChange(tmp){
                 id = tmp.charAt(tmp.length - 1);
+
+                $('#font-size').val($('#inputBoxResult' + id).css('font-size').replace('px', ''));
+
                 $('#elementResizable' + id).css('border', '1px solid');
                 $('#nwgrip' + id).css('border', '1px solid');
                 $('#negrip' + id).css('border', '1px solid');
@@ -1079,7 +1082,8 @@
             }
 
             function hideAllExceptLogo(){
-                
+                $('#font-size').val('');
+
                 $('#elementResizable').css('border', '1px solid');
                 $('#nwgrip').css('border', '1px solid');
                 $('#negrip').css('border', '1px solid');
@@ -1110,6 +1114,8 @@
             function hideAll(){
                 var x = event.target.id;
                 if(x == 'finalLogo' || x == 'txtField' || x == 'parent'){
+                    $('#font-size').val('');
+
                     $('#elementResizable').css('border', '0');
                     $('#negrip').css('border', '0');
                     $('#swgrip').css('border', '0');
@@ -1407,10 +1413,6 @@
                 hexcodes = hexcodes.replace(recentColor.toUpperCase(), newColor.toUpperCase());
                 changeColor(recentColor, newColor);
             }
-
-            $('#inputBoxResult0').click(function(){
-                $('#font-size').val(30);
-            });
 
             // $('#color').change(function(){
             //     var color = $(this).val();

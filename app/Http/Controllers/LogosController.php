@@ -37,7 +37,7 @@ class LogosController extends Controller
             'description' => 'required|string|max:255',
             'price' => 'required|integer',
             'logoType' => 'required',
-            'image' => 'required',
+            'image' => 'required|mimes:png',
             'hexcode1' => 'required',
         ]);
         
@@ -94,7 +94,7 @@ class LogosController extends Controller
                 'description' => 'required|string|max:255',
                 'price' => 'required|integer',
                 'logoType' => 'required',
-                'image' => 'required',
+                'image' => 'required|mimes:png',
             ]);
 
             $image = Storage::disk('logoImage')->putFile('', $request->image);
