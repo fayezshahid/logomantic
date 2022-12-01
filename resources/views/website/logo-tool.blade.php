@@ -89,7 +89,7 @@
 
                                 <li class="nav-item">
                                     <a href="{{ route('premium') }}" class="nav-link">
-                                        Premium Logo 
+                                        Premium Logo  
                                        
                                     </a>
 
@@ -117,11 +117,10 @@
                                             <a href="{{ route('businessCardDesign') }}" class="nav-link">
                                                Business card Design
                                             </a>
-                                        </li>                                      
-
+                                        </li>
                                         <li class="nav-item">
                                             <a href="{{ route('letterHeadDesign') }}" class="nav-link">
-                                                Letter Head Design
+                                                Letter Head  Design
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -165,57 +164,52 @@
                                 <li class="nav-item">
                                     <a href="{{ route('contact') }}" class="nav-link">
                                         Contact
+                                      
                                     </a>
-                                   
                                 </li>
-
+                                
                                 @auth
                                     <li class="nav-item">
-                                        <a href="{{ route('wishlist') }}" class="nav-link">
-                                            Wishlist
+                                        <a href="#" class="nav-link">
+                                            Dashboard 
+                                            <i class='bx bx-chevron-down'></i>
                                         </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('cart') }}" class="nav-link">
-                                            Cart
-                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item">
+                                                <a href="{{ route('wishlist') }}" class="nav-link">
+                                                    Wishlist
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('cart') }}" class="nav-link">
+                                                    Cart
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <form action="{{ route('logout') }}" method="post">
+                                                    @csrf
+                                                    <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </li>
                                 @endauth
 
-                                <li class="nav-item">
-                                    @auth
-                                        <form action="{{ route('logout') }}" method="post">
-                                            @csrf
-                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
-                                        </form>
-                                    @else
+                                @guest
+                                    <li class="nav-item">
                                         <a href="{{ route('login') }}" class="nav-link">
                                         Login / Register
                                         
                                         </a>
-                                    @endauth
-                                </li>
-                                
-                            </ul>
+                                    </li>
+                                @endguest
 
-                            <div class="others-options d-flex align-items-center">
-                                <!-- <div class="option-item">
-                                    <div class="cart-btn">
-                                        <a href="cart.html">
-                                            <i class='flaticon-shopping-cart'></i>
-                                            <span>0</span>
-                                        </a>
-                                    </div>
-                                </div> -->
-
-                            
-
-                                {{-- <div class="option-item">
-                                    <a href="pricing-1.html" class="default-btn">
+                                {{-- <div class="option-item" style="align-self:center ;">
+                                    <a href="pricing-2.html" class="default-btn">
                                        Pricing
                                     </a>
                                 </div> --}}
-                            </div>
+                            </ul>
                         </div>
                     </nav>
                 </div>

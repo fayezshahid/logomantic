@@ -76,7 +76,7 @@
                             <img src="assets/new-image/web-logo/new-2.png" class="white-logo" alt="image">
                         </a>
 
-                        <div class="navbar-collapse mean-menu" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a href="{{ route('home') }}" class="nav-link active">
@@ -169,39 +169,47 @@
                                 
                                 @auth
                                     <li class="nav-item">
-                                        <a href="{{ route('wishlist') }}" class="nav-link">
-                                            Wishlist
+                                        <a href="#" class="nav-link">
+                                            Dashboard 
+                                            <i class='bx bx-chevron-down'></i>
                                         </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('cart') }}" class="nav-link">
-                                            Cart
-                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item">
+                                                <a href="{{ route('wishlist') }}" class="nav-link">
+                                                    Wishlist
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('cart') }}" class="nav-link">
+                                                    Cart
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <form action="{{ route('logout') }}" method="post">
+                                                    @csrf
+                                                    <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </li>
                                 @endauth
 
-                                <li class="nav-item">
-                                    @auth
-                                        <form action="{{ route('logout') }}" method="post">
-                                            @csrf
-                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
-                                        </form>
-                                    @else
+                                @guest
+                                    <li class="nav-item">
                                         <a href="{{ route('login') }}" class="nav-link">
                                         Login / Register
                                         
                                         </a>
-                                    @endauth
-                                </li>
+                                    </li>
+                                @endguest
 
                                 {{-- <div class="option-item" style="align-self:center ;">
                                     <a href="pricing-2.html" class="default-btn">
                                        Pricing
                                     </a>
                                 </div> --}}
-                            </ul>   
+                            </ul>
                         </div>
-
                     </nav>
                 </div>
             </div>

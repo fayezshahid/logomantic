@@ -161,30 +161,39 @@
                                 
                                 @auth
                                     <li class="nav-item">
-                                        <a href="{{ route('wishlist') }}" class="nav-link">
-                                            Wishlist
+                                        <a href="#" class="nav-link">
+                                            Dashboard 
+                                            <i class='bx bx-chevron-down'></i>
                                         </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('cart') }}" class="nav-link">
-                                            Cart
-                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item">
+                                                <a href="{{ route('wishlist') }}" class="nav-link">
+                                                    Wishlist
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('cart') }}" class="nav-link">
+                                                    Cart
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <form action="{{ route('logout') }}" method="post">
+                                                    @csrf
+                                                    <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </li>
                                 @endauth
 
-                                <li class="nav-item">
-                                    @auth
-                                        <form action="{{ route('logout') }}" method="post">
-                                            @csrf
-                                            <a onclick="this.parentNode.submit();" class="nav-link" style="cursor: pointer">Logout</a>
-                                        </form>
-                                    @else
+                                @guest
+                                    <li class="nav-item">
                                         <a href="{{ route('login') }}" class="nav-link">
                                         Login / Register
                                         
                                         </a>
-                                    @endauth
-                                </li>
+                                    </li>
+                                @endguest
 
                                 {{-- <div class="option-item" style="align-self:center ;">
                                     <a href="pricing-2.html" class="default-btn">
