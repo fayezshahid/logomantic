@@ -284,7 +284,9 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <img src="{{ $wishlist->logo }}" height="300px" width="300px" alt="">
+                                    <a data-bs-toggle="modal" data-bs-target="#logoModal{{ $wishlist->id }}">
+                                        <img src="{{ $wishlist->logo }}" height="300px" width="300px" alt="">
+                                    </a>
                                 </td>
                                 <td style="width: 30%">
                                     <div class="d-flex justify-content-between" style="margin-top: 40px">
@@ -302,6 +304,18 @@
                                     </div>
                                 </td>
                             </tr>
+                            <div class="modal" id="logoModal{{ $wishlist->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                    <div class="modal-content" style="height:550px;">
+                                        <div class="modal-body">
+                                            <img style="" src="{{ $wishlist->logo }}" alt="">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
             
                     </tbody>

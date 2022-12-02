@@ -237,7 +237,7 @@
                             @foreach ($cartItems as $cart)
                                 <tr>
                                     <td class="product-thumbnail">
-                                        <a href="#">
+                                        <a data-bs-toggle="modal" data-bs-target="#logoModal{{ $cart->id }}">
                                             <img src="{{ $cart->logo }}" alt="item">
                                         </a>
                                     </td>
@@ -273,6 +273,18 @@
                                         </form>
                                     </td>
                                 </tr>
+                                <div class="modal" id="logoModal{{ $cart->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                        <div class="modal-content" style="height:550px;">
+                                            <div class="modal-body">
+                                                <img style="" src="{{ $cart->logo }}" alt="">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         </tbody>
                     </table>
