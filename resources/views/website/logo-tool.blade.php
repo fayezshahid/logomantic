@@ -406,7 +406,7 @@
                         </div> -->
                         <div id="colorPalette" style="padding-left: 125px;padding-bottom: 10px; display:none">
                             @foreach ($logo->hexcodes as $hexcode)
-                                <input type="color" onclick="getColor(this.value)" onchange="setColor(this.value)" value="#{{ $hexcode->hexcode }}" style="width: 3rem; height: 3rem;">
+                                <input type="color" class="colors" onclick="getColor(this.value)" onchange="setColor(this.value)" value="#{{ $hexcode->hexcode }}" style="width: 3rem; height: 3rem;">
                             @endforeach
                         </div>
 
@@ -914,7 +914,62 @@
                 currentPixels = ctx.getImageData(0, 0, img.width, img.height);
 
                 img.onload = null;
+                
+                var all = $('.colors').map(function() {
+                    return this.value;
+                }).get();
+
+                for(var I = 0, L = originalPixels.data.length; I < L; I += 4)
+                {
+                    var currentRGB = rgbToHex(currentPixels.data[I], currentPixels.data[I + 1], currentPixels.data[I + 2]);
+                    
+                    if(!all.includes(currentRGB)){
+                        if(currentPixels.data[I + 3] > 0){
+                            var maxValue = 0;
+                            var maxValueHex;
+
+                            for(var i=0; i<all.length; i++){
+                                if(maxValue < hexColorDelta(currentRGB, all[i])){
+                                    maxValue = hexColorDelta(currentRGB, all[i]);
+                                    maxValueHex = all[i]
+                                }
+                            }
+                            
+                            currentRGB = hexToRGB(maxValueHex);
+                            currentPixels.data[I] = currentRGB.R;
+                            currentPixels.data[I + 1] = currentRGB.G;
+                            currentPixels.data[I + 2] = currentRGB.B;
+                        }
+                    }
+                }
+
+                ctx.putImageData(currentPixels, 0, 0);
+                img.src = canvas.toDataURL("image/png");
+
             })
+
+            function hexColorDelta(hex1, hex2) {
+                hex1 = hex1.replace('#', '');
+                hex2 = hex2.replace('#', '');
+                // get red/green/blue int values of hex1
+                var r1 = parseInt(hex1.substring(0, 2), 16);
+                var g1 = parseInt(hex1.substring(2, 4), 16);
+                var b1 = parseInt(hex1.substring(4, 6), 16);
+                // get red/green/blue int values of hex2
+                var r2 = parseInt(hex2.substring(0, 2), 16);
+                var g2 = parseInt(hex2.substring(2, 4), 16);
+                var b2 = parseInt(hex2.substring(4, 6), 16);
+                // calculate differences between reds, greens and blues
+                var r = 255 - Math.abs(r1 - r2);
+                var g = 255 - Math.abs(g1 - g2);
+                var b = 255 - Math.abs(b1 - b2);
+                // limit differences between 0 and 1
+                r /= 255;
+                g /= 255;
+                b /= 255;
+                // 0 means opposite colors, 1 means same colors
+                return (r + g + b) / 3;
+            }
 
             function hexToRGB(hex)
             {

@@ -45,6 +45,7 @@
   padding: 7px;
   overflow: hidden;
   margin-bottom: 10px;
+  border-color: deepskyblue !important;
 }
 .ui-rotatable-handle{
   display: none; 
@@ -53,6 +54,7 @@
   width: 10px;
   height: 10px;
   background-color: #ffffff;
+  border-color: deepskyblue !important;
   /* border: 1px solid #000000; */
 }
 .nwgrip {
